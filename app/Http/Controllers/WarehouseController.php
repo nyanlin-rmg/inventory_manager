@@ -40,7 +40,5 @@ class WarehouseController extends Controller
     }
     public function destroy($id)
     {
-        DB::table('warehouses')->where('id', $id)->delete();
-        return redirect('warehouse/');
     }
 }
