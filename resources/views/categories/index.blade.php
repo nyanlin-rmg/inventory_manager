@@ -24,8 +24,6 @@
 		 </thread>
 		 <tbody>
 		 <?php 
-		 $categories = DB::table('categories')->get();
-		 //$categories = Category::get();
 		 foreach ($categories as $category) {
 		 	$id = $category->id;
 		 ?>
@@ -33,7 +31,7 @@
 		 	<td> {{ $category->id }} </td>
 			<td>{{ $category->name }}</td>
 			<td>{{ $category->description }}</td>
-			<td> <a class="btn btn-success" href="{{ url('category/edit',$category->id)}}">Edit</a></td>
+			<td> <a class="btn btn-success" href="{{ route('category.edit',$category->id) }}">Edit</a></td>
 			<td> <a class="btn btn-danger" href="{{ url('category/delete',$category->id)}}">Delete</a> </td>
 		 </tr>
 		<?php } ?>

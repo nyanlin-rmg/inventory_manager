@@ -5,7 +5,7 @@
 <body>
 	<div class="container">
 	<h1>Create</h1>
-	<form action="{{ url('category/store') }}" method="post">
+	<form action="{{ route('category.store') }}" method="POST">
 	{{ csrf_field() }}
 	<div class="form-group">
 		<label for="usr">Name:</label>

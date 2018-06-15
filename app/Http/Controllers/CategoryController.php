@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+        $categories = Category::all();
+        return view('categories.index',['categories'=>$categories]);
     }
 
     /**
@@ -71,13 +72,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    { 
         Category::find($id)->update($request->all());
-        /*Category::table('categories')
-        ->where('id',$id)
-        ->update(['name' => $request['name'],
-            'description' => $request['description']
-        ]);*/
         return redirect('/category')->with('success','Category updated successfully!!');
     }
 

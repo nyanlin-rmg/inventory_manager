@@ -4,8 +4,9 @@
 <body>
 	<div class="container">
 	<h1>Update</h1>
-	<form action="{{ url('category/update', $category->id) }}" method="post">
+	<form action="{{ route('category.update', $category->id) }}" method="post">
 	{{ csrf_field() }}
+	{{ method_field('PUT') }}
 	<input type='hidden' name='id' class='form-control' value='{{ $category->id }}'><br>
 	<div class="form-group">
 		<label for="usr">Name:</label>
