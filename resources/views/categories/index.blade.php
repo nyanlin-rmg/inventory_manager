@@ -32,7 +32,13 @@
 			<td>{{ $category->name }}</td>
 			<td>{{ $category->description }}</td>
 			<td> <a class="btn btn-success" href="{{ route('category.edit',$category->id) }}">Edit</a></td>
-			<td> <a class="btn btn-danger" href="{{ url('category/delete',$category->id)}}">Delete</a> </td>
+			<td><!--  <a class="btn btn-danger" href="{{ route('category.destroy',$category->id)}}">Delete</a> --> 
+				<form action="{{ route('category.destroy', $category->id) }}" method="post">
+					{{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+			</td>
 		 </tr>
 		<?php } ?>
 		</tbody>
