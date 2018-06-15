@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
+use App\Warehouse;
 use Illuminate\Http\Request;
 
 class WarehouseController extends Controller
 {
     public function index()
     {
-    	$warehouses = DB::table('warehouses')->get();
-    	return view('warehouse.index', ['warehouses'=>$warehouses]);
+        $warehouses = Warehouse::all();
+        return view('warehouse.index', ['warehouses'=>$warehouses]);
     }
     public function create()
     {
@@ -17,30 +17,25 @@ class WarehouseController extends Controller
     }
     public function store(Request $request)
     {
-    	DB::table('warehouses')->insert([
-    		'name' => $request->name,
-    		'location' => $request->location
-    	]);
-    	return redirect('warehouse/'); 
+        Warehouse::create($request->all());
+        return redirect('warehouse');
     }
     public function show(Request $request)
     {
-    	return view('warehouse.show');
     }
-    public function edit($id)
+    public function edit(Warehouse $warehouse, $id)
     {
-        $warehouse = DB::table('warehouses')->where('id', $id)->first();
+        $warehouse = Warehouse::find($id);
         return view('warehouse.edit', ['warehouse' => $warehouse]);
     }
-    public function update(Request $request)
+    public function update(Request $request, Warehouse $warehouse, $id)
     {
-        DB::table('warehouses')->where('id', $request->id)
-        ->update(['name' => $request->name, 'location' => $request->location]);
-        return redirect('warehouse/');
+        Warehouse::find($id)->update($request->all());
+        return redirect('warehouse');
     }
     public function destroy($id)
     {
-        DB::table('warehouse')->where('id',$id)->delete();
+        Warehouse::find($id)->delete();
         return redirect('warehouse/');
     }
 }

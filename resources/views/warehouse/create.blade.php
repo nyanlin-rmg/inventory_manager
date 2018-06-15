@@ -1,4 +1,4 @@
-@extends('design')
+@extends('layouts.default')
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +14,8 @@
 		<div class="row">
 			<form action="{{url('warehouse/store')}}" method="post">
 				{{csrf_field()}}
-				<p><input type="text" name="name" placeholder="Name"></p>
-				<p><input type="text" name="location" placeholder="Location"></p>
+				<p><input type="text" name="name" placeholder="Name" class="form form-control"></p>
+				<p><textarea placeholder="Location" name="location" class="form form-control"></textarea></p>
 				<p><input type="submit" value="Create" class="btn btn-primary"></p>
 			</form>
 		</div>

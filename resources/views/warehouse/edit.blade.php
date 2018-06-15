@@ -1,4 +1,4 @@
-@extends('design')
+@extends('layouts.default')
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,11 +12,11 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<form action="{{ url('warehouse/update') }}" method="post">
+			<form action="{{ url('warehouse/update', $warehouse->id) }}" method="post">
 				{{csrf_field()}}
 				<input type="hidden" name="id" value="{{ $warehouse->id }}">
-				<p><input type="text" name="name" value="{{ $warehouse->name }}"></p>
-				<p><input type="text" name="location" value="{{ $warehouse->location }}"></p>
+				<p><input type="text" name="name" value="{{ $warehouse->name }}" class="form form-control"></p>
+				<p><textarea name="location" class="form form-control">{{ $warehouse->location }}</textarea></p>
 				<p><input type="submit" value="Edit" class="btn btn-primary"></p>
 			</form>
 		</div>
