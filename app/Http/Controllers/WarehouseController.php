@@ -38,5 +38,4 @@ class WarehouseController extends Controller
         Warehouse::find($id)->delete();
         return redirect('warehouse/');
     }
-
 }
