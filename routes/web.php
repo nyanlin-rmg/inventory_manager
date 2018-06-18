@@ -6,6 +6,7 @@ Route::get('warehouse/show/{id}', 'WarehouseController@show');
 Route::get('warehouse/edit/{id}', 'WarehouseController@edit');
 Route::post('warehouse/update/{id}', 'WarehouseController@update');
 Route::get('warehouse/destroy/{id}', 'WarehouseController@destroy');
+Route::post('warehouse/search', 'WarehouseController@search');
 
 /*Route::get('category','CategoryController@index');
 Route::post('category/store','CategoryController@store');
