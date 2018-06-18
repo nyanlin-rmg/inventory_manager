@@ -14,3 +14,4 @@ Route::get('category/edit/{id}','CategoryController@edit');
 Route::post('category/update/{id}','CategoryController@update');*/
 
 Route::resource('/category','CategoryController');
+Route::post('category/search','CategoryController@search');
