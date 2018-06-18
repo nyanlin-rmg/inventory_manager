@@ -39,7 +39,4 @@ class WarehouseController extends Controller
         return redirect('warehouse/');
     }
 
-    public function zzz() {
-        
-    }
 }
