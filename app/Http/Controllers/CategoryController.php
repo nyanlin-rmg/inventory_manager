@@ -36,6 +36,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        
         Category::create($request->all());
         //return redirect('/category')->with('success','Category created successfully');
         return redirect('/category')->with('success','Category created successfully!!');
@@ -65,7 +66,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+   with  * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

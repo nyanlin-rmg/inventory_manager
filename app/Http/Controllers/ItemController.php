@@ -17,7 +17,10 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::all();        
+        // $items = Item::select()
+        //                 ->join('item_warehouses','id','=','item_warehouses.item_id')
+        //                 ->get();
+        $items = Item::get();
         return view('items.index', ['items'=>$items]);
     }
 
@@ -31,8 +34,7 @@ class ItemController extends Controller
        $categories = Category::all();
        $warehouses = Warehouse::all();
        return view('items.create',['categories'=>$categories],['warehouses'=>$warehouses]);
-
-    }
+   }
 
     /**
      * Store a newly created resource in storage.
@@ -42,17 +44,19 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $item = new Item;
-        $item_warehouse = new Item_warehouse;
-        $item->name = $request->name;
-        $item->category_id = $request->cid;
-        $item->save();        
-        $item_warehouse->item_id = $item->id;
-        $item_warehouse->warehouse_id = $request->wid;
-        $item_warehouse->qty = $request->qty;
-        $item_warehouse->save();
-        return redirect('item');
+        //dd($_POST);
+        // $item = new Item;
+        // $item_warehouse = new Item_warehouse;
+        // $item->name = $request->name;
+        // $item->category_id = $request->cid;
+        // $item->save();        
+        // $item_warehouse->item_id = $item->id;
+        // $item_warehouse->warehouse_id = $request->wid;
+        // $item_warehouse->qty = $request->qty;
+        // $item_warehouse->save();
+        // return redirect('item');
+         Item::create($request->all());
+         return redirect('item');
     }
 
     /**
@@ -75,7 +79,8 @@ class ItemController extends Controller
     public function edit(Item $item, $id)
     {
         $items = Item::find($id);
-        return view('items.edit', ['item'=>$items]);
+        $item_warehouses = Item_warehouse::all();
+        return view('items.edit', ['item'=>$items],['item_warehouse'=>$item_warehouses]);
     }
 
     /**
@@ -103,6 +108,7 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
+        
         Item_warehouse::where('item_id',$id)->delete();
         return redirect('item');
     }

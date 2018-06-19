@@ -6,10 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-   protected $fillable = ['name', 'category_id'];
-
-    public function item_warehouses ()
+   public $fillable=['name','category_id'];
+   public function category()
     {
-    	return $this->belongsToMany('App\Item_warehouse');
+        return $this->hasMany('App\Category');
+    }
+
+    public function warehouse ()
+    {
+    	return $this->belongsToMany('App\warehouse');
     }
 }
