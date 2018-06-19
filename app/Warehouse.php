@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Warehouse extends Model
 {
     protected $fillable = ['name', 'location'];
-     public function item()
+
+    public function Item()
     {
-    	return $this->belongsToMany('App\item');
+    	return $this->belongsToMany('App\Item');
     }
 }

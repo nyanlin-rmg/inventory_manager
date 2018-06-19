@@ -108,7 +108,7 @@ class ItemController extends Controller
     public function destroy($id)
     {
         
-        Item_warehouse::where('item_id',$id)->delete();
+        Item::find($id)->delete();
         return redirect('item');
     }
 }

@@ -4,7 +4,7 @@
 </head>
 <body>
 	<div class="container">
-		@foreach($category as $category)
+		@forelse( $categories as $category)
     	<h1>Show</h1>
     	<div class="container">
 		<table class="table table-striped">
@@ -31,9 +31,13 @@
                 </form>
 			</td>
 		 </tr>
-    	@endforeach
+		@empty
+		 <div class="container">
+		 <h1>  There is no item !!!! </h1>
+		 </div>
+    	@endforelse
     </tbody>
 </table>
-    	<a href="{{ route('category.index') }}" class="btn btn-primary">Back to home</a>  
+    	<a href="{{ route('category.index') }}" class="primary">Back to home</a>  
 </body>
 </html>

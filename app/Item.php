@@ -11,9 +11,8 @@ class Item extends Model
     {
         return $this->hasMany('App\Category');
     }
-
-    public function warehouse ()
+    public function Warehouse()
     {
-    	return $this->belongsToMany('App\warehouse');
+    	return $this->belongsToMany('App\Warehouse');
     }
 }
