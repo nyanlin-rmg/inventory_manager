@@ -11,7 +11,7 @@
 			<table class="table">
 				<tr>
 					<td>
-						<input type="text" name="search" class="form-control">
+						<input type="text" name="search" class="form-control" placeholder="Search" required="">
 					</td>
 					<td>
 						<input type="submit" value="Search" class="btn btn-primary">

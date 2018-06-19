@@ -17,10 +17,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        // $items = Item::select()
-        //                 ->join('item_warehouses','id','=','item_warehouses.item_id')
-        //                 ->get();
-        $items = Item::get();
+        $items = Item::all();
         return view('items.index', ['items'=>$items]);
     }
 
@@ -44,18 +41,9 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($_POST);
-        // $item = new Item;
-        // $item_warehouse = new Item_warehouse;
-        // $item->name = $request->name;
-        // $item->category_id = $request->cid;
-        // $item->save();        
-        // $item_warehouse->item_id = $item->id;
-        // $item_warehouse->warehouse_id = $request->wid;
-        // $item_warehouse->qty = $request->qty;
-        // $item_warehouse->save();
-        // return redirect('item');
-         Item::create($request->all());
+         $item = Item::create($request->all());
+         $item->warehouse()->attach($request->warehouse_id , ['qty' => $request->qty]);
+         //dd($item);
          return redirect('item');
     }
 
@@ -91,10 +79,6 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item,$id)
     {
-        // $items = Item::select()
-        //                 ->join('item_warehouses','id','=','item_warehouses.item_id')
-        //                 ->update($request->all());        
-        // return redirect('item');
         Item::find($id)->update($request->all());
         return redirect('item');
     }
