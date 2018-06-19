@@ -91,8 +91,16 @@ class CategoryController extends Controller
 
     public function search(Request $request)
     {
-       $search = $request->search; 
-        $category = Category::where('name','LIKE','%'.$search.'%')->get();
-        return view('categories.search_result', ['category'=>$category]);
-    }
+        if ( ! trim( $request->search) ) 
+        {
+            $categories = [];
+            return view('categories.search_result', ['categories'=> collect($categories)] );
+        }
+
+        $categories = Category::where('name','LIKE','%'.$request->search.'%')->get();
+    
+        return view('categories.search_result', ['categories'=>$categories]);
+        }
+
+    
 }

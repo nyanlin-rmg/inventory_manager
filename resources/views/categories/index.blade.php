@@ -7,7 +7,7 @@
 	<h1>Show</h1>
 	<form action="{{ url('category/search') }}" method="POST">
 	{{ csrf_field() }}
-	<input type="text" name="search">
+	<input type="text" name="search" required>
 	<button type="submit" class="btn btn-primary">Search</button>  
 	</form>
 	<hr/>

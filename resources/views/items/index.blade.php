@@ -16,7 +16,7 @@
 		 @foreach($items as $item)		 
 		 <tr>
 		 	<td><a href="{{ url('item/show',$item->id) }}">{{ $item->name }}</a></td>
-		 	<td>{{ $item->qty }}</td>
+		 	<td>{{ $item->pivot }}</td>
 		 	<td> <a class="btn btn-success" href="{{ url('item/edit',$item->id) }}">Edit</a></td>
 
 			<td> <a class="btn btn-danger" href="{{ url('item/destroy',$item->id)}}">Delete</a> </td>
