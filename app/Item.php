@@ -13,6 +13,6 @@ class Item extends Model
     }
     public function Warehouse()
     {
-    	return $this->belongsToMany('App\Warehouse');
+    	return $this->belongsToMany('App\Warehouse')->withPivot('qty');
     }
 }

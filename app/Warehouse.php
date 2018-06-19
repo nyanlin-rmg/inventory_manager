@@ -10,6 +10,6 @@ class Warehouse extends Model
 
     public function Item()
     {
-    	return $this->belongsToMany('App\Item');
+    	return $this->belongsToMany('App\Item')->withPivot('qty');
     }
 }
