@@ -79,8 +79,7 @@ class ItemController extends Controller
     public function edit(Item $item, $id)
     {
         $items = Item::find($id);
-        $item_warehouses = Item_warehouse::all();
-        return view('items.edit', ['item'=>$items],['item_warehouse'=>$item_warehouses]);
+        return view('items.edit', ['item'=>$items]);
     }
 
     /**
