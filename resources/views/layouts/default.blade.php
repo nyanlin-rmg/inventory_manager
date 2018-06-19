@@ -7,6 +7,7 @@
 <title></title>
 <!-- <link href="css/bootstrap.css" rel="stylesheet"> -->
 <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 <link rel="stylesheet" type="text/css" href="{!! ('css/bootstrap-theme.min.css') !!}">
 <link href="{!! ('css/style.css') !!} rel="stylesheet">
 </head>
