@@ -74,9 +74,9 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $item)
+    public function edit(Item $item, $id)
     {
-        $items = new Item;
+        $items = Item::find($id);
         return view('items.edit', ['item'=>$items]);
     }
 
@@ -87,11 +87,13 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(Request $request, Item $item,$id)
     {
-        $items = Item::select()
-                        ->join('item_warehouses','id','=','item_warehouses.item_id')
-                        ->update($request->all());        
+        // $items = Item::select()
+        //                 ->join('item_warehouses','id','=','item_warehouses.item_id')
+        //                 ->update($request->all());        
+        // return redirect('item');
+        Item::find($id)->update($request->all());
         return redirect('item');
     }
 
@@ -103,6 +105,7 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        
+        Item::find($id)->delete();
+        return redirect('item');
     }
 }

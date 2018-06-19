@@ -10,6 +10,6 @@ class Item_warehouse extends Model
 
     public function item()
     {
-    	return $this->belongsMany('App\Item');
+    	return $this->belongsToMany('App\Item');
     }
 }
