@@ -17,9 +17,16 @@ class ItemController extends Controller
      */
     public function index()
     {
+
         $items = Item::all();
         $items->warehouse()->attach($id,['qty'=>$qty]);   
         
+
+        // $items = Item::select()
+        //                 ->join('item_warehouses','id','=','item_warehouses.item_id')
+        //                 ->get();
+        $items = Item::get();
+
         return view('items.index', ['items'=>$items]);
     }
 
@@ -33,8 +40,7 @@ class ItemController extends Controller
        $categories = Category::all();
        $warehouses = Warehouse::all();
        return view('items.create',['categories'=>$categories],['warehouses'=>$warehouses]);
-
-    }
+   }
 
     /**
      * Store a newly created resource in storage.
@@ -44,10 +50,25 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+
         $item = Item::all();
         $item = Warehouse::make($item);
         $item->save();
         return redirect('item');
+        //dd($_POST);
+        // $item = new Item;
+        // $item_warehouse = new Item_warehouse;
+        // $item->name = $request->name;
+        // $item->category_id = $request->cid;
+        // $item->save();        
+        // $item_warehouse->item_id = $item->id;
+        // $item_warehouse->warehouse_id = $request->wid;
+        // $item_warehouse->qty = $request->qty;
+        // $item_warehouse->save();
+        // return redirect('item');
+         Item::create($request->all());
+         return redirect('item');
+
     }
 
     /**
@@ -67,9 +88,9 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $item)
+    public function edit(Item $item, $id)
     {
-        $items = new Item;
+        $items = Item::find($id);
         return view('items.edit', ['item'=>$items]);
     }
 
@@ -80,11 +101,13 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(Request $request, Item $item,$id)
     {
-        $items = Item::select()
-                        ->join('item_warehouses','id','=','item_warehouses.item_id')
-                        ->update($request->all());        
+        // $items = Item::select()
+        //                 ->join('item_warehouses','id','=','item_warehouses.item_id')
+        //                 ->update($request->all());        
+        // return redirect('item');
+        Item::find($id)->update($request->all());
         return redirect('item');
     }
 
@@ -101,6 +124,9 @@ class ItemController extends Controller
 
         $item->warehouse()->detach($id);
         
+        
+        Item::find($id)->delete();
+
         return redirect('item');
     }
 }

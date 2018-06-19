@@ -36,6 +36,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        
         Category::create($request->all());
         //return redirect('/category')->with('success','Category created successfully');
         return redirect('/category')->with('success','Category created successfully!!');
@@ -65,7 +66,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+   with  * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -88,4 +89,19 @@ class CategoryController extends Controller
         Category::find($id)->delete();
         return redirect('/category')->with('success','Category deleted successfully!!');
     }
+
+    public function search(Request $request)
+    {
+        if ( ! trim( $request->search) ) 
+        {
+            $categories = [];
+            return view('categories.search_result', ['categories'=> collect($categories)] );
+        }
+
+        $categories = Category::where('name','LIKE','%'.$request->search.'%')->get();
+    
+        return view('categories.search_result', ['categories'=>$categories]);
+        }
+
+    
 }
