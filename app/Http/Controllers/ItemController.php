@@ -17,9 +17,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::select()
-                        ->join('item_warehouses','id','=','item_warehouses.item_id')
-                        ->get();
+        $items = Item::all();        
         return view('items.index', ['items'=>$items]);
     }
 
@@ -105,7 +103,7 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        Item::find($id)->delete();
+        Item_warehouse::where('item_id',$id)->delete();
         return redirect('item');
     }
 }

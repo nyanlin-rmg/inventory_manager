@@ -88,4 +88,11 @@ class CategoryController extends Controller
         Category::find($id)->delete();
         return redirect('/category')->with('success','Category deleted successfully!!');
     }
+
+    public function search(Request $request)
+    {
+       $search = $request->search; 
+        $category = Category::where('name','LIKE','%'.$search.'%')->get();
+        return view('categories.search_result', ['category'=>$category]);
+    }
 }
