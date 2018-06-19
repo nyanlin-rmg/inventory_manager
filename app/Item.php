@@ -8,8 +8,8 @@ class Item extends Model
 {
     protected $fillable = ['name', 'category_id'];
 
-    public function item_warehouses ()
+    public function warehouse ()
     {
-    	return $this->belongsToMany('App\Item_warehouse');
+    	return $this->belongsToMany('App\Warehouse')->withPivot(['item_id','warehouse_id','qty']);
     }
 }

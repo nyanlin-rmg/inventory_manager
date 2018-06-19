@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Warehouse;
 use App\Category;
 use App\Item;
-use App\Item_warehouse;
+
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -17,7 +17,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::all();        
+        $items = Item::all();
+        $items->warehouse()->attach($id,['qty'=>$qty]);   
+        
         return view('items.index', ['items'=>$items]);
     }
 
@@ -42,16 +44,9 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $item = new Item;
-        $item_warehouse = new Item_warehouse;
-        $item->name = $request->name;
-        $item->category_id = $request->cid;
-        $item->save();        
-        $item_warehouse->item_id = $item->id;
-        $item_warehouse->warehouse_id = $request->wid;
-        $item_warehouse->qty = $request->qty;
-        $item_warehouse->save();
+        $item = Item::all();
+        $item = Warehouse::make($item);
+        $item->save();
         return redirect('item');
     }
 
@@ -101,8 +96,11 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        Item::find($id)->delete();
-        Item_warehouse::where('item_id',$id)->delete();
+        $item = Item::find($id);
+        $item->warehouse()->attach($id);
+
+        $item->warehouse()->detach($id);
+        
         return redirect('item');
     }
 }
