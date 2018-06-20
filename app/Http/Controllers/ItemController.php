@@ -14,11 +14,9 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-
     {
         $items = Item::with('warehouses')->get();
         return view('items.index', ['items'=>$items]);
-
     }
 
     /**
@@ -73,12 +71,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item, $id)
     {
-<<<<<<< HEAD
         $items = Item::find($id);
-        $item->warehouses()->attach($item->item_id , ['qty' => $item_warehouses->qty]);
-=======
-        $items = Item::with('warehouses')->find($id);
->>>>>>> 85f6309317e5b969ca4e73efc357430f9196f51a
         return view('items.edit', ['item'=>$items]);
     }
 
@@ -91,14 +84,7 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item,$id)
     {
-<<<<<<< HEAD
         $item = Item::find($id)->update($request->all());
-=======
-        $item = Item::find($id);
-        Item::find($id)->update($request->all());
-        $item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
-       
->>>>>>> 85f6309317e5b969ca4e73efc357430f9196f51a
         return redirect('item');
     }
 
