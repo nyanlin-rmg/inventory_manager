@@ -16,9 +16,12 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {       
-        $items = Item::all();
-        return view('items.index', ['items'=>$items]);
+    {    
+        // $items = Item::first();
+        $items = Item::first()->warehouse()->get(['qty']);
+        dd($items);
+        
+        return view('items.index', ['items'=>$items],['qty'=>$qty]);
     }
 
     /**
