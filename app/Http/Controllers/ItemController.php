@@ -18,6 +18,7 @@ class ItemController extends Controller
     public function index()
     {
         $items = Item::all();
+        $item->warehouse()->attach($request->warehouse_id , ['qty' => $request->qty]);
         return view('items.index', ['items'=>$items]);
     }
 
