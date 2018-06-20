@@ -20,7 +20,7 @@
 				<div class="form-group">
 				<label>Category_id:</label>
 				<div>
-				<select name= "cid" class="form-control">
+				<select name= "category_id" class="form-control">
 				@foreach ($categories as $category)
 				<option value="{{ $category->id }}">{{ $category->name }}</option>
 				@endforeach
@@ -30,16 +30,16 @@
 				<div class="form-group">
 				<label>Warehouse_id:</label>
 				<div>
-				<select name= "wid" class="form-control">
+				<select name= "warehouse_id" class="form-control">
 				
-				<option value="1">warehouse1</option>
-				<option value="2">warehouse2</option>
-				<option value="3">warehouse3</option>
+				@foreach ($warehouses as $warehouse)
+				<option value="{{ $warehouse->id }}">{{ $warehouse->name }}</option>
+				@endforeach
 				
 				</select>
 				</div><br>
 
-				<input type="submit" value="Submit" class="btn btn-primary">
+				<input type="submit" value="Create" class="btn btn-primary">
 			</div>	
 		</form>
 		

@@ -6,15 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    protected $fillable = ['name', 'category_id'];
-
-    public function category()
+   public $fillable=['name','category_id'];
+   
+   public function category()
     {
-    	return $this->belongsTo('App\Category');
+        return $this->hasMany('App\Category');
     }
 
-    public function warehouses()
+
+     public function warehouses()
     {
-    	return $this->belongsToMany('App\Warehouse');
+    	return $this->belongsToMany('App\Warehouse','item_warehouses')->withPivot('qty')->withTimestamps();
+
     }
 }

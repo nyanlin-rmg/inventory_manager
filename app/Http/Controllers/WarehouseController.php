@@ -20,7 +20,7 @@ class WarehouseController extends Controller
     }
     public function store(Request $request)
     {
-        Warehouse::create($request->all());
+        $test = Warehouse::create($request->all());
         return redirect('warehouse');
     }
     public function show(Request $request, $id)
@@ -59,5 +59,18 @@ class WarehouseController extends Controller
     {
         Warehouse::find($id)->delete();
         return redirect('warehouse/');
+    }
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        if(!trim($search))
+        {
+            $search_warehouses = [];
+            return view('warehouse.search_result', ['search_warehouses'=>collect($search_warehouses)]);
+        }
+        $search_warehouses = Warehouse::where(
+            'name', 'LIKE', '%'. $search. '%'
+        )->get();
+        return view('warehouse.search_result', ['search_warehouses' => $search_warehouses]);
     }
 }

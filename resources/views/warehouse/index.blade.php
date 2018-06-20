@@ -6,6 +6,21 @@
 </head>
 <body>
 	<div class="container">
+		<form action="{{ url('warehouse/search') }}" method="POST">
+			{{csrf_field()}}
+			<table class="table">
+				<tr>
+					<td>
+						<input type="text" name="search" class="form-control" placeholder="Search" required="">
+					</td>
+					<td>
+						<input type="submit" value="Search" class="btn btn-primary">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div class="container">
 		<table class="table">
 			<tr>
 				<td><b>Name</b></td>

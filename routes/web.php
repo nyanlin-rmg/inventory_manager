@@ -7,6 +7,7 @@ Route::get('warehouse/showItems/{itemid}', 'WarehouseController@showItems');
 Route::get('warehouse/edit/{id}', 'WarehouseController@edit');
 Route::post('warehouse/update/{id}', 'WarehouseController@update');
 Route::get('warehouse/destroy/{id}', 'WarehouseController@destroy');
+Route::post('warehouse/search', 'WarehouseController@search');
 
 /*Route::get('category','CategoryController@index');
 Route::post('category/store','CategoryController@store');
@@ -16,6 +17,9 @@ Route::post('category/update/{id}','CategoryController@update');*/
 
 Route::resource('/category','CategoryController');
 
+Route::post('category/search','CategoryController@search');
+
+
 Route::get('item/','ItemController@index');
 Route::get('item/create', 'ItemController@create');
 Route::post('item/store', 'ItemController@store');
@@ -23,3 +27,4 @@ Route::get('item/show/{id}', 'ItemController@show');
 Route::get('item/edit/{id}', 'ItemController@edit');
 Route::post('item/update/{id}', 'ItemController@update');
 Route::get('item/destroy/{id}', 'ItemController@destroy');
+
