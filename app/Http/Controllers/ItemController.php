@@ -72,6 +72,7 @@ class ItemController extends Controller
     public function edit(Item $item, $id)
     {
         $items = Item::find($id);
+        $item->warehouses()->attach($item->item_id , ['qty' => $item_warehouses->qty]);
         return view('items.edit', ['item'=>$items]);
     }
 
@@ -84,7 +85,7 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item,$id)
     {
-        Item::find($id)->update($request->all());
+        $item = Item::find($id)->update($request->all());
         return redirect('item');
     }
 
@@ -98,7 +99,7 @@ class ItemController extends Controller
     {
        $item = Item::find($id);
        Item::find($id)->delete();
-       $item->warehouse()->detach();               
+       $item->warehouses()->detach();               
        return redirect('item');
     }
 }
