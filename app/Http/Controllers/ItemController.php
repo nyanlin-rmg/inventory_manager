@@ -74,7 +74,7 @@ class ItemController extends Controller
     public function edit(Item $item, $id)
     {
         $items = Item::find($id);
-        $items = Item::with('warehouses')->get($id);
+        $items = Item::with('warehouses')->get();
         return view('items.edit', ['item'=>$items]);
     }
 
@@ -87,7 +87,8 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item,$id)
     {
-        Item::find($id)->update($request->all());
+        $item = Item::find($id)->update($request->all());
+        $item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
         return redirect('item');
     }
 
