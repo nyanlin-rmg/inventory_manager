@@ -84,8 +84,12 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item,$id)
     {
-        $item = Item::find($id)->update($request->all());
-        return redirect('item');
+        // $item = Item::find($id)->update($request->all());
+      //return redirect('item');
+        $item = Item::find($id);
+        Item::find($id)->update($request->all());
+        $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $request->qty]);
+       return redirect('item');
     }
 
     /**
