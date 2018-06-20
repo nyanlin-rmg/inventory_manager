@@ -100,7 +100,7 @@ class ItemController extends Controller
     {
        $item = Item::find($id);
        Item::find($id)->delete();
-       $item->warehouse()->detach();               
+       $item->warehouses()->detach();               
        return redirect('item');
     }
 }
