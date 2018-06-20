@@ -16,21 +16,8 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-
-
+    {       
         $items = Item::all();
-        $items->warehouse()->attach($id,['qty'=>$qty]);   
-        
-
-        // $items = Item::select()
-        //                 ->join('item_warehouses','id','=','item_warehouses.item_id')
-        //                 ->get();
-        $items = Item::get();
-
-
-        $items = Item::all();
-
         return view('items.index', ['items'=>$items]);
     }
 
@@ -53,32 +40,11 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-
-
-        $item = Item::all();
-        $item = Warehouse::make($item);
-        $item->save();
-        return redirect('item');
-        //dd($_POST);
-        // $item = new Item;
-        // $item_warehouse = new Item_warehouse;
-        // $item->name = $request->name;
-        // $item->category_id = $request->cid;
-        // $item->save();        
-        // $item_warehouse->item_id = $item->id;
-        // $item_warehouse->warehouse_id = $request->wid;
-        // $item_warehouse->qty = $request->qty;
-        // $item_warehouse->save();
-        // return redirect('item');
-         Item::create($request->all());
-
+    {     
          $item = Item::create($request->all());
          $item->warehouse()->attach($request->warehouse_id , ['qty' => $request->qty]);
          //dd($item);
-
          return redirect('item');
-
     }
 
     /**
@@ -125,14 +91,9 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        $item = Item::find($id);
-        $item->warehouse()->attach($id);
-
-        $item->warehouse()->detach($id);
-        
-        
-        Item::find($id)->delete();
-
-        return redirect('item');
+       $item = Item::find($id);
+       Item::find($id)->delete();
+       $item->warehouse()->detach();               
+       return redirect('item');
     }
 }

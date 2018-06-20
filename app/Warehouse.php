@@ -7,18 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Warehouse extends Model
 {
     protected $fillable = ['name', 'location'];
-
-
-
-     public function item ()
-    {
-    	return $this->belongsToMany('App\Item')->withPivot(['item_id','warehouse_id','qty']);
-    }
-    public function Item()
+    
 
     public function item()
-
     {
-    	return $this->belongsToMany('App\Item')->withPivot('qty')->withTimestamps();
+    	return $this->belongsToMany('App\Item','item_warehouses')->withPivot('qty')->withTimestamps();
     }
 }
