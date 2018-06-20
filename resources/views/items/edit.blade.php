@@ -14,7 +14,7 @@
 				<label>Name:</label>
 				<input type="text" name="name" value="{{ $item->name }}" class="form form-control"><br>
 				<label>Quantity:</label>
-				<input type="text" name="qty" value="{{ $item->qty}}" class="form form-control"><br>
+				<input type="text" name="qty" value="{{ $item->warehouses->pivot->qty}}" class="form form-control"><br>
 				<input type="submit" value="Update" class="btn btn-primary">
 			</form>
 		</div>
