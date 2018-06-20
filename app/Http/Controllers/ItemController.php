@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Warehouse;
 use App\Category;
 use App\Item;
-
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -16,12 +14,11 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    
-        // $items = Item::first();
-        $items = Item::first()->warehouse()->get(['qty']);
-        dd($items);
-        
-        return view('items.index', ['items'=>$items],['qty'=>$qty]);
+
+    {
+        $items = Item::with('warehouses')->get();
+        return view('items.index', ['items'=>$items]);
+
     }
 
     /**
@@ -45,7 +42,7 @@ class ItemController extends Controller
     public function store(Request $request)
     {     
          $item = Item::create($request->all());
-         $item->warehouse()->attach($request->warehouse_id , ['qty' => $request->qty]);
+         $item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
          //dd($item);
          return redirect('item');
     }
@@ -56,9 +53,16 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show($id)
     {
-        
+        $warehouses = array();
+        foreach (Item::find(1)->warehouses as $warehouse) {
+        if ($warehouse->pivot->qty) {
+            $warehouses[] = $warehouse;
+            dd($warehouses);
+        }
+    }
+    //return $owners;
     }
 
     /**
