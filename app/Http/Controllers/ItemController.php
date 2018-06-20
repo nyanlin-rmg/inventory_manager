@@ -38,7 +38,7 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {     
          $item = Item::create($request->all());
          $item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
          //dd($item);
@@ -96,8 +96,9 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        
-        Item::find($id)->delete();
-        return redirect('item');
+       $item = Item::find($id);
+       Item::find($id)->delete();
+       $item->warehouse()->detach();               
+       return redirect('item');
     }
 }
