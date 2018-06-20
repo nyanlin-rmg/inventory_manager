@@ -13,7 +13,7 @@
 			</tr>
 			@foreach($warehouses as $warehouse)
 			<tr>
-				<td>{{ ucwords($warehouse->name) }}</td>
+				<td><a href="{{ url('warehouse/show', $warehouse->id) }}">{{ ucwords($warehouse->name) }}</a></td>
 				<td>{{ ucwords($warehouse->location) }}</td>
 				<td><a href="{{ url('warehouse/edit', $warehouse->id) }}" class="btn btn-primary">Edit</a></td>
 				<td><a href="{{ url('warehouse/destroy', $warehouse->id) }}" class="btn btn-danger">Delete</a></td>

@@ -3,6 +3,7 @@ Route::get('warehouse/','WarehouseController@index');
 Route::get('warehouse/create', 'WarehouseController@create');
 Route::post('warehouse/store', 'WarehouseController@store');
 Route::get('warehouse/show/{id}', 'WarehouseController@show');
+Route::get('warehouse/showItems/{itemid}', 'WarehouseController@showItems');
 Route::get('warehouse/edit/{id}', 'WarehouseController@edit');
 Route::post('warehouse/update/{id}', 'WarehouseController@update');
 Route::get('warehouse/destroy/{id}', 'WarehouseController@destroy');

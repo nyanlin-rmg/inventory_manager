@@ -8,8 +8,13 @@ class Item extends Model
 {
     protected $fillable = ['name', 'category_id'];
 
-    public function item_warehouses ()
+    public function category()
     {
-    	return $this->belongsToMany('App\Item_warehouse');
+    	return $this->belongsTo('App\Category');
+    }
+
+    public function warehouses()
+    {
+    	return $this->belongsToMany('App\Warehouse');
     }
 }

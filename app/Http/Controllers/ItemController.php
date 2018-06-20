@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Warehouse;
 use App\Category;
 use App\Item;
-use App\Item_warehouse;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
