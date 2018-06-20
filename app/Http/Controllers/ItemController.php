@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Warehouse;
 use App\Category;
 use App\Item;
-use App\Item_warehouse;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -17,8 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::all();
-        $item->warehouse()->attach($request->warehouse_id , ['qty' => $request->qty]);
+        $items = Item::with('warehouses')->get();
         return view('items.index', ['items'=>$items]);
     }
 
@@ -41,9 +38,9 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {     
          $item = Item::create($request->all());
-         $item->warehouse()->attach($request->warehouse_id , ['qty' => $request->qty]);
+         $item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
          //dd($item);
          return redirect('item');
     }
@@ -54,9 +51,16 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show($id)
     {
-        
+        $warehouses = array();
+        foreach (Item::find(1)->warehouses as $warehouse) {
+        if ($warehouse->pivot->qty) {
+            $warehouses[] = $warehouse;
+            dd($warehouses);
+        }
+    }
+    //return $owners;
     }
 
     /**
@@ -92,8 +96,9 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        
-        Item::find($id)->delete();
-        return redirect('item');
+       $item = Item::find($id);
+       Item::find($id)->delete();
+       $item->warehouse()->detach();               
+       return redirect('item');
     }
 }
