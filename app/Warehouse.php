@@ -8,7 +8,7 @@ class Warehouse extends Model
 {
     protected $fillable = ['name', 'location'];
 
-    public function item()
+    public function items()
     {
     	return $this->belongsToMany('App\Item')->withPivot('qty')->withTimestamps();
     }
