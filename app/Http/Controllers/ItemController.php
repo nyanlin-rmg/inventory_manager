@@ -14,9 +14,11 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
         $items = Item::with('warehouses')->get();
         return view('items.index', ['items'=>$items]);
+
     }
 
     /**
