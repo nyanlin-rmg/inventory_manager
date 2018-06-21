@@ -12,7 +12,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<form action="{{url('warehouse/store')}}" method="post">
+			<form action="{{route('warehouse.store')}}" method="post">
 				{{csrf_field()}}
 				<p><input type="text" name="name" placeholder="Name" class="form form-control"></p>
 				<p><textarea placeholder="Location" name="location" class="form form-control"></textarea></p>

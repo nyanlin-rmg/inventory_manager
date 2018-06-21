@@ -5,7 +5,7 @@
 	<title></title>
 </head>
 <body>	
-		<form action="{{url('item/store')}}" method="post">
+		<form action="{{route('item.store')}}" method="post">
 			{{csrf_field()}}
 			<br>
 			<div class="container">
