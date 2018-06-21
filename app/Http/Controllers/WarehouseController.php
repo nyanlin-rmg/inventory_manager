@@ -45,12 +45,12 @@ class WarehouseController extends Controller
         
     // }
 
-    public function edit(Warehouse $warehouse, $id)
+    public function edit($id)
     {
         $warehouse = Warehouse::find($id);
         return view('warehouse.edit', ['warehouse' => $warehouse]);
     }
-    public function update(Request $request, Warehouse $warehouse, $id)
+    public function update(Request $request, $id)
     {
         Warehouse::find($id)->update($request->all());
         return redirect('warehouse');
