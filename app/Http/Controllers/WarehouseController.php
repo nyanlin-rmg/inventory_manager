@@ -23,27 +23,17 @@ class WarehouseController extends Controller
         $test = Warehouse::create($request->all());
         return redirect('warehouse');
     }
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $warehouse = Warehouse::findOrFail($id);
-        $items = $warehouse->items()->get();
-        $categories = $items->map ( function ($value, $key) {
+        //dd($id);
+        $warehouses = Warehouse::findOrFail($id);
+        $items = Item::with('category','warehouses')->get();
+        //dd($items);
+        $categories = $items->map(function($value,$key){
             return $value->category()->get();
-        } )->unique();
-       
-        return view('warehouse.show',['warehouse'=>$warehouse], ['categories'=>$categories]);
+        })->unique();
+        return view('warehouse.show',['warehouse'=>$warehouses],['categories'=>$categories]);
     }
-    // public function showItems(Request $request, $id)
-    // {
-    //     $warehouse = Warehouse::findOrFail($id);
-    //     $items = $warehouse->items()->get();
-    //     $categories = Category::findOrFail($request->categoryid);
-    //     dd($categories);
-    //     foreach ($items as $item) {
-    //         echo "$item->category_id";
-    //     }
-        
-    // }
 
     public function edit($id)
     {

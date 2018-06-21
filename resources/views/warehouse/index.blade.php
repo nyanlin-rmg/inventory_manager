@@ -28,7 +28,7 @@
 			</tr>
 			@foreach($warehouses as $warehouse)
 			<tr>
-				<td><a href="{{ url('warehouse/show', $warehouse->id) }}">{{ ucwords($warehouse->name) }}</a></td>
+				<td><a href="{{ route('warehouse.show', $warehouse->id) }}">{{ ucwords($warehouse->name) }}</a></td>
 				<td>{{ ucwords($warehouse->location) }}</td>
 				<td><a href="{{ route('warehouse.edit', $warehouse->id) }}" class="btn btn-primary">Edit</a></td>
 				<td>

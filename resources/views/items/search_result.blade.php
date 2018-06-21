@@ -10,7 +10,6 @@
 		<table class="table table-striped">
 		<thread>
 			<tr>
-				<td> ID </td>
 				<td> Name </td>
 				<td> Quanity </td>
 				<td> </td>
@@ -20,7 +19,6 @@
 		 <tbody>
 		 	@forelse( $items as $item)
 		 	<tr>
-		 	<td> {{ $item->id }} </td>
 			<td>{{ $item->name }}</td>
 			<?php  
             $warehouses = $item->warehouses;
