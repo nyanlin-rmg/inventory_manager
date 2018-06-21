@@ -17,13 +17,9 @@ Route::post('category/update/{id}','CategoryController@update');*/
 Route::resource('/category','CategoryController');
 
 Route::post('category/search','CategoryController@search');
+Route::resource('item','ItemController');
+Route::post('item/search','ItemController@search');
 
 
-Route::get('item/','ItemController@index');
-Route::get('item/create', 'ItemController@create');
-Route::post('item/store', 'ItemController@store');
-Route::get('item/show/{id}', 'ItemController@show');
-Route::get('item/edit/{id}', 'ItemController@edit');
-Route::post('item/update/{id}', 'ItemController@update');
-Route::get('item/destroy/{id}', 'ItemController@destroy');
+
 

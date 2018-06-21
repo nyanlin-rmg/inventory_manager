@@ -7,8 +7,9 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<form action="{{ url('item/update', $item->id) }}" method="post">
+			<form action="{{ route('item.update', $item->id) }}" method="post">
 				{{csrf_field()}}
+				{{ method_field('PUT') }}
 				<?php $warehouses = $item->warehouses; ?>
 				@foreach ($warehouses as $warehouse)
 				<input type="hidden" name="warehouse_id" value="{{ $warehouse->pivot->warehouse_id }}"><br>

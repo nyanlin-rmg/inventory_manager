@@ -53,13 +53,13 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $warehouses = array();
-        foreach (Item::find(1)->warehouses as $warehouse) {
-        if ($warehouse->pivot->qty) {
-            $warehouses[] = $warehouse;
-            dd($warehouses);
-        }
-    }
+        // $warehouses = array();
+        // foreach (Item::find(1)->warehouses as $warehouse) {
+        // if ($warehouse->pivot->qty) {
+        //     $warehouses[] = $warehouse;
+        //     dd($warehouses);
+        //}
+    //}
     //return $owners;
     }
 
@@ -69,9 +69,9 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $item, $id)
+    public function edit($id)
     {
-        $items = Item::find($id);
+        $items = Item::with('warehouses')->find($id);
         return view('items.edit', ['item'=>$items]);
     }
 
@@ -82,7 +82,7 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item,$id)
+    public function update(Request $request, $id)
     {
         // $item = Item::find($id)->update($request->all());
       //return redirect('item');
@@ -105,4 +105,26 @@ class ItemController extends Controller
        $item->warehouses()->detach();               
        return redirect('item');
     }
+    public function search(Request $request)
+    {
+        if ( ! trim( $request->search) ) 
+        {
+            $items = [];
+            return view('items.search_result', ['items'=> collect($items)] );
+        }
+
+        $items = Item::with('warehouses')->where('name','LIKE','%'.$request->search.'%')->get();
+        // foreach ($items as $item) {
+        //     $warehouses = $item->warehouses;
+        //     foreach ($warehouses as $warehouse) {
+        //         dd($warehouse->pivot->qty);
+        //     }
+        // }
+
+    
+        return view('items.search_result', ['items'=>$items]);
+        }
+
+    
 }
+
