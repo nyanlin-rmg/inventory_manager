@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Warehouse;
+use App\Item;
+use App\Category;
+use App\Item_warehouse;
 use Illuminate\Http\Request;
 
 class WarehouseController extends Controller
@@ -20,15 +23,34 @@ class WarehouseController extends Controller
         $test = Warehouse::create($request->all());
         return redirect('warehouse');
     }
-    public function show(Request $request)
+    public function show(Request $request, $id)
     {
+        $warehouse = Warehouse::findOrFail($id);
+        $items = $warehouse->items()->get();
+        $categories = $items->map ( function ($value, $key) {
+            return $value->category()->get();
+        } )->unique();
+       
+        return view('warehouse.show',['warehouse'=>$warehouse], ['categories'=>$categories]);
     }
-    public function edit(Warehouse $warehouse, $id)
+    // public function showItems(Request $request, $id)
+    // {
+    //     $warehouse = Warehouse::findOrFail($id);
+    //     $items = $warehouse->items()->get();
+    //     $categories = Category::findOrFail($request->categoryid);
+    //     dd($categories);
+    //     foreach ($items as $item) {
+    //         echo "$item->category_id";
+    //     }
+        
+    // }
+
+    public function edit($id)
     {
         $warehouse = Warehouse::find($id);
         return view('warehouse.edit', ['warehouse' => $warehouse]);
     }
-    public function update(Request $request, Warehouse $warehouse, $id)
+    public function update(Request $request, $id)
     {
         Warehouse::find($id)->update($request->all());
         return redirect('warehouse');
