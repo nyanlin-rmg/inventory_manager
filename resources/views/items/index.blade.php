@@ -4,6 +4,13 @@
 </head>
 <body>
 	<div class="container"> 
+		<br>
+		<form action="{{ url('item/search') }}" method="POST">
+		{{ csrf_field() }}
+			<input type="text" name="search" required>
+			<button type="submit" class="btn btn-primary">Search</button>  
+		</form>
+		<br>
 	<table class="table table-havor">
 		<thread>
 			<tr>

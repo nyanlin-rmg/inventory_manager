@@ -55,15 +55,11 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $warehouses = array();
-        foreach (Item::find(1)->warehouses as $warehouse) {
-        if ($warehouse->pivot->qty) {
-            $warehouses[] = $warehouse;
-            dd($warehouses);
-        }
+        
+        
     }
     //return $owners;
-    }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -72,9 +68,8 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Item $item, $id)
-    {
-        $items = Item::find($id);
-        $items = Item::with('warehouses')->get();
+    {        
+        $items = Item::with('warehouses')->find($id);
         return view('items.edit', ['item'=>$items]);
     }
 
@@ -87,8 +82,9 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item,$id)
     {
-        $item = Item::find($id)->update($request->all());
-        $item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
+        $item = Item::find($id);
+        Item::find($id)->update($request->all());
+        $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $request->qty]);
         return redirect('item');
     }
 
@@ -104,5 +100,5 @@ class ItemController extends Controller
        Item::find($id)->delete();
        $item->warehouses()->detach();               
        return redirect('item');
-    }
+    }   
 }

@@ -21,7 +21,8 @@
 				?>
 				@foreach($warehouses as $warehouse) 
 				<label>Quantity:</label>
-
+				<input type="text" name="qty" value="{{ $warehouse->pivot->qty }}" class="form form-control"><br>
+				@endforeach
 				<input type="submit" value="Update" class="btn btn-primary">
 			</form>
 		</div>

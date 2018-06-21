@@ -26,4 +26,5 @@ Route::get('item/show/{id}', 'ItemController@show');
 Route::get('item/edit/{id}', 'ItemController@edit');
 Route::post('item/update/{id}', 'ItemController@update');
 Route::get('item/destroy/{id}', 'ItemController@destroy');
+Route::post('item/search', 'ItemController@search');
 
