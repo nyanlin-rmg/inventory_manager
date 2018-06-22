@@ -22,8 +22,9 @@ class WarehouseController extends Controller
         $test = Warehouse::create($request->all());
         return redirect('warehouse');
     }
-    public function show(Request $request, $id)
+    public function show($id)
     {
+
         $wid = $id;
         $warehouses = Warehouse::findOrFail($id);
         $items = $warehouses->items()->get();
@@ -41,14 +42,15 @@ class WarehouseController extends Controller
         // dd($warehouse); 
         return view('warehouse.showItems', ['warehouse'=>$warehouse]);
        
+
     }
 
-    public function edit(Warehouse $warehouse, $id)
+    public function edit($id)
     {
         $warehouse = Warehouse::find($id);
         return view('warehouse.edit', ['warehouse' => $warehouse]);
     }
-    public function update(Request $request, Warehouse $warehouse, $id)
+    public function update(Request $request, $id)
     {
         Warehouse::find($id)->update($request->all());
         return redirect('warehouse');

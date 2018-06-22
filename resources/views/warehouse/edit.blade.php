@@ -12,8 +12,9 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<form action="{{ url('warehouse/update', $warehouse->id) }}" method="post">
+			<form action="{{ route('warehouse.update', $warehouse->id) }}" method="post">
 				{{csrf_field()}}
+				{{method_field('PUT')}}
 				<input type="hidden" name="id" value="{{ $warehouse->id }}">
 				<p><input type="text" name="name" value="{{ $warehouse->name }}" class="form form-control"></p>
 				<p><textarea name="location" class="form form-control">{{ $warehouse->location }}</textarea></p>

@@ -28,10 +28,16 @@
 			</tr>
 			@foreach($warehouses as $warehouse)
 			<tr>
-				<td><a href="{{ url('warehouse/show', $warehouse->id) }}">{{ ucwords($warehouse->name) }}</a></td>
+				<td><a href="{{ route('warehouse.show', $warehouse->id) }}">{{ ucwords($warehouse->name) }}</a></td>
 				<td>{{ ucwords($warehouse->location) }}</td>
-				<td><a href="{{ url('warehouse/edit', $warehouse->id) }}" class="btn btn-primary">Edit</a></td>
-				<td><a href="{{ url('warehouse/destroy', $warehouse->id) }}" class="btn btn-danger">Delete</a></td>
+				<td><a href="{{ route('warehouse.edit', $warehouse->id) }}" class="btn btn-primary">Edit</a></td>
+				<td>
+					<form action="{{ route('warehouse.destroy', $warehouse->id) }}" method="post">
+						{{ csrf_field() }}
+						{{ method_field('DELETE') }}
+						<button class="btn btn-danger">Delete</button>
+					</form>
+				</td>
 			</tr>
 			@endforeach
 		</table>

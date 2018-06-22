@@ -8,9 +8,11 @@ class Category extends Model
 {
     public $fillable=['name','description'];
 
+    
     public function items()
-        {
-            return $this->hasMany('App\Item');
-        }
+    {
+        return $this->hasMany('App\Item');
+    }
+
 }
 
