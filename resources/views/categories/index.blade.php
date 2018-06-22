@@ -35,7 +35,7 @@
 		 ?>
 		 <tr>
 		 	<td> {{ $category->id }} </td>
-			<td>{{ $category->name }}</td>
+			<td><a href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a></td>
 			<td>{{ $category->description }}</td>
 			<td> <a class="btn btn-success" href="{{ route('category.edit',$category->id) }}">Edit</a></td>
 			<td><!--  <a class="btn btn-danger" href="{{ route('category.destroy',$category->id)}}">Delete</a> --> 
