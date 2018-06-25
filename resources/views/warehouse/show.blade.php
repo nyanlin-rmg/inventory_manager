@@ -12,7 +12,7 @@
 			@foreach( $categories as $category )
 				@foreach( $category as $name )
 			<tr>
-				<td><a href="{{ url('warehouse/showItems', $warehouse->id) }}">
+				<td><a href="{{ url('warehouse/showItems', $warehouse->id) }}"> 
 					<input type="hidden" name="categoryid" value="{{ $name->id }}" >
 					{{ $name->name }}
 				</a></td>

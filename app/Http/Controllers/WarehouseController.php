@@ -29,7 +29,7 @@ class WarehouseController extends Controller
         $warehouses = Warehouse::findOrFail($id);
         $items = Item::with('category','warehouses')->get();
         //dd($items);
-        $categories = $items->map(function($value,$key){
+        $categories = $items->map(function($value){
             return $value->category()->get();
         })->unique();
         return view('warehouse.show',['warehouse'=>$warehouses],['categories'=>$categories]);
