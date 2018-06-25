@@ -53,10 +53,7 @@ class CategoryController extends Controller
     {
         $categories = Category::findOrFail($id);
         $items = $categories->items()->get();
-        foreach ($items as $item) {
-            echo $item->name . "</br>" ;
-        }
-        die();
+        return view ('categories.show',['items'=>$items]);
     }
 
     /**

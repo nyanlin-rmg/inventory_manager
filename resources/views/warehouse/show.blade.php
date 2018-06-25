@@ -1,3 +1,4 @@
+@extends('layouts.default')
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +6,7 @@
 </head>
 <body>
 	<div class="container">
-		<table class="table">
+		<table class="table table-striped">
 			<tr>
 				<td><b>Category Name</b></td>
 			</tr>
