@@ -1,4 +1,5 @@
 <?php
+
 // Route::get('warehouse/','WarehouseController@index');
 // Route::get('warehouse/create', 'WarehouseController@create');
 // Route::post('warehouse/store', 'WarehouseController@store');
@@ -8,6 +9,7 @@
 // Route::post('warehouse/update/{id}', 'WarehouseController@update');
 // Route::get('warehouse/destroy/{id}', 'WarehouseController@destroy');
 Route::resource('/warehouse', 'WarehouseController');
+>>>>>>> 5a40a4cb44550bc916219644fa9e132aa9ab11d3
 Route::post('warehouse/search', 'WarehouseController@search');
 
 /*Route::get('category','CategoryController@index');
