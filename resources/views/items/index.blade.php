@@ -44,28 +44,5 @@
 		</table>	
 		<a href="{{ route('item.create') }}" class="btn btn-primary">Create</a>
 	</div>
-	<div class="container">
-		<form action="{{ url('item/search') }}" method="POST">
-		{{ csrf_field() }}
-		<table class="table table-havor">
-			<td>
-				<select name="item" class="form-control">
-					@foreach($items as $item)
-						<option value="{{ $item->id }}">{{ $item->name }}</option>
-					@endforeach
-				</select>
-			</td>
-			<td>
-				<input type="text" name="qty" required>
-			</td>
-			<td>
-				<button type="submit" class="btn btn-primary">In</button>
-			</td>
-			<td>
-				<button type="submit" class="btn btn-primary">Out</button>
-			</td>
-		</table>
-		</form>
-		</div>
 </body>
 </html>
