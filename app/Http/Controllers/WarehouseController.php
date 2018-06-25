@@ -24,7 +24,6 @@ class WarehouseController extends Controller
     }
     public function show($id)
     {
-
         $wid = $id;
         $warehouses = Warehouse::findOrFail($id);
         $items = $warehouses->items()->get();
@@ -35,11 +34,8 @@ class WarehouseController extends Controller
     }
     public function showItems( $category_id, $warehouse_id)
     {
-        // $items = Item::with('category','warehouses')->get();   
-        // $categories = Category::findOrFail($id);
         $warehouses = Warehouse::findOrFail($warehouse_id);
         $warehouse = $warehouses->items()->where('category_id',$category_id)->get();
-        // dd($warehouse); 
         return view('warehouse.showItems', ['warehouse'=>$warehouse]);
        
 
