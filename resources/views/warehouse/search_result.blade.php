@@ -15,8 +15,14 @@
 			<tr>
 				<td>{{ ucwords($search_warehouse->name) }}</td>
 				<td>{{ ucwords($search_warehouse->location) }}</td>
-				<td><a href="{{ url('warehouse/edit', $search_warehouse->id) }}" class="btn btn-primary">Edit</a></td>
-				<td><a href="{{ url('warehouse/destroy', $search_warehouse->id) }}" class="btn btn-danger">Delete</a></td>
+				<td><a href="{{ route('warehouse.edit', $search_warehouse->id) }}" class="btn btn-primary">Edit</a></td>
+				<td>
+					<form action="{{ route('warehouse.destroy', $search_warehouse->id) }}" method="post">
+						{{ csrf_field() }}
+						{{ method_field('DELETE') }}
+						<button class="btn btn-danger">Delete</button>
+					</form>
+				</td>	
 			</tr>
 		@empty
 		<tr>

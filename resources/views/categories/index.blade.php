@@ -20,8 +20,7 @@
 	<div class="container">
 		<table class="table table-striped">
 		<thread>
-			<tr>
-				<td> ID </td>
+			<tr>				
 				<td> Name </td>
 				<td> Description </td>
 				<td> </td>
@@ -33,8 +32,7 @@
 		 foreach ($categories as $category) {
 		 	$id = $category->id;
 		 ?>
-		 <tr>
-		 	<td> {{ $category->id }} </td>
+		 <tr>		 	
 			<td>{{ $category->name }}</td>
 			<td>{{ $category->description }}</td>
 			<td> <a class="btn btn-success" href="{{ route('category.edit',$category->id) }}">Edit</a></td>

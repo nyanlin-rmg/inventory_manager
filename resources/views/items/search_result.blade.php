@@ -46,6 +46,6 @@
     </tbody>
 </table>
     	<a class="btn btn-info" href="{{ route('item.index') }}">Back to home</a>
->>>>>>> 9851f46f38f8a3daf02096b09ee160577c4782b6
+
 </body>
 </html>
