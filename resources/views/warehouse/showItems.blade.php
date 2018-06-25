@@ -8,17 +8,20 @@
 	<div class="container">
 		<table class="table table-striped">
 			<tr>
-				<td><b>Category Name</b></td>
+				<td><b>Item Name</td>
+				<td><b>QTY</b></td>
 			</tr>
-			@foreach( $categories as $category )
-				@foreach( $category as $name )
+			@foreach( $warehouse as $warehouse )
+				
 			<tr>
-				<td><a href="{{ url('warehouse/showItems'.'/'. $name->id . '/' . $wid) }}">
-
-					{{ $name->name }}
-				</a></td>
+				<td>
+					{{ $warehouse->name }}
+				</td>
+				<td>
+					{{ $warehouse->pivot->qty }}
+				</td>
 			</tr>
-				@endforeach
+				
 			@endforeach	
 		</table>
 		<hr>

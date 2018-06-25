@@ -7,6 +7,7 @@
 	<h1>Create</h1>
 	<form action="{{ route('category.store') }}" method="POST">
 	{{ csrf_field() }}
+	
 	<div class="form-group">
 		<label for="usr">Name:</label>
 		<input type="text" name="name" class="form-control">

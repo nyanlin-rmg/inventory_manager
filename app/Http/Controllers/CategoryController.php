@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Item;
+use App\Warehouse;
 use Illuminate\Http\Request;
 use App\Category;
 
@@ -50,7 +51,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $categories = Category::findOrFail($id);
+        $items = $categories->items()->get();
+        return view ('categories.show',['items'=>$items]);
     }
 
     /**

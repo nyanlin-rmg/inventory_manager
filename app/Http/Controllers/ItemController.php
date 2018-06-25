@@ -115,7 +115,5 @@ class ItemController extends Controller
         $items = Item::with('warehouses')->where('name','LIKE','%'.$request->search.'%')->get();       
     
         return view('items.search_result', ['items'=>$items]);
-        }   
-
-}
+    }
 

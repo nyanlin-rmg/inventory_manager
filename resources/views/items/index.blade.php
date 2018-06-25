@@ -28,7 +28,7 @@
 		@foreach($warehouses as $warehouse) 
 		 <tr>
 
-		 	<td><a href="{{ route('item.show',$item->id) }}">{{ $item->name }}</a></td>
+		 	<td>{{ $item->name }}</td>
 		 	<td>{{ $warehouse->pivot->qty }}</td>
 		
 		 	<td> <a class="btn btn-success" href="{{ route('item.edit',$item->id) }}">Edit</a></td>
