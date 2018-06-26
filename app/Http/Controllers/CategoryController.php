@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Item;
 
 class CategoryController extends Controller
 {
@@ -86,7 +87,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $category = Category::find($id);
         Category::find($id)->delete();
+        $category->items()->delete();
         return redirect('/category')->with('success','Category deleted successfully!!');
     }
 

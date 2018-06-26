@@ -88,8 +88,7 @@ class ItemController extends Controller
     {
         $item = Item::find($id);
         Item::find($id)->update($request->all());
-        $item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
-       
+        $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $request->qty]);
         return redirect('item');
     }
 
