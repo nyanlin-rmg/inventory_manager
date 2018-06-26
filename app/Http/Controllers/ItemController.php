@@ -124,11 +124,6 @@ class ItemController extends Controller
     
         return view('items.search_result', ['items'=>$items]);
         }
-        public function in()
-        {
-            return view('welcome');
-        }
-        
 
     
 }

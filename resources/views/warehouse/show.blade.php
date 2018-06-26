@@ -14,7 +14,7 @@
 				@foreach( $category as $name )
 			<tr>
 				<td><a href="{{ url('warehouse/showItems'.'/'. $name->id . '/' . $wid) }}">
-
+					<!-- <input type="hidden" name="categoryid" value="{{ $name->id }}" > -->
 					{{ $name->name }}
 				</a></td>
 			</tr>
