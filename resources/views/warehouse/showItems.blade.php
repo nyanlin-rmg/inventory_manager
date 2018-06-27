@@ -10,6 +10,8 @@
 			<tr>
 				<td><b>Item Name</td>
 				<td><b>QTY</b></td>
+				<td></td>
+				<td></td>
 			</tr>
 			@foreach( $warehouse as $warehouse )
 				
@@ -19,12 +21,7 @@
 				</td>
 				<td>
 					{{ $warehouse->pivot->qty }}
-				</td>
-			</tr>
-				
-			@endforeach	
-		</table>
-		<hr>
-	</div>
+				</td>	
+			</form>
 </body>
 </html>

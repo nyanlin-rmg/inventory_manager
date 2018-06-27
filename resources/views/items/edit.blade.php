@@ -7,7 +7,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<form action="{{ route('item.update', $item->id) }}" method="post">
+			<form action="{{ route('items.update', $item->id) }}" method="post">
 				{{csrf_field()}}
 				{{ method_field('PUT') }}
 				<?php $warehouses = $item->warehouses; ?>

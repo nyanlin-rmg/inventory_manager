@@ -89,7 +89,7 @@ class ItemController extends Controller
         $item = Item::find($id);
         Item::find($id)->update($request->all());
         $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $request->qty]);
-       return redirect('item');
+       return redirect('items');
     }
 
     /**
@@ -103,7 +103,7 @@ class ItemController extends Controller
        $item = Item::find($id);
        Item::find($id)->delete();
        $item->warehouses()->detach();               
-       return redirect('item');
+       return redirect('items');
     }
     public function search(Request $request)
     {
@@ -124,12 +124,5 @@ class ItemController extends Controller
     
         return view('items.search_result', ['items'=>$items]);
         }
-        public function in()
-        {
-            return view('welcome');
-        }
-        
-
-    
 }
 

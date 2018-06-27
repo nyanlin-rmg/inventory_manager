@@ -11,6 +11,7 @@ class WarehouseController extends Controller
     public function index()
     {
         $warehouses = Warehouse::all();
+        
         return view('warehouse.index', ['warehouses'=>$warehouses]);
     }
     public function create()
@@ -26,19 +27,19 @@ class WarehouseController extends Controller
     {
         $wid = $id;
         $warehouses = Warehouse::findOrFail($id);
+        $items = Item::all();
         $items = $warehouses->items()->get();
         $categories = $items->map ( function ($value, $key) {
             return $value->category()->get();
         } )->unique(); 
-        return view('warehouse.show',['wid'=>$wid], ['categories'=>$categories]);
+        return view('warehouse.show',['wid'=>$wid], ['categories'=>$categories],['items'=>$items]);
     }
     public function showItems( $category_id, $warehouse_id)
     {
         $warehouses = Warehouse::findOrFail($warehouse_id);
+        $items = Item::all();
         $warehouse = $warehouses->items()->where('category_id',$category_id)->get();
-        return view('warehouse.showItems', ['warehouse'=>$warehouse]);
-       
-
+        return view('warehouse.showItems', ['warehouse'=>$warehouse],['items'=>$items]);
     }
 
     public function edit($id)
@@ -71,5 +72,12 @@ class WarehouseController extends Controller
             'name', 'LIKE', '%'. $search. '%'
         )->get();
         return view('warehouse.search_result', ['search_warehouses' => $search_warehouses]);
+    }
+
+    public function inventory_in( Request $request)
+    {
+    }
+    public function inventory_out( Request $request)
+    {
     }
 }
