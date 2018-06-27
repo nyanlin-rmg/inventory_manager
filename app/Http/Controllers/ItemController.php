@@ -42,27 +42,8 @@ class ItemController extends Controller
          $item = Item::create($request->all());
          $item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
          //dd($item);
-         return redirect('item');
+         return redirect('items');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        // $warehouses = array();
-        // foreach (Item::find(1)->warehouses as $warehouse) {
-        // if ($warehouse->pivot->qty) {
-        //     $warehouses[] = $warehouse;
-        //     dd($warehouses);
-        //}
-    //}
-    //return $owners;
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
