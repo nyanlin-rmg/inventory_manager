@@ -3,21 +3,27 @@
 <head>
 </head>
 <body>
-	<div class="container"> 
-
-	<form action="{{ url('item/search') }}" method="POST">
-	{{ csrf_field() }}
-	<input type="text" name="search" required>
-	<button type="submit" class="btn btn-primary">Search</button>  
-	</form>
-	<hr/>
-
-	<table class="table table-havor">
+	<div class="container">
+		<form action="{{ url('item/search') }}" method="POST">
+			{{csrf_field()}}
+			<table class="table">
+				<tr>
+					<td>
+						<input type="text" name="search" class="form-control" placeholder="Search" required="">
+					</td>
+					
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div class="container">
+	<table class="table table-striped">
 		<thread>
 			<tr>
-				<td> Name </td>
-				<td>Quantity</td>
-				<td>Action</td>						
+				<td><b>Name</b></td>
+				<td><b>Quantity</b></td>
+				<td><b>Action</b></td>	
+				<td></td>					
 			</tr>
 		 </thread>
 		 <tbody>

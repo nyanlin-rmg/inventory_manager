@@ -39,7 +39,8 @@
 				</select>
 				</div><br>
 
-				<input type="submit" value="Create" class="btn btn-primary">
+				<input type="submit" value="Submit" class="btn btn-primary">
+				<a href="{{ route('item.index') }}" class="btn btn-warning">Cancel</a>
 			</div>	
 		</form>
 		

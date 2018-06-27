@@ -13,8 +13,8 @@
 			<tr>
 				<td> Name </td>
 				<td> Quanity </td>
-				<td> </td>
-	            <td> </td>
+				<td>Action</td>	
+				<td></td>			
 			</tr>
 		 </thread>
 		 <tbody>
@@ -43,7 +43,7 @@
     	@endforelse
     </tbody>
 </table>
-    	<a class="btn btn-info" href="{{ route('item.index') }}">Back to home</a>
+    	<a href="{{ route('item.index') }}" class="btn btn-info">Back to home</a>
 
 </body>
 </html>
