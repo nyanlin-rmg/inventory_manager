@@ -35,10 +35,8 @@ class WarehouseController extends Controller
     public function showItems( $category_id, $warehouse_id)
     {
         $warehouses = Warehouse::findOrFail($warehouse_id);
-        $warehouse = $warehouses->items()->where('category_id',$category_id)->get();
-        return view('warehouse.showItems', ['warehouse'=>$warehouse]);
-       
-
+        $items = $warehouses->items()->where('category_id',$category_id)->get();
+        return view('warehouse.showItems', ['items'=>$items]);
     }
 
     public function edit($id)
@@ -71,5 +69,20 @@ class WarehouseController extends Controller
             'name', 'LIKE', '%'. $search. '%'
         )->get();
         return view('warehouse.search_result', ['search_warehouses' => $search_warehouses]);
+    }
+    public function inventory_in_out(Request $request, $id)
+    {
+        $in = $request->in;
+        $out = $request->out;
+        $result = $in - $out;
+        $item = Item::find($id);
+        $warehouses = $item->warehouses;
+        foreach ($warehouses as $warehouse) {
+            $qty = $warehouse->pivot->qty;
+            $warehouse_id = $warehouse->pivot->warehouse_id;
+        }
+        $qty += $result;
+        $item->warehouses()->updateExistingPivot($warehouse_id, ['qty' => $qty]);
+        return redirect()->back();
     }
 }
