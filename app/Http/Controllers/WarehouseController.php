@@ -85,4 +85,10 @@ class WarehouseController extends Controller
         $item->warehouses()->updateExistingPivot($warehouse_id, ['qty' => $qty]);
         return redirect()->back();
     }
+    public function shortage()
+    {
+        // $warehouses = Warehouse::findOrFail($warehouse_id);
+        // $items = $warehouses->items()->where('category_id',$category_id)->get();
+        return view('warehouse.shortage');        
+    }
 }
