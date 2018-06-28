@@ -42,7 +42,6 @@
 		<hr>
 		<a href="{{ route('warehouse.create') }}" class="btn btn-primary">Create</a>
 		<a href="{{ url('warehouse/purchase') }}" class="btn btn-primary">Purchase</a>
-		<a href="" class="btn btn-primary">Sale</a>
 	</div>
 </body>
 </html>
