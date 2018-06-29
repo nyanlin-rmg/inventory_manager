@@ -1,4 +1,4 @@
- @extends('layouts.default')
+  @extends('layouts.default')
  @include('header')
 <html>
 <head>
@@ -25,7 +25,6 @@
 		 <tbody>
 		 @foreach($items as $item)
 		 <tr>
-
 		 	<td>{{ $item->name }}</td>
 		 	<td>{{ $item->price }}</td>
 		 	<td> 

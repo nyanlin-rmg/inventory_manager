@@ -83,6 +83,7 @@ class WarehouseController extends Controller
         return redirect()->back();
     }
 
+
     public function purchase() 
     {
         $items = Item::all();
