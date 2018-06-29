@@ -11,10 +11,10 @@
 				{{csrf_field()}}
 				{{ method_field('PUT') }}
 
-				<input type="hidden" name="id" value="{{ $item->id }}">
+				<input type="hidden" name="id" value="{{ $item->id }}" required="">
 				<div class="form-group">
 					<label>Name:</label>
-					<input type="text" name="name" value="{{ $item->name }}" class="form-control">
+					<input type="text" name="name" value="{{ $item->name }}" class="form-control" required="">
 				</div>
 				
 				<div class="form-group">

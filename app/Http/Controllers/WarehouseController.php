@@ -21,7 +21,7 @@ class WarehouseController extends Controller
     public function store(Request $request)
     {
         $test = Warehouse::create($request->all());
-        return redirect('warehouse')->with('success','Warehouse successfully created');
+        return redirect('warehouses')->with('success','Warehouse successfully created');
     }
     public function show($id)
     {
@@ -50,14 +50,14 @@ class WarehouseController extends Controller
     public function update(Request $request, $id)
     {
         Warehouse::find($id)->update($request->all());
-        return redirect('warehouse')->with('success','Warehouse successfully updated');
+        return redirect('warehouses')->with('success','Warehouse successfully updated');
     }
     public function destroy($id)
     {
         $warehouse = Warehouse::find($id);
         Warehouse::find($id)->delete();
         $warehouse->items()->detach();
-        return redirect('warehouse/')->with('success','Warehouse successfully deleted');
+        return redirect('warehouses/')->with('success','Warehouse successfully deleted');
     }
     public function search(Request $request)
     {
@@ -85,6 +85,7 @@ class WarehouseController extends Controller
         return redirect()->back();
     }
 
+
     public function purchase() 
     {
         $items = Item::all();
@@ -104,6 +105,7 @@ class WarehouseController extends Controller
         }
         $quantity = $qty + $quantity;
         $item->warehouses()->sync([$request->warehouse_id => ['qty'=>$quantity]]);
-       return redirect('warehouse');
+       return redirect('warehouses');
+
     }
 }
