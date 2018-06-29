@@ -103,22 +103,15 @@ class ItemController extends Controller
     }
     public function search(Request $request)
     {
-        if ( ! trim( $request->search) ) 
+        $search = $request->search;
+        if ( ! trim( $search) ) 
         {
             $items = [];
-            return view('items.search_result', ['items'=> collect($items)] );
+            return view('items.search_result', ['items'=> collect($items), 'search' => $search] );
         }
 
         $items = Item::with('warehouses')->where('name','LIKE','%'.$request->search.'%')->get();
-        // foreach ($items as $item) {
-        //     $warehouses = $item->warehouses;
-        //     foreach ($warehouses as $warehouse) {
-        //         dd($warehouse->pivot->qty);
-        //     }
-        // }
-
-    
-        return view('items.search_result', ['items'=>$items]);
+        return view('items.search_result', ['items'=>$items, 'search' => $search]);
         }  
 }
 

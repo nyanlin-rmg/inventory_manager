@@ -10,7 +10,7 @@
 			<ul class="list-inline text-left">
 				    <li><a href="{{ url('warehouse/') }}">Warehouse</a></li>
 				    <li><a href="{{ url('category/') }}">Category</a></li>
-				    <li><a href="{{ url('item/') }}">Item</a></li>
+				    <li><a href="{{ url('items/') }}">Item</a></li>
 					<li><a href="#">Login</a></li>
 					<li><a href="#">Register</a></li>
 			</ul>

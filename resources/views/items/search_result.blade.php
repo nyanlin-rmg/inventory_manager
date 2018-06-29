@@ -4,7 +4,10 @@
 </head>
 <body>
 	<div class="container">
-		
+		<form action="{{ url('items/search') }}" method="POST">
+		{{ csrf_field() }}
+			<input type="text" name="search" class="form-control search" placeholder="search" value="{{ $search }}" required> 
+		</form>
     	<h1>Show</h1>
     	<div class="container">
 		<table class="table table-striped">
