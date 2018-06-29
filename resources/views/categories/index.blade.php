@@ -1,4 +1,5 @@
  @extends('layouts.default')
+ @include('header')
 <html>
 <head>
 </head>
@@ -6,10 +7,9 @@
 	<div class="container">
 		<form action="{{ url('category/search') }}" method="POST">
 		{{ csrf_field() }}
-		<input type="text" name="search" class="form-control" placeholder="search" required> 
+			<input type="text" name="search" class="form-control search" placeholder="search" required> 
 		</form>
 	</div>
-	<div class="container">
 	@if ($message = Session::get('success'))
 		<div class="alert alert-success">
 		<p>{{ $message }}</p>

@@ -1,5 +1,16 @@
 <?php
-
+Route::get('/', function () {
+	return view('index');
+});
+Route::get('warehouse', function () {
+	return view('warehouse');	
+});
+Route::get('category', function () {
+	return view('category');	
+});
+Route::get('item', function () {
+	return view('item');	
+});
 Route::get('warehouse/purchase','WarehouseController@purchase');
 Route::resource('warehouse', 'WarehouseController');
 Route::post('warehouse/search', 'WarehouseController@search');

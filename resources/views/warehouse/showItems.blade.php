@@ -17,11 +17,9 @@
 				{{ csrf_field() }}
 				<tr>
 					<td>{{ ucwords($item->name) }}</td>
-					<td>{{ $item->pivot->qty }}</td>
-					
+					<td>{{ $item->pivot->qty }}</td>					
 				</tr>
 			</form>
-				
 			@endforeach	
 		</table>
 		<hr>

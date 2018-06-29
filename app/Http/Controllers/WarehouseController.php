@@ -95,27 +95,17 @@ class WarehouseController extends Controller
     }
     public function save(Request $request)
     {
-       //dd($request->quantity);
-       $item = Item::find($request->item_id);
-        //$warehouses = $item->warehouses;
-        //$item->warehouses()->attach($request->warehouse_id, ['qty' => $request->quantity]);
-        $item->warehouses()->syncWithoutDetaching([$request->warehouse_id => ['qty'=>$request->quantity]]);
-
-
-       /* foreach ($warehouses as $warehouse) {
-            $item_id = $warehouse->pivot->item_id;
-            $warehouse_id = $warehouse->pivot->warehouse_id;
-            $quantity = $warehouse->pivot->qty; 
-        
-        //dd($item_id);
-        if($item_id == $request->item_id && $warehouse_id == $request->warehouse_id) {
-            $quantity += $request->quantity;
-             $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $quantity]);
+        $item = Item::find($request->item_id);
+        $warehouses = $item->warehouses()->get();
+        $quantity = $request->quantity;
+        $warehouse = $item->warehouses()->find($request->warehouse_id);
+        if($warehouse == null) {
+            $qty = 0;
         } else {
-            $item->warehouses()->attach($request->warehouse_id, ['qty' => $request->quantity]);
+            $qty = $warehouse->pivot->qty;
         }
-      
-    }*/
-     return redirect('warehouse');
-}
+        $quantity = $qty + $quantity;
+        $item->warehouses()->sync([$request->warehouse_id => ['qty'=>$quantity]]);
+       return redirect('warehouse');
+    }
 }

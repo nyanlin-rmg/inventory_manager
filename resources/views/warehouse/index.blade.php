@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@include('header')
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 	<div class="container">
 		<form action="{{ url('warehouse/search') }}" method="POST">
 			{{csrf_field()}}
-			<input type="text" name="search" class="form-control" placeholder="Search" required="">
+			<input type="text" name="search" class="form-control search" placeholder="Search" required="">
 		</form>
 	</div>
 	<div class="container">
