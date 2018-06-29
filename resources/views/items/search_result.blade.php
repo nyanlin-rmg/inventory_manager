@@ -11,10 +11,12 @@
 		<table class="table table-striped">
 		<thread>
 			<tr>
-				<td><b>Name </b></td>
-				<td> <b>Quanity</b> </td>
-				<td><b>Action</b></td>	
-				<td></td>			
+
+				<td> Name </td>
+				<td> Quanity </td>
+				<td> Price </td>
+				<td> </td>
+	            <td> </td>
 			</tr>
 		 </thread>
 		 <tbody>
@@ -27,6 +29,7 @@
             @foreach ($warehouses as $warehouse) 
             <td>{{ $warehouse->pivot->qty }}</td>
             @endforeach
+            <td>{{ $item->price }}</td>
 			<td> <a class="btn btn-success" href="{{ route('item.edit',$item->id) }}">Edit</a></td>
 			<td>
 				<form action="{{ route('item.destroy', $item->id) }}" method="post">

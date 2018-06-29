@@ -89,7 +89,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $category = Category::find($id);
         Category::find($id)->delete();
+        $category->items()->delete();
         return redirect('/category')->with('success','Category deleted successfully!!');
     }
 
@@ -104,7 +106,5 @@ class CategoryController extends Controller
         $categories = Category::where('name','LIKE','%'.$request->search.'%')->get();
     
         return view('categories.search_result', ['categories'=>$categories]);
-        }
-
-    
+        }   
 }

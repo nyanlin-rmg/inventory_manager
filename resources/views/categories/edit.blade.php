@@ -17,7 +17,8 @@
 		<textarea name="description" class="form-control">{{ $category->description }}</textarea>
 	</div>
 	<div class="form-group">
-		<button type="submit" class="btn btn-success">Update</button>
+		<input type="submit" class="btn btn-primary" value="Update"></input>
+		<a href="{{ route('category.index') }}" class="btn btn-primary">Cancel</a>
 	</div>
 	</form>
 	</div>

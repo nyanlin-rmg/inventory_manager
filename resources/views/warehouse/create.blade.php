@@ -14,11 +14,21 @@
 		<div class="row">
 			<form action="{{route('warehouse.store')}}" method="post">
 				{{csrf_field()}}
-				<p><input type="text" name="name" placeholder="Name" class="form form-control"></p>
-				<p><textarea placeholder="Location" name="location" class="form form-control"></textarea></p>
-				<p><input type="submit" value="Create" class="btn btn-primary"></p>
-				<a href="{{ route('warehouse.index') }}" class="btn btn-warning">Cancel</a>
-			</form>			
+
+				<div class="form-group">
+					<label>Name:</label>
+					<input type="text" name="name" placeholder="Name" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Location:</label>
+					<textarea placeholder="Location" name="location" class="form-control"></textarea>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Create" class="btn btn-primary">
+					<a href="{{ route('warehouse.index') }}" class="btn btn-primary">Cancel</a>
+				</div>
+			</form>
+
 		</div>
 	</div>
 </body>
