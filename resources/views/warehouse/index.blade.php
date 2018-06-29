@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 @extends('layouts.default')
 <!DOCTYPE html>
 <html>
@@ -43,6 +46,8 @@
 		</table>
 		<hr>
 		<a href="{{ url('warehouse/create') }}" class="btn btn-info">Create Warehouse</a>
+		<a href="{{ url('warehouse/purchase') }}" class="btn btn-info">Purchase</a>
+		<a href="{{ url('warehouse/sale') }}" class="btn btn-info">Sale</a>
 	</div>
 </body>
 </html>

@@ -87,4 +87,8 @@ class WarehouseController extends Controller
         $item->warehouses()->updateExistingPivot($warehouse_id, ['qty' => $qty]);
         return redirect()->back();
     }
+    public function purchase()
+    {
+        return view('warehouse.purchase');
+    }
 }

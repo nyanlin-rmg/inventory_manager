@@ -25,14 +25,6 @@
 					@endforeach
 					</select>
 				</div>
-				<div class="form-group">
-					<label>Warehouse_id:</label>
-					<select name= "warehouse_id" class="form-control">
-					@foreach ($warehouses as $warehouse)
-					<option value="{{ $warehouse->id }}">{{ $warehouse->name }}</option>
-					@endforeach
-					</select>
-				</div>
 				<input type="submit" value="Create" class="btn btn-primary">
 			</div>	
 		</form>

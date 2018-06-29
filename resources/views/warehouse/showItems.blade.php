@@ -3,15 +3,22 @@
 <html>
 <head>
 	<title></title>
+	<style type="text/css">
+		div {
+    		padding-top:20px;
+		}
+	</style>
 </head>
 <body>
 	<div class="container">
+		<a href="{{ url('items/create') }}" class="btn btn-primary">Create Item</a>
 		<table class="table table-striped">
 			<tr>
 				<td><b>Name</td>
 				<td><b>Quantity</b></td>
 				<td><b>Quantity In</b></td>
 				<td><b>Quantity Out</b></td>
+				<td></td>
 			</tr>
 			@foreach( $items as $item )
 			<form action="{{ url('warehouse/inventory_in_out', $item->id) }}" method="post">
