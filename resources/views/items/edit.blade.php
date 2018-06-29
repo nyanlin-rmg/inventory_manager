@@ -10,12 +10,23 @@
 			<form action="{{ route('item.update', $item->id) }}" method="post">
 				{{csrf_field()}}
 				{{ method_field('PUT') }}
-				<input type="hidden" name="id" value="{{ $item->id }}"><br>
-				<label>Name:</label>
-				<input type="text" name="name" value="{{ $item->name }}" class="form form-control"><br>
-				<label>Price:</label>
-				<input type="number" name="price" value="{{ $item->price }}" class="form form-control"><br>
-				<input type="submit" value="Update" class="btn btn-primary">
+
+				<input type="hidden" name="id" value="{{ $item->id }}">
+				<div class="form-group">
+					<label>Name:</label>
+					<input type="text" name="name" value="{{ $item->name }}" class="form-control">
+				</div>
+				
+				<div class="form-group">
+					<label>Price:</label>
+					<input type="text" name="price" value="{{ $item->price }}" class="form-control">
+				</div>
+				
+				
+				<div class="form-group">
+					<input type="submit" value="Update" class="btn btn-primary">
+					<a href="{{ route('item.index') }}" class="btn btn-primary">Cancel</a>
+				</div>
 			</form>
 		</div>
 	</div>

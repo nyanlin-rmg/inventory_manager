@@ -6,23 +6,29 @@
 	<div class="container"> 
 	<form action="{{ url('item/search') }}" method="POST">
 	{{ csrf_field() }}
-	<input type="text" name="search" required>
-	<button type="submit" class="btn btn-primary">Search</button>  
+	<input type="text" name="search" class="form-control" placeholder="search" required> 
 	</form>
 	<hr/>
+	@if ($message = Session::get('success'))
+		<div class="alert alert-success">
+		<p>{{ $message }}</p>
+		</div>
+	@endif
 	<table class="table table-havor">
 		<thread>
 			<tr>
-				<td> Name </td>
-				<td>Price</td>				
+				<td><b> Name </b></td>
+				<td><b> Price </b></td>
+				<td> </td>						
+				<td> </td>
 			</tr>
 		 </thread>
 		 <tbody>
 		 @foreach($items as $item)
 		 <tr>
 		 	<td>{{ $item->name }}</td>
-			<td>{{ $item->price }}</td>
-		 	<td><a class="btn btn-success" href="{{ route('item.edit',$item->id) }}">Edit</a></td>
+		 	<td>{{ $item->price }}</td>
+		 	<td> <a class="btn btn-success" href="{{ route('item.edit',$item->id) }}">Edit</a></td>
 		 	<td>
 			<form action="{{ route('item.destroy', $item->id) }}" method="post">
 					{{ csrf_field() }}

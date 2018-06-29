@@ -5,30 +5,36 @@
 	<title></title>
 </head>
 <body>	
+	<div class="container">
 		<form action="{{route('item.store')}}" method="post">
 			{{csrf_field()}}
-			<br>
-			<div class="container">
 				<div class="form-group">
-				<label>Name:</label>
-				<input type="text" name="name" class="form form-control"></div><br>
+					<label>Name:</label>
+					<input type="text" name="name" class="form-control">
+				</div>
 
 				<div class="form-group">
-				<label>Price</label>
-				<input type="number" name="price" class="form form-control"></div><br>
+					<label>Price:</label>
+					<input type="number" name="price" class="form-control">
+				</div>
 
+				
 				<div class="form-group">
-				<label>Category_id:</label>
-				<div>
-				<select name= "category_id" class="form-control">
-				@foreach ($categories as $category)
-				<option value="{{ $category->id }}">{{ $category->name }}</option>
-				@endforeach
-				</select>
-				</div><br>
+					<label>Category Name:</label>
+						<div>
+							<select name= "category_id" class="form-control">
+								@foreach ($categories as $category)
+									<option value="{{ $category->id }}">{{ $category->name }}</option>
+								@endforeach
+							</select>
+						</div>
+				</div>
+
+				<div class="form-group"> 
 				<input type="submit" value="Create" class="btn btn-primary">
-			</div>	
+				<a href="{{ route('item.index') }}" class="btn btn-primary">Cancel</a>
+				</div>	
 		</form>
-		
+	</div>
 </body>
 </html>

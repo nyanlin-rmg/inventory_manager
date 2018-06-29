@@ -6,6 +6,9 @@
 </head>
 <body>
 	<div class="container">
+		<div class="form-group">
+			<a href="{{ route('category.create') }}" class="btn btn-primary">Create Category</a>
+		</div>
 		<table class="table table-striped">
 			<tr>
 				<td><b>Category Name</b></td>
