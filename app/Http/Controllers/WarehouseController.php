@@ -94,20 +94,30 @@ class WarehouseController extends Controller
     {
        //dd($request->warehouse_id);
        $item = Item::find($request->item_id);
-        $warehouses = $item->warehouses;
-        //dd($warehouses);
-        foreach ($warehouses as $warehouse) {
-            $item_id = $warehouse->pivot->item_id;
-            $warehouse_id = $warehouse->pivot->warehouse_id;
-            $quantity = $warehouse->pivot->qty; 
+        $warehouses = $item->warehouses()->get();
+        if($warehouses == null)
+        {
+            echo "true";
         }
+        die();
+        foreach ($warehouses as $warehouse) {
+            // $item_id = $warehouse->pivot->item_id;
+            // $warehouse_id = $warehouse->pivot->warehouse_id;
+            // $quantity = $warehouse->pivot->qty; 
         
-        if($item_id == $request->item_id && $warehouse_id == $request->warehouse_id) {
+        
+        if($warehouse->pivot->item_id == $request->item_id &&  $warehouse->pivot->warehouse_id == $request->warehouse_id) {
+            $quantity = $warehouse->pivot->qty;
             $quantity += $request->quantity;
              $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $quantity]);
-        } else {
+        } else if($warehouse->pivot->item_id == $request->item_id || $ $warehouse->pivot->warehouse_id == $request->warehouse_id)
+        {
+            $item->warehouses()->attach($request->warehouse_id, ['qty' => $request->quantity]);
+        } else 
+        {
             $item->warehouses()->attach($request->warehouse_id, ['qty' => $request->quantity]);
         }
+    }
        return redirect('warehouse');
 
     }

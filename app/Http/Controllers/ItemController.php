@@ -15,11 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        $items = Item::all();
-=======
         $items = Item::get();
->>>>>>> fcdd39db7d007aa6d2b88213433de6cd98856a18
         return view('items.index', ['items'=>$items]);
     }
 
@@ -43,13 +39,7 @@ class ItemController extends Controller
     public function store(Request $request)
     {     
          $item = Item::create($request->all());
-<<<<<<< HEAD
-         return redirect('item');
-=======
-         //$item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
-         //dd($item);
          return redirect('item')->with('success','Item created successfully!!');
->>>>>>> fcdd39db7d007aa6d2b88213433de6cd98856a18
     }
 
     /**
