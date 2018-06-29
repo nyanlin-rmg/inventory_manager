@@ -23,10 +23,7 @@
 						{{ method_field('DELETE') }}
 						<button class="btn btn-danger">Delete</button>
 					</form>
-				</td>	
-
-				<td><a href="{{ route('warehouse.destroy', $search_warehouse->id) }}" class="btn btn-danger">Delete</a></td>
-
+				</td>		
 			</tr>
 		@empty
 		<tr>
@@ -34,7 +31,7 @@
 		</tr>
 		@endforelse
 		</table>
-		<a href="{{url('warehouse')}}">Go To Home</a>
+		<a href="{{url('warehouse')}}" class="btn btn-primary">Go To Home</a>
 	</div>
 </body>
 </html>

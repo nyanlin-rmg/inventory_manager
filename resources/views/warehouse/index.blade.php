@@ -13,9 +13,7 @@
 					<td>
 						<input type="text" name="search" class="form-control" placeholder="Search" required="">
 					</td>
-					<td>
-						<input type="submit" value="Search" class="btn btn-primary">
-					</td>
+					
 				</tr>
 			</table>
 		</form>
@@ -25,6 +23,8 @@
 			<tr>
 				<td><b>Name</b></td>
 				<td><b>Location</b></td>
+				<td></td>
+				<td></td>
 			</tr>
 			@foreach($warehouses as $warehouse)
 			<tr>
@@ -43,6 +43,7 @@
 		</table>
 		<hr>
 		<a href="{{ url('warehouse/create') }}" class="btn btn-info">Create Warehouse</a>
+		<a href="{{ url('/purchase') }}" class="btn btn-info">Purchase</a>
 	</div>
 </body>
 </html>

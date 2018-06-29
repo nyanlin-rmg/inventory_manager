@@ -11,9 +11,9 @@
 		<table class="table table-striped">
 		<thread>
 			<tr>
-				<td> Name </td>
-				<td> Quanity </td>
-				<td>Action</td>	
+				<td><b>Name </b></td>
+				<td> <b>Quanity</b> </td>
+				<td><b>Action</b></td>	
 				<td></td>			
 			</tr>
 		 </thread>

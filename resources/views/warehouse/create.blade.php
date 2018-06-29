@@ -17,7 +17,8 @@
 				<p><input type="text" name="name" placeholder="Name" class="form form-control"></p>
 				<p><textarea placeholder="Location" name="location" class="form form-control"></textarea></p>
 				<p><input type="submit" value="Create" class="btn btn-primary"></p>
-			</form>
+				<a href="{{ route('warehouse.index') }}" class="btn btn-warning">Cancel</a>
+			</form>			
 		</div>
 	</div>
 </body>
