@@ -4,7 +4,6 @@
 </head>
 <body>
 	<div class="container">
-	<h1>Create</h1>
 	<form action="{{ route('category.store') }}" method="POST">
 	{{ csrf_field() }}
 	<div class="form-group">
@@ -16,7 +15,8 @@
 		<textarea name="description" class="form-control"></textarea>
 	</div>
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<input type="submit" class="btn btn-primary" value="Submit"></button>
+		<a href="{{ route('category.index') }}" class="btn btn-primary">Cancel</a>
 	</div>
 	</form>
 	</div>

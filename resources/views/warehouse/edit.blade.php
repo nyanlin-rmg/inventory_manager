@@ -1,26 +1,23 @@
 @extends('layouts.default')
-<!DOCTYPE html>
-<html>
-<head>
-	<style type="text/css">
-		div {
-			margin-top: 10px;
-		}
-	</style>
-	<title>Warehouse</title>
-</head>
-<body>
 	<div class="container">
+		<h2>Update Warehouse</h2>
 		<div class="row">
 			<form action="{{ route('warehouse.update', $warehouse->id) }}" method="post">
 				{{csrf_field()}}
 				{{method_field('PUT')}}
 				<input type="hidden" name="id" value="{{ $warehouse->id }}">
-				<p><input type="text" name="name" value="{{ $warehouse->name }}" class="form form-control"></p>
-				<p><textarea name="location" class="form form-control">{{ $warehouse->location }}</textarea></p>
-				<p><input type="submit" value="Edit" class="btn btn-primary"></p>
+				<div class="form-group">
+					<label for="usr">Name:</label>
+					<input type="text" name="name" value="{{ $warehouse->name }}" class="form form-control">
+				</div>
+				<div class="form-group">
+					<label for="usr">Location:</label>
+					<textarea name="location" class="form form-control">{{ $warehouse->location }}</textarea>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Update" class="btn btn-primary">
+					<a href="{{ route('warehouse.index') }}" class="btn btn-primary">Cancel</a>
+				</div>
 			</form>
 		</div>
 	</div>
-</body>
-</html>

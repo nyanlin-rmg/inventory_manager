@@ -15,7 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::with('warehouses')->get();
+        $items = Item::get();
         return view('items.index', ['items'=>$items]);
     }
 
@@ -27,8 +27,7 @@ class ItemController extends Controller
     public function create()
     {
        $categories = Category::all();
-       $warehouses = Warehouse::all();
-       return view('items.create',['categories'=>$categories],['warehouses'=>$warehouses]);
+       return view('items.create',['categories'=>$categories]);
    }
 
     /**
@@ -40,9 +39,9 @@ class ItemController extends Controller
     public function store(Request $request)
     {     
          $item = Item::create($request->all());
-         $item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
+         //$item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
          //dd($item);
-         return redirect('item');
+         return redirect('item')->with('success','Item created successfully!!');
     }
 
     /**
@@ -53,14 +52,6 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        // $warehouses = array();
-        // foreach (Item::find(1)->warehouses as $warehouse) {
-        // if ($warehouse->pivot->qty) {
-        //     $warehouses[] = $warehouse;
-        //     dd($warehouses);
-        //}
-    //}
-    //return $owners;
     }
 
     /**
@@ -71,8 +62,8 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        $items = Item::with('warehouses')->find($id);
-        return view('items.edit', ['item'=>$items]);
+        $item = Item::find($id);
+        return view('items.edit', ['item' => $item]);
     }
 
     /**
@@ -84,12 +75,13 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $item = Item::find($id)->update($request->all());
-      //return redirect('item');
-        $item = Item::find($id);
+        $item = Item::find($id)->update($request->all());
+        return redirect('item')->with('success','Category updated successfully!!');
+        /*$item = Item::find($id);
         Item::find($id)->update($request->all());
         $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $request->qty]);
-       return redirect('item');
+        return redirect('item');*/
+
     }
 
     /**
@@ -100,10 +92,10 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-       $item = Item::find($id);
+       //$item = Item::find($id);
        Item::find($id)->delete();
-       $item->warehouses()->detach();               
-       return redirect('item');
+       //$item->warehouses()->detach();               
+       return redirect('item')->with('success','Category updated successfully!!');
     }
     public function search(Request $request)
     {
@@ -123,8 +115,6 @@ class ItemController extends Controller
 
     
         return view('items.search_result', ['items'=>$items]);
-        }
-
-    
+        }  
 }
 

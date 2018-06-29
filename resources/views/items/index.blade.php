@@ -1,4 +1,5 @@
  @extends('layouts.default')
+ @include('header')
 <html>
 <head>
 </head>
@@ -6,29 +7,28 @@
 	<div class="container"> 
 	<form action="{{ url('item/search') }}" method="POST">
 	{{ csrf_field() }}
-	<input type="text" name="search" required>
-	<button type="submit" class="btn btn-primary">Search</button>  
+	<input type="text" name="search" class="form-control search" placeholder="search" required> 
 	</form>
-	<hr/>
+	@if ($message = Session::get('success'))
+		<div class="alert alert-success">
+		<p>{{ $message }}</p>
+		</div>
+	@endif
 	<table class="table table-havor">
 		<thread>
 			<tr>
-				<td> Name </td>
-				<td>Quantity</td>
-				<td>Action</td>						
+				<td><b> Name </b></td>
+				<td><b> Price </b></td>
+				<td> </td>						
+				<td> </td>
 			</tr>
 		 </thread>
 		 <tbody>
 		 @foreach($items as $item)
-		<?php 
-			$warehouses = $item->warehouses;
-		?>
-		@foreach($warehouses as $warehouse) 
 		 <tr>
 
-		 	<td><a href="{{ route('item.show',$item->id) }}">{{ $item->name }}</a></td>
-		 	<td>{{ $warehouse->pivot->qty }}</td>
-		
+		 	<td>{{ $item->name }}</td>
+		 	<td>{{ $item->price }}</td>
 		 	<td> <a class="btn btn-success" href="{{ route('item.edit',$item->id) }}">Edit</a></td>
 		 	<td>
 			<form action="{{ route('item.destroy', $item->id) }}" method="post">
@@ -38,7 +38,6 @@
                 </form>
                </td>
 		 </tr>
-		@endforeach	
 		@endforeach
 		</tbody>
 		</table>	
