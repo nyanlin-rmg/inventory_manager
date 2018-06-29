@@ -6,7 +6,7 @@
 </head>
 <body>	
 	<div class="container">
-		<form action="{{route('item.store')}}" method="post">
+		<form action="{{route('items.store')}}" method="post">
 			{{csrf_field()}}
 				<div class="form-group">
 					<label>Name:</label>
@@ -31,7 +31,7 @@
 				</div>
 				<div class="form-group"> 
 				<input type="submit" value="Create" class="btn btn-primary">
-				<a href="{{ route('item.index') }}" class="btn btn-primary">Cancel</a>
+				<a href="{{ route('items.index') }}" class="btn btn-danger">Cancel</a>
 				</div>	
 		</form>
 	</div>

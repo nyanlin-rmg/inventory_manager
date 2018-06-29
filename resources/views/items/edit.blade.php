@@ -7,7 +7,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<form action="{{ route('item.update', $item->id) }}" method="post">
+			<form action="{{ route('items.update', $item->id) }}" method="post">
 				{{csrf_field()}}
 				{{ method_field('PUT') }}
 
@@ -25,7 +25,7 @@
 				
 				<div class="form-group">
 					<input type="submit" value="Update" class="btn btn-primary">
-					<a href="{{ route('item.index') }}" class="btn btn-primary">Cancel</a>
+					<a href="{{ route('items.index') }}" class="btn btn-danger">Cancel</a>
 				</div>
 			</form>
 		</div>

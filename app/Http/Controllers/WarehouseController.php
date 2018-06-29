@@ -20,7 +20,7 @@ class WarehouseController extends Controller
     public function store(Request $request)
     {
         $test = Warehouse::create($request->all());
-        return redirect('warehouse')->with('success','Warehouse successfully created');
+        return redirect('warehouses')->with('success','Warehouse successfully created');
     }
     public function show($id)
     {
@@ -55,7 +55,7 @@ class WarehouseController extends Controller
         $warehouse = Warehouse::find($id);
         Warehouse::find($id)->delete();
         $warehouse->items()->detach();
-        return redirect('warehouse/')->with('success','Warehouse successfully deleted');
+        return redirect('warehouses/')->with('success','Warehouse successfully deleted');
     }
     public function search(Request $request)
     {
@@ -92,23 +92,18 @@ class WarehouseController extends Controller
     }
     public function save(Request $request)
     {
-       //dd($request->warehouse_id);
-       $item = Item::find($request->item_id);
-        $warehouses = $item->warehouses;
-        //dd($warehouses);
-        foreach ($warehouses as $warehouse) {
-            $item_id = $warehouse->pivot->item_id;
-            $warehouse_id = $warehouse->pivot->warehouse_id;
-            $quantity = $warehouse->pivot->qty; 
-        }
-        
-        if($item_id == $request->item_id && $warehouse_id == $request->warehouse_id) {
-            $quantity += $request->quantity;
-             $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $quantity]);
+        $item = Item::find($request->item_id);
+        $warehouses = $item->warehouses()->get();
+        $quantity = $request->quantity;
+        $warehouse = $item->warehouses()->find($request->warehouse_id);
+        if($warehouse == null) {
+            $qty = 0;
         } else {
-            $item->warehouses()->attach($request->warehouse_id, ['qty' => $request->quantity]);
+            $qty = $warehouse->pivot->qty;
         }
-       return redirect('warehouse');
+        $quantity = $qty + $quantity;
+        $item->warehouses()->sync([$request->warehouse_id => ['qty'=>$quantity]]);
+       return redirect('warehouses');
 
     }
 }
