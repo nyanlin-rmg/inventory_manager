@@ -16,13 +16,7 @@
 			<tr>
 				<td><b>Name</b></td>
 				<td><b>Quantity</b></td>
-<<<<<<< HEAD
-				<td><b>Quantity In</b></td>
-				<td><b>Quantity Out</b></td>
-				<td></td>
-=======
 				<td> </td>
->>>>>>> 0dc7186a5a082f36e8891b275a135d0f33992727
 			</tr>
 			@foreach( $items as $item )
 			<form action="{{ url('warehouses/inventory_in_out', $item->id) }}" method="post">

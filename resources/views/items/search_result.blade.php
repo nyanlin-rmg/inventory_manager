@@ -27,10 +27,7 @@
             @foreach ($warehouses as $warehouse) 
             <td>{{ $warehouse->pivot->qty }}</td>
             @endforeach
-<<<<<<< HEAD
-=======
             <td>{{ $item->price }}</td>
->>>>>>> 0dc7186a5a082f36e8891b275a135d0f33992727
 			<td> <a class="btn btn-success" href="{{ route('items.edit',$item->id) }}">Edit</a></td>
 			<td>
 				<form action="{{ route('items.destroy', $item->id) }}" method="post">
@@ -47,10 +44,6 @@
     	@endforelse
     </tbody>
 </table>
-<<<<<<< HEAD
-    	<a class="btn btn-info" href="{{ route('items.index') }}">Back to home</a>
-=======
     	<a href="{{ route('items.index') }}" class="btn btn-primary">Back</a>
->>>>>>> 0dc7186a5a082f36e8891b275a135d0f33992727
 </body>
 </html>

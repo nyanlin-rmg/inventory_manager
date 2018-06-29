@@ -1,16 +1,10 @@
-<<<<<<< HEAD
-=======
 @extends('layouts.default')
->>>>>>> 0dc7186a5a082f36e8891b275a135d0f33992727
 <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
 </head>
 <body>
-<<<<<<< HEAD
-	<h1>Hello</h1>
-=======
 	<div class="container">
 		<form action="{{url('warehouses/save')}}" method="post">
 			{{ csrf_field() }}
@@ -42,6 +36,5 @@
 		<a href="{{ route('warehouses.index') }}" class="btn btn-danger">Cancel</a>
 	</form>
 	</div>
->>>>>>> 0dc7186a5a082f36e8891b275a135d0f33992727
 </body>
 </html>

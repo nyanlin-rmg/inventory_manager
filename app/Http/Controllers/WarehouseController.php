@@ -84,11 +84,6 @@ class WarehouseController extends Controller
         $item->warehouses()->updateExistingPivot($warehouse_id, ['qty' => $qty]);
         return redirect()->back();
     }
-<<<<<<< HEAD
-    public function purchase()
-    {
-        return view('warehouse.purchase');
-=======
 
     public function purchase() 
     {
@@ -110,6 +105,5 @@ class WarehouseController extends Controller
         $quantity = $qty + $quantity;
         $item->warehouses()->sync([$request->warehouse_id => ['qty'=>$quantity]]);
        return redirect('warehouse');
->>>>>>> 0dc7186a5a082f36e8891b275a135d0f33992727
     }
 }

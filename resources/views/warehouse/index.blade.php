@@ -1,6 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
 @extends('layouts.default')
 @include('header')
 <!DOCTYPE html>
@@ -43,14 +40,8 @@
 			@endforeach
 		</table>
 		<hr>
-<<<<<<< HEAD
-		<a href="{{ url('warehouse/create') }}" class="btn btn-info">Create Warehouse</a>
-		<a href="{{ url('warehouse/purchase') }}" class="btn btn-info">Purchase</a>
-		<a href="{{ url('warehouse/sale') }}" class="btn btn-info">Sale</a>
-=======
 		<a href="{{ route('warehouses.create') }}" class="btn btn-primary">Create Warehouse</a>
 		<a href="{{ url('warehouses/purchase') }}" class="btn btn-primary">Purchase</a>
->>>>>>> 0dc7186a5a082f36e8891b275a135d0f33992727
 	</div>
 </body>
 </html>

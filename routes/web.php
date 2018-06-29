@@ -1,14 +1,16 @@
 <?php
-Route::get('warehouse/purchase','WarehouseController@purchase');
-Route::get('warehouse/showItems/{itemid}/{wid}', 'WarehouseController@showItems');;
-Route::resource('/warehouse', 'WarehouseController')->middleware('auth');
-Route::post('warehouse/search', 'WarehouseController@search');
-Route::post('warehouse/inventory_in_out/{id}', 'WarehouseController@inventory_in_out');
-Route::resource('/category','CategoryController');
-Route::post('category/search','CategoryController@search');
+Route::get('/', function () {
+	return view('index');
+});
+Route::get('warehouses/purchase','WarehouseController@purchase');
+Route::resource('warehouses', 'WarehouseController');
+Route::post('warehouses/search', 'WarehouseController@search');
+Route::get('warehouses/showItems/{itemid}/{wid}', 'WarehouseController@showItems');
+Route::post('warehouses/save','WarehouseController@save');
+Route::post('warehouses/showItems/{itemid}/{wid}', 'WarehouseController@showItems');
+
+Route::resource('/categories','CategoryController')->except(['show']);
+Route::post('categories/search','CategoryController@search');
+
 Route::resource('items','ItemController')->except(['show']);
 Route::post('items/search','ItemController@search');
-Auth::routes();
-
-Route::get('/items.index', 'ItemController@index')->name('item');
-
