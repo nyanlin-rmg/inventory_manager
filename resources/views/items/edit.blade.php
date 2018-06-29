@@ -10,21 +10,23 @@
 			<form action="{{ route('items.update', $item->id) }}" method="post">
 				{{csrf_field()}}
 				{{ method_field('PUT') }}
-				<?php $warehouses = $item->warehouses; ?>
-				@foreach ($warehouses as $warehouse)
-				<input type="hidden" name="warehouse_id" value="{{ $warehouse->pivot->warehouse_id }}"><br>
-				@endforeach
-				<input type="hidden" name="id" value="{{ $item->id }}"><br>
-				<label>Name:</label>
-				<input type="text" name="name" value="{{ $item->name }}" class="form form-control"><br>
-				<?php 
-					$warehouses = $item->warehouses;
-				?>
-				@foreach($warehouses as $warehouse) 
-				<label>Quantity:</label>
-				<input type="text" name="qty" value="{{ $warehouse->pivot->qty }}" class="form form-control"><br>
-				@endforeach
-				<input type="submit" value="Update" class="btn btn-primary">
+
+				<input type="hidden" name="id" value="{{ $item->id }}">
+				<div class="form-group">
+					<label>Name:</label>
+					<input type="text" name="name" value="{{ $item->name }}" class="form-control">
+				</div>
+				
+				<div class="form-group">
+					<label>Price:</label>
+					<input type="text" name="price" value="{{ $item->price }}" class="form-control">
+				</div>
+				
+				
+				<div class="form-group">
+					<input type="submit" value="Update" class="btn btn-primary">
+					<a href="{{ route('items.index') }}" class="btn btn-danger">Cancel</a>
+				</div>
 			</form>
 		</div>
 	</div>

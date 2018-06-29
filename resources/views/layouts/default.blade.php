@@ -12,8 +12,3 @@
 <link href="{!! ('css/style.css') !!} rel="stylesheet">
 </head>
 <body>
-<!-- <div class="container">
-@yield('content')
-</div> -->
-</body>
-</html>

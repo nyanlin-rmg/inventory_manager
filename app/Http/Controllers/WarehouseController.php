@@ -21,7 +21,7 @@ class WarehouseController extends Controller
     public function store(Request $request)
     {
         $test = Warehouse::create($request->all());
-        return redirect('warehouse');
+        return redirect('warehouse')->with('success','Warehouse successfully created');
     }
     public function show($id)
     {
@@ -34,6 +34,7 @@ class WarehouseController extends Controller
         } )->unique(); 
         return view('warehouse.show',['wid'=>$wid], ['categories'=>$categories],['items'=>$items]);
     }
+
     public function showItems( $category_id, $warehouse_id)
     {
         $warehouses = Warehouse::findOrFail($warehouse_id);
@@ -49,15 +50,14 @@ class WarehouseController extends Controller
     public function update(Request $request, $id)
     {
         Warehouse::find($id)->update($request->all());
-        return redirect('warehouse');
+        return redirect('warehouse')->with('success','Warehouse successfully updated');
     }
     public function destroy($id)
     {
         $warehouse = Warehouse::find($id);
-        $items = $warehouse->items()->delete();
-        $warehouse->items()->detach();
         Warehouse::find($id)->delete();
-        return redirect('warehouse/');
+        $warehouse->items()->detach();
+        return redirect('warehouse/')->with('success','Warehouse successfully deleted');
     }
     public function search(Request $request)
     {
@@ -72,23 +72,44 @@ class WarehouseController extends Controller
         )->get();
         return view('warehouse.search_result', ['search_warehouses' => $search_warehouses]);
     }
-    public function inventory_in_out(Request $request, $id)
+    public function inventory_in(Request $request, $id)
     {
-        $in = $request->in;
-        $out = $request->out;
-        $result = $in - $out;
         $item = Item::find($id);
         $warehouses = $item->warehouses;
         foreach ($warehouses as $warehouse) {
             $qty = $warehouse->pivot->qty;
             $warehouse_id = $warehouse->pivot->warehouse_id;
         }
-        $qty += $result;
+        $qty += $request->quantiy;
         $item->warehouses()->updateExistingPivot($warehouse_id, ['qty' => $qty]);
         return redirect()->back();
     }
+<<<<<<< HEAD
     public function purchase()
     {
         return view('warehouse.purchase');
+=======
+
+    public function purchase() 
+    {
+        $items = Item::all();
+        $warehouses = Warehouse::all();
+        return view('warehouse.purchase', ['warehouses' => $warehouses, 'items' => $items]);
+    }
+    public function save(Request $request)
+    {
+        $item = Item::find($request->item_id);
+        $warehouses = $item->warehouses()->get();
+        $quantity = $request->quantity;
+        $warehouse = $item->warehouses()->find($request->warehouse_id);
+        if($warehouse == null) {
+            $qty = 0;
+        } else {
+            $qty = $warehouse->pivot->qty;
+        }
+        $quantity = $qty + $quantity;
+        $item->warehouses()->sync([$request->warehouse_id => ['qty'=>$quantity]]);
+       return redirect('warehouse');
+>>>>>>> 0dc7186a5a082f36e8891b275a135d0f33992727
     }
 }

@@ -1,55 +1,46 @@
  @extends('layouts.default')
+ @include('header')
 <html>
 <head>
 </head>
 <body>
 	<div class="container">
-	<h1>Show</h1>
-	<form action="{{ url('category/search') }}" method="POST">
-	{{ csrf_field() }}
-	<input type="text" name="search" required>
-	<button type="submit" class="btn btn-primary">Search</button>  
-	</form>
-	<hr/>
+		<form action="{{ url('categories/search') }}" method="POST">
+		{{ csrf_field() }}
+			<input type="text" name="search" class="form-control search" placeholder="search" required> 
+		</form>
 	@if ($message = Session::get('success'))
 		<div class="alert alert-success">
 		<p>{{ $message }}</p>
 		</div>
 	@endif
-
 	<div class="container">
 		<table class="table table-striped">
 		<thread>
 			<tr>
-				<td> ID </td>
-				<td> Name </td>
-				<td> Description </td>
-				<td> </td>
-	            <td> </td>
+				<th> Name </th>
+				<th> Description </th>
+				<th width="180px">Action</th>
 			</tr>
 		 </thread>
 		 <tbody>
-		 <?php 
-		 foreach ($categories as $category) {
-		 	$id = $category->id;
-		 ?>
+		 @foreach ($categories as $category)
 		 <tr>
-		 	<td> {{ $category->id }} </td>
-			<td><a href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a></td>
+			<td>{{ $category->name }}</td>
 			<td>{{ $category->description }}</td>
-			<td> <a class="btn btn-success" href="{{ route('category.edit',$category->id) }}">Edit</a></td>
-			<td><!--  <a class="btn btn-danger" href="{{ route('category.destroy',$category->id)}}">Delete</a> --> 
-				<form action="{{ route('category.destroy', $category->id) }}" method="post">
+			<td> 
+				<a class="btn btn-success" href="{{ route('categories.edit',$category->id) }}">Edit</a>
+				<form action="{{ route('categories.destroy', $category->id) }}" method="post" style="display: inline;">
 					{{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
-			</td>
+            </td>
 		 </tr>
-		<?php } ?>
+		@endforeach
 		</tbody>
 		</table>
-		<a class="btn btn-primary" href="{{ url('category/create')}}">Create</a><br><br>		
+		<a class="btn btn-primary" href="{{ route('categories.create')}}">Create Category</a>
 	</div>
 </body>
 </html>

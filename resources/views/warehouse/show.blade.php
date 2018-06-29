@@ -13,8 +13,8 @@
 			@foreach( $categories as $category )
 				@foreach( $category as $name )
 			<tr>
-				<td><a href="{{ url('warehouse/showItems'.'/'. $name->id . '/' . $wid) }}">
-					<!-- <input type="hidden" name="categoryid" value="{{ $name->id }}" > -->
+				<td><a href="{{ url('warehouses/showItems'.'/'. $name->id . '/' . $wid) }}">
+					<input type="hidden" name="categoryid" value="{{ $name->id }}" >
 					{{ $name->name }}
 				</a></td>
 			</tr>
@@ -22,6 +22,7 @@
 			@endforeach	
 		</table>
 		<hr>
+		<a href="{{ url('warehouses') }}" class="btn btn-primary">Back</a>
 	</div>
 </body>
 </html>

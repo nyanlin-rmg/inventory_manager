@@ -15,7 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::with('warehouses')->get();
+        $items = Item::get();
         return view('items.index', ['items'=>$items]);
     }
 
@@ -27,8 +27,7 @@ class ItemController extends Controller
     public function create()
     {
        $categories = Category::all();
-       $warehouses = Warehouse::all();
-       return view('items.create',['categories'=>$categories],['warehouses'=>$warehouses]);
+       return view('items.create',['categories'=>$categories]);
    }
 
     /**
@@ -40,10 +39,26 @@ class ItemController extends Controller
     public function store(Request $request)
     {     
          $item = Item::create($request->all());
-         $item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
+         //$item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
          //dd($item);
+<<<<<<< HEAD
          return redirect('items');
     }
+=======
+         return redirect('items')->with('success','Item created successfully!!');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Item  $item
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+    }
+
+>>>>>>> 0dc7186a5a082f36e8891b275a135d0f33992727
     /**
      * Show the form for editing the specified resource.
      *
@@ -52,8 +67,8 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        $items = Item::with('warehouses')->find($id);
-        return view('items.edit', ['item'=>$items]);
+        $item = Item::find($id);
+        return view('items.edit', ['item' => $item]);
     }
 
     /**
@@ -65,12 +80,17 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $item = Item::find($id)->update($request->all());
-      //return redirect('item');
-        $item = Item::find($id);
+        $item = Item::find($id)->update($request->all());
+        return redirect('items')->with('success','Category updated successfully!!');
+        /*$item = Item::find($id);
         Item::find($id)->update($request->all());
         $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $request->qty]);
+<<<<<<< HEAD
        return redirect('items');
+=======
+        return redirect('item');*/
+
+>>>>>>> 0dc7186a5a082f36e8891b275a135d0f33992727
     }
 
     /**
@@ -81,10 +101,15 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-       $item = Item::find($id);
+       //$item = Item::find($id);
        Item::find($id)->delete();
+<<<<<<< HEAD
        $item->warehouses()->detach();               
        return redirect('items');
+=======
+       //$item->warehouses()->detach();               
+       return redirect('items')->with('success','Category updated successfully!!');
+>>>>>>> 0dc7186a5a082f36e8891b275a135d0f33992727
     }
     public function search(Request $request)
     {
@@ -104,5 +129,9 @@ class ItemController extends Controller
 
     
         return view('items.search_result', ['items'=>$items]);
+<<<<<<< HEAD
         }
+=======
+        }  
+>>>>>>> 0dc7186a5a082f36e8891b275a135d0f33992727
 }

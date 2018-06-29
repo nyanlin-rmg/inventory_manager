@@ -2,6 +2,7 @@
 
 @section('content')
 @extends('layouts.default')
+@include('header')
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,33 +10,30 @@
 </head>
 <body>
 	<div class="container">
-		<form action="{{ url('warehouse/search') }}" method="POST">
+		<form action="{{ url('warehouses/search') }}" method="POST">
 			{{csrf_field()}}
-			<table class="table">
-				<tr>
-					<td>
-						<input type="text" name="search" class="form-control" placeholder="Search" required="">
-					</td>
-					<td>
-						<input type="submit" value="Search" class="btn btn-primary">
-					</td>
-				</tr>
-			</table>
+			<input type="text" name="search" class="form-control search" placeholder="Search" required="">
 		</form>
 	</div>
 	<div class="container">
+		@if ($message = Session::get('success'))
+		<div class="alert alert-success">
+		<p>{{ $message }}</p>
+		</div>
+	@endif
 		<table class="table">
 			<tr>
-				<td><b>Name</b></td>
-				<td><b>Location</b></td>
+				<th> Name </th>
+				<th> Location </th>
+				<th width="180px"> Action </th>
 			</tr>
 			@foreach($warehouses as $warehouse)
 			<tr>
-				<td><a href="{{ route('warehouse.show', $warehouse->id) }}">{{ ucwords($warehouse->name) }}</a></td>
+				<td><a href="{{ route('warehouses.show', $warehouse->id) }}">{{ ucwords($warehouse->name) }}</a></td>
 				<td>{{ ucwords($warehouse->location) }}</td>
-				<td><a href="{{ route('warehouse.edit', $warehouse->id) }}" class="btn btn-primary">Edit</a></td>
 				<td>
-					<form action="{{ route('warehouse.destroy', $warehouse->id) }}" method="post">
+					<a href="{{ route('warehouses.edit', $warehouse->id) }}" class="btn btn-success">Edit</a>
+					<form action="{{ route('warehouses.destroy', $warehouse->id) }}" method="post" style="display: inline;">
 						{{ csrf_field() }}
 						{{ method_field('DELETE') }}
 						<button class="btn btn-danger">Delete</button>
@@ -45,9 +43,14 @@
 			@endforeach
 		</table>
 		<hr>
+<<<<<<< HEAD
 		<a href="{{ url('warehouse/create') }}" class="btn btn-info">Create Warehouse</a>
 		<a href="{{ url('warehouse/purchase') }}" class="btn btn-info">Purchase</a>
 		<a href="{{ url('warehouse/sale') }}" class="btn btn-info">Sale</a>
+=======
+		<a href="{{ route('warehouses.create') }}" class="btn btn-primary">Create Warehouse</a>
+		<a href="{{ url('warehouses/purchase') }}" class="btn btn-primary">Purchase</a>
+>>>>>>> 0dc7186a5a082f36e8891b275a135d0f33992727
 	</div>
 </body>
 </html>
