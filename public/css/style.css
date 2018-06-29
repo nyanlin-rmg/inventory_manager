@@ -5,3 +5,26 @@
 	color: red;
 	font-style: italic;
 }
+.links {
+	margin-bottom: 30px;
+}
+.links{
+	background: #908f8f;
+	padding: 20px;
+	border-radius: 3px;
+	}
+.links ul li a{
+	color: white;
+	text-decoration: none;
+	padding: 10px;
+}
+.links ul li a:hover {
+	background: #555;
+	border-radius: 3px;
+}
+.links ul{
+	margin: 0px;
+}
+.search {
+	margin-bottom: 20px;
+}

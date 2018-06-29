@@ -13,10 +13,10 @@
 			</tr>
 			@forelse($search_warehouses as $search_warehouse)
 			<tr>
-				<td><a href="{{ route('warehouse.show', $search_warehouse->id) }}">{{ ucwords($search_warehouse->name) }}</a></td>
+				<td><a href="{{ route('warehouses.show', $search_warehouse->id) }}">{{ ucwords($search_warehouse->name) }}</a></td>
 				<td>{{ ucwords($search_warehouse->location) }}</td>
-				<td><a href="{{ route('warehouse.edit', $search_warehouse->id) }}" class="btn btn-primary">Edit</a></td>
-				<td><a href="{{ route('warehouse.destroy', $search_warehouse->id) }}" class="btn btn-danger">Delete</a></td>
+				<td><a href="{{ route('warehouses.edit', $search_warehouse->id) }}" class="btn btn-primary">Edit</a></td>
+				<td><a href="{{ route('warehouses.destroy', $search_warehouse->id) }}" class="btn btn-danger">Delete</a></td>
 			</tr>
 		@empty
 		<tr>
@@ -24,7 +24,7 @@
 		</tr>
 		@endforelse
 		</table>
-		<a href="{{url('warehouse')}}">Go To Home</a>
+		<a href="{{url('warehouse')}}" class="btn btn-primary">Back</a>
 	</div>
 </body>
 </html>

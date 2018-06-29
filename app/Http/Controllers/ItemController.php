@@ -39,7 +39,9 @@ class ItemController extends Controller
     public function store(Request $request)
     {     
          $item = Item::create($request->all());
-         return redirect('item')->with('success','Item created successfully!!');
+         //$item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
+         //dd($item);
+         return redirect('items')->with('success','Item created successfully!!');
     }
 
     /**
@@ -74,7 +76,12 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
         $item = Item::find($id)->update($request->all());
-        return redirect('item')->with('success','Category updated successfully!!');
+        return redirect('items')->with('success','Category updated successfully!!');
+        /*$item = Item::find($id);
+        Item::find($id)->update($request->all());
+        $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $request->qty]);
+        return redirect('item');*/
+
     }
 
     /**
@@ -88,7 +95,7 @@ class ItemController extends Controller
        //$item = Item::find($id);
        Item::find($id)->delete();
        //$item->warehouses()->detach();               
-       return redirect('item')->with('success','Category updated successfully!!');
+       return redirect('items')->with('success','Category updated successfully!!');
     }
     public function search(Request $request)
     {

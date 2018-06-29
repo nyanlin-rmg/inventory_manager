@@ -17,7 +17,7 @@ class CreateItemWarehousesTable extends Migration
         Schema::create('item_warehouses', function (Blueprint $table) {
             $table->integer('item_id');
             $table->integer('warehouse_id');
-            $table->integer('qty');
+            $table->integer('qty')->default(0);
             $table->timestamps();
         });
     }

@@ -1,41 +1,32 @@
+@extends('layouts.default')
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Inventory Management</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="../css/stylehome.css">
+	<title></title>
 </head>
 <body>
-	<header class="header-bar">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand text-color" href="#">UCSY</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav menu-bar">
-					<li class="nav-item">
-						<a class="nav-link" href="home.html">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ route('warehouse.index')}}">WareHouse<span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="items.html">items</a>
-					</li>
+	<div class="container">
+		<div class="row links">
+			<ul class="list-inline text-left">
+				<li><a href="{{ url('/') }}">Home</a></li>
+			    <li><a href="{{ url('warehouses/') }}">Warehouse</a></li>
+			    <li><a href="{{ url('categories/') }}">Category</a></li>
+			    <li><a href="{{ url('items/') }}">Item</a></li>
+				<li>
+					
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" >
+                                        Logout
+                                    </a>
 
-					<li class="nav-item">
-						<a class="nav-link" href="{{route('category.index')}}">Categories</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="home.html">About us</a>
-					</li>
-				</ul>				
-			</div>			
-		</nav>
-		
-	</header>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                
+                </li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
