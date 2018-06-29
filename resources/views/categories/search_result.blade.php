@@ -18,9 +18,9 @@
 			 	<td> {{ $category->id }} </td>
 				<td>{{ $category->name }}</td>
 				<td>{{ $category->description }}</td>
-				<td> <a class="btn btn-success" href="{{ route('category.edit',$category->id) }}">Edit</a></td>
+				<td> <a class="btn btn-success" href="{{ route('categories.edit',$category->id) }}">Edit</a></td>
 				<td>
-					<form action="{{ route('category.destroy', $category->id) }}" method="post">
+					<form action="{{ route('categories.destroy', $category->id) }}" method="post">
 						{{ csrf_field() }}
 	                    {{ method_field('DELETE') }}
 	                    <button class="btn btn-danger" type="submit">Delete</button>
@@ -35,7 +35,7 @@
 			</tr>
     	@endforelse
 	</table>
-    	<a href="{{ route('category.index') }}" class="btn btn-primary">Back</a>  
+    	<a href="{{ route('categories.index') }}" class="btn btn-primary">Back</a>  
     </div>
 </body>
 </html>

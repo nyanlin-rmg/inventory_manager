@@ -4,14 +4,7 @@
 </head>
 <body>
 	<div class="container">
-		@if ($errors->any())
-		<div class="alert alert-danger">
-				@foreach($errors->all() as $error)
-				{{ $error }}
-				@endforeach
-		</div>
-		@endif
-	<form action="{{ route('category.store') }}" method="POST">
+	<form action="{{ route('categories.store') }}" method="POST">
 	{{ csrf_field() }}
 	<div class="form-group">
 		<label for="usr">Name:</label>
@@ -23,7 +16,7 @@
 	</div>
 	<div class="form-group">
 		<input type="submit" class="btn btn-primary" value="Submit"></button>
-		<a href="{{ route('category.index') }}" class="btn btn-danger">Cancel</a>
+		<a href="{{ route('categories.index') }}" class="btn btn-danger">Cancel</a>
 	</div>
 	</form>
 	</div>

@@ -6,13 +6,6 @@
 </head>
 <body>	
 	<div class="container">
-		@if ($errors->any())
-		<div class="alert alert-danger">
-				@foreach($errors->all() as $error)
-				{{ $error }}
-				@endforeach
-		</div>
-		@endif
 		<form action="{{route('items.store')}}" method="post">
 			{{csrf_field()}}
 				<div class="form-group">

@@ -37,13 +37,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|alpha|max:255',
-            'description' => 'required',
-        ]);
         Category::create($request->all());
         //return redirect('/category')->with('success','Category created successfully');
-        return redirect('/category')->with('success','Category created successfully!!');
+        return redirect('/categories')->with('success','Category created successfully!!');
     }
 
     /**
@@ -81,7 +77,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     { 
         Category::find($id)->update($request->all());
-        return redirect('/category')->with('success','Category updated successfully!!');
+        return redirect('/categories')->with('success','Category updated successfully!!');
     }
 
     /**
@@ -95,7 +91,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         Category::find($id)->delete();
         $category->items()->delete();
-        return redirect('/category')->with('success','Category deleted successfully!!');
+        return redirect('/categories')->with('success','Category deleted successfully!!');
     }
 
     public function search(Request $request)

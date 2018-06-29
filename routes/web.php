@@ -2,24 +2,15 @@
 Route::get('/', function () {
 	return view('index');
 });
-Route::get('warehouse', function () {
-	return view('warehouse');	
-});
-Route::get('category', function () {
-	return view('category');	
-});
-Route::get('item', function () {
-	return view('item');	
-});
-Route::get('warehouse/purchase','WarehouseController@purchase');
-Route::resource('warehouse', 'WarehouseController');
-Route::post('warehouse/search', 'WarehouseController@search');
-Route::get('warehouse/showItems/{itemid}/{wid}', 'WarehouseController@showItems');
-Route::post('warehouse/save','WarehouseController@save');
-Route::post('warehouse/showItems/{itemid}/{wid}', 'WarehouseController@showItems');
+Route::get('warehouses/purchase','WarehouseController@purchase');
+Route::resource('warehouses', 'WarehouseController');
+Route::post('warehouses/search', 'WarehouseController@search');
+Route::get('warehouses/showItems/{itemid}/{wid}', 'WarehouseController@showItems');
+Route::post('warehouses/save','WarehouseController@save');
+Route::post('warehouses/showItems/{itemid}/{wid}', 'WarehouseController@showItems');
 
-Route::resource('/category','CategoryController')->except(['show']);
-Route::post('category/search','CategoryController@search');
+Route::resource('/categories','CategoryController')->except(['show']);
+Route::post('categories/search','CategoryController@search');
 
 Route::resource('items','ItemController')->except(['show']);
 Route::post('items/search','ItemController@search');

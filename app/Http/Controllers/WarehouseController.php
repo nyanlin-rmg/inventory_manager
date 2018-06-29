@@ -19,10 +19,6 @@ class WarehouseController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|alpha|max:255',
-            'location' => 'required',
-        ]);
         $test = Warehouse::create($request->all());
         return redirect('warehouse')->with('success','Warehouse successfully created');
     }

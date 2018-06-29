@@ -2,7 +2,7 @@
 	<div class="container">
 		<h2>Update Warehouse</h2>
 		<div class="row">
-			<form action="{{ route('warehouse.update', $warehouse->id) }}" method="post">
+			<form action="{{ route('warehouses.update', $warehouse->id) }}" method="post">
 				{{csrf_field()}}
 				{{method_field('PUT')}}
 				<input type="hidden" name="id" value="{{ $warehouse->id }}">
@@ -16,7 +16,7 @@
 				</div>
 				<div class="form-group">
 					<input type="submit" value="Update" class="btn btn-primary">
-					<a href="{{ route('warehouse.index') }}" class="btn btn-danger">Cancel</a>
+					<a href="{{ route('warehouses.index') }}" class="btn btn-danger">Cancel</a>
 				</div>
 			</form>
 		</div>

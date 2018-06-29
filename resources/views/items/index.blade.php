@@ -40,7 +40,7 @@
 		@endforeach
 		</tbody>
 		</table>	
-		<a href="{{ route('items.create') }}" class="btn btn-primary">Create</a>
+		<a href="{{ route('items.create') }}" class="btn btn-primary">Create Item</a>
 	</div>
 </body>
 </html>

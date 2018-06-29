@@ -38,10 +38,6 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {     
-         $request->validate([
-            'name' => 'required|alpha|max:255',
-            'price' =>'required',
-         ]);
          $item = Item::create($request->all());
          //$item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
          //dd($item);
