@@ -28,9 +28,9 @@
             <td>{{ $warehouse->pivot->qty }}</td>
             @endforeach
             <td>{{ $item->price }}</td>
-			<td> <a class="btn btn-success" href="{{ route('item.edit',$item->id) }}">Edit</a></td>
+			<td> <a class="btn btn-success" href="{{ route('items.edit',$item->id) }}">Edit</a></td>
 			<td>
-				<form action="{{ route('item.destroy', $item->id) }}" method="post">
+				<form action="{{ route('items.destroy', $item->id) }}" method="post">
 					{{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <button class="btn btn-danger" type="submit">Delete</button>
@@ -44,6 +44,6 @@
     	@endforelse
     </tbody>
 </table>
-    	<a class="btn btn-info" href="{{ route('item.index') }}">Back to home</a>
+    	<a href="{{ route('items.index') }}" class="btn btn-primary">Back</a>
 </body>
 </html>

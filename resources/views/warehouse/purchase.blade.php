@@ -33,7 +33,7 @@
 			<input type="number" name="quantity" class="form-control">
 		</div>
 		<input type="submit" value="Purchase" class="btn btn-primary">
-		<a href="{{ route('warehouse.index') }}" class="btn btn-primary">Cancel</a>
+		<a href="{{ route('warehouse.index') }}" class="btn btn-danger">Cancel</a>
 	</form>
 	</div>
 </body>

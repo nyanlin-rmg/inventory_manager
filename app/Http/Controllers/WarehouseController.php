@@ -19,6 +19,10 @@ class WarehouseController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|alpha|max:255',
+            'location' => 'required',
+        ]);
         $test = Warehouse::create($request->all());
         return redirect('warehouse')->with('success','Warehouse successfully created');
     }
@@ -91,22 +95,27 @@ class WarehouseController extends Controller
     }
     public function save(Request $request)
     {
-       //dd($request->warehouse_id);
+       //dd($request->quantity);
        $item = Item::find($request->item_id);
-        $warehouses = $item->warehouses;
-        //dd($warehouses);
-        foreach ($warehouses as $warehouse) {
+        //$warehouses = $item->warehouses;
+        //$item->warehouses()->attach($request->warehouse_id, ['qty' => $request->quantity]);
+        $item->warehouses()->syncWithoutDetaching([$request->warehouse_id => ['qty'=>$request->quantity]]);
+
+
+       /* foreach ($warehouses as $warehouse) {
             $item_id = $warehouse->pivot->item_id;
             $warehouse_id = $warehouse->pivot->warehouse_id;
             $quantity = $warehouse->pivot->qty; 
-        }
         
+        //dd($item_id);
         if($item_id == $request->item_id && $warehouse_id == $request->warehouse_id) {
             $quantity += $request->quantity;
              $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $quantity]);
         } else {
             $item->warehouses()->attach($request->warehouse_id, ['qty' => $request->quantity]);
         }
-       return redirect('warehouse');
-    }
+      
+    }*/
+     return redirect('warehouse');
+}
 }

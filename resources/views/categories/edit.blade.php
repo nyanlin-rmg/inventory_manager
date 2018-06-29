@@ -18,7 +18,7 @@
 	</div>
 	<div class="form-group">
 		<input type="submit" class="btn btn-primary" value="Update"></input>
-		<a href="{{ route('category.index') }}" class="btn btn-primary">Cancel</a>
+		<a href="{{ route('category.index') }}" class="btn btn-danger">Cancel</a>
 	</div>
 	</form>
 	</div>

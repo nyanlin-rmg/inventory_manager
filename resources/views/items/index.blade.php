@@ -4,11 +4,10 @@
 </head>
 <body>
 	<div class="container"> 
-	<form action="{{ url('item/search') }}" method="POST">
+	<form action="{{ url('items/search') }}" method="POST">
 	{{ csrf_field() }}
 	<input type="text" name="search" class="form-control" placeholder="search" required> 
 	</form>
-	<hr/>
 	@if ($message = Session::get('success'))
 		<div class="alert alert-success">
 		<p>{{ $message }}</p>
@@ -17,10 +16,9 @@
 	<table class="table table-havor">
 		<thread>
 			<tr>
-				<td><b> Name </b></td>
-				<td><b> Price </b></td>
-				<td> </td>						
-				<td> </td>
+				<th> Name </th>
+				<th> Price </th>
+				<th width="180px"> Action </th>
 			</tr>
 		 </thread>
 		 <tbody>
@@ -29,19 +27,19 @@
 
 		 	<td>{{ $item->name }}</td>
 		 	<td>{{ $item->price }}</td>
-		 	<td> <a class="btn btn-success" href="{{ route('item.edit',$item->id) }}">Edit</a></td>
-		 	<td>
-			<form action="{{ route('item.destroy', $item->id) }}" method="post">
+		 	<td> 
+		 		<a class="btn btn-success" href="{{ route('items.edit',$item->id) }}">Edit</a>
+				<form action="{{ route('items.destroy', $item->id) }}" method="post" style="display: inline;">
 					{{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
-               </td>
+              </td>
 		 </tr>
 		@endforeach
 		</tbody>
 		</table>	
-		<a href="{{ route('item.create') }}" class="btn btn-primary">Create</a>
+		<a href="{{ route('items.create') }}" class="btn btn-primary">Create</a>
 	</div>
 </body>
 </html>

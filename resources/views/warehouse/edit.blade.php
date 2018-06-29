@@ -16,7 +16,7 @@
 				</div>
 				<div class="form-group">
 					<input type="submit" value="Update" class="btn btn-primary">
-					<a href="{{ route('warehouse.index') }}" class="btn btn-primary">Cancel</a>
+					<a href="{{ route('warehouse.index') }}" class="btn btn-danger">Cancel</a>
 				</div>
 			</form>
 		</div>

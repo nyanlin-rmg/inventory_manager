@@ -4,25 +4,23 @@
 </head>
 <body>
 	<div class="container">
-	<form action="{{ url('category/search') }}" method="POST">
-	{{ csrf_field() }}
-	<input type="text" name="search" class="form-control" placeholder="search" required> 
-	</form>
-	<hr/>
+		<form action="{{ url('category/search') }}" method="POST">
+		{{ csrf_field() }}
+		<input type="text" name="search" class="form-control" placeholder="search" required> 
+		</form>
+	</div>
+	<div class="container">
 	@if ($message = Session::get('success'))
 		<div class="alert alert-success">
 		<p>{{ $message }}</p>
 		</div>
 	@endif
-
-	<div class="container">
 		<table class="table table-striped">
 		<thread>
 			<tr>
-				<td><b> Name </b></td>
-				<td><b> Description </b></td>
-				<td> </td>
-				<td> </td>
+				<th> Name </th>
+				<th> Description </th>
+				<th width="180px">Action</th>
 			</tr>
 		 </thread>
 		 <tbody>
@@ -30,14 +28,14 @@
 		 <tr>
 			<td>{{ $category->name }}</td>
 			<td>{{ $category->description }}</td>
-			<td> <a class="btn btn-success" href="{{ route('category.edit',$category->id) }}">Edit</a></td>
-			<td>
-				<form action="{{ route('category.destroy', $category->id) }}" method="post">
+			<td> 
+				<a class="btn btn-success" href="{{ route('category.edit',$category->id) }}">Edit</a>
+				<form action="{{ route('category.destroy', $category->id) }}" method="post" style="display: inline;">
 					{{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
-                </td>
+            </td>
 		 </tr>
 		@endforeach
 		</tbody>

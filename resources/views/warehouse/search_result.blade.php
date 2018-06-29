@@ -24,7 +24,7 @@
 		</tr>
 		@endforelse
 		</table>
-		<a href="{{url('warehouse')}}">Go To Home</a>
+		<a href="{{url('warehouse')}}" class="btn btn-primary">Back</a>
 	</div>
 </body>
 </html>

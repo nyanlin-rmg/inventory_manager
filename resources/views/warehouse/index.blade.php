@@ -19,18 +19,17 @@
 	@endif
 		<table class="table">
 			<tr>
-				<td><b>Name</b></td>
-				<td><b>Location</b></td>
-				<td> </td>
-				<td> </td>
+				<th> Name </th>
+				<th> Location </th>
+				<th width="180px"> Action </th>
 			</tr>
 			@foreach($warehouses as $warehouse)
 			<tr>
 				<td><a href="{{ route('warehouse.show', $warehouse->id) }}">{{ ucwords($warehouse->name) }}</a></td>
 				<td>{{ ucwords($warehouse->location) }}</td>
-				<td><a href="{{ route('warehouse.edit', $warehouse->id) }}" class="btn btn-success">Edit</a></td>
 				<td>
-					<form action="{{ route('warehouse.destroy', $warehouse->id) }}" method="post">
+					<a href="{{ route('warehouse.edit', $warehouse->id) }}" class="btn btn-success">Edit</a>
+					<form action="{{ route('warehouse.destroy', $warehouse->id) }}" method="post" style="display: inline;">
 						{{ csrf_field() }}
 						{{ method_field('DELETE') }}
 						<button class="btn btn-danger">Delete</button>

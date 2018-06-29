@@ -35,7 +35,7 @@
 			</tr>
     	@endforelse
 	</table>
-    	<a href="{{ route('category.index') }}" class="primary">Back to home</a>  
+    	<a href="{{ route('category.index') }}" class="btn btn-primary">Back</a>  
     </div>
 </body>
 </html>
