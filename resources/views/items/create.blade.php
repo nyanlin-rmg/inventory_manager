@@ -14,8 +14,8 @@
 				<input type="text" name="name" class="form form-control"></div><br>
 
 				<div class="form-group">
-				<label>Quantity:</label>
-				<input type="text" name="qty" class="form form-control"></div><br>
+				<label>Price</label>
+				<input type="number" name="price" class="form form-control"></div><br>
 
 				<div class="form-group">
 				<label>Category_id:</label>
@@ -26,19 +26,6 @@
 				@endforeach
 				</select>
 				</div><br>
-
-				<div class="form-group">
-				<label>Warehouse_id:</label>
-				<div>
-				<select name= "warehouse_id" class="form-control">
-				
-				@foreach ($warehouses as $warehouse)
-				<option value="{{ $warehouse->id }}">{{ $warehouse->name }}</option>
-				@endforeach
-				
-				</select>
-				</div><br>
-
 				<input type="submit" value="Create" class="btn btn-primary">
 			</div>	
 		</form>

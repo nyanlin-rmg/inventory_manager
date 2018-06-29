@@ -85,4 +85,20 @@ class WarehouseController extends Controller
         $item->warehouses()->updateExistingPivot($warehouse_id, ['qty' => $qty]);
         return redirect()->back();
     }
+
+    public function purchase()
+    {
+        $items = Item::all();
+        $warehouses = Warehouse::all();
+        return view('warehouse.purchase',['items'=>$items],['warehouses'=>$warehouses]);
+    }
+
+    public function save(Request $request)
+    {
+
+            
+        
+        
+        // return redirect('warehouse');
+    }
 }

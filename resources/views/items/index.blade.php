@@ -14,31 +14,23 @@
 		<thread>
 			<tr>
 				<td> Name </td>
-				<td>Quantity</td>
-				<td>Action</td>						
+				<td>Price</td>				
 			</tr>
 		 </thread>
 		 <tbody>
 		 @foreach($items as $item)
-		<?php 
-			$warehouses = $item->warehouses;
-		?>
-		@foreach($warehouses as $warehouse) 
 		 <tr>
-
-		 	<td><a href="{{ route('item.show',$item->id) }}">{{ $item->name }}</a></td>
-		 	<td>{{ $warehouse->pivot->qty }}</td>
-		
-		 	<td> <a class="btn btn-success" href="{{ route('item.edit',$item->id) }}">Edit</a></td>
+		 	<td>{{ $item->name }}</td>
+			<td>{{ $item->price }}</td>
+		 	<td><a class="btn btn-success" href="{{ route('item.edit',$item->id) }}">Edit</a></td>
 		 	<td>
 			<form action="{{ route('item.destroy', $item->id) }}" method="post">
 					{{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
-               </td>
+            </td>
 		 </tr>
-		@endforeach	
 		@endforeach
 		</tbody>
 		</table>	

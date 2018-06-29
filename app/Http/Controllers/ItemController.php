@@ -15,7 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::with('warehouses')->get();
+        $items = Item::all();
         return view('items.index', ['items'=>$items]);
     }
 
@@ -40,8 +40,6 @@ class ItemController extends Controller
     public function store(Request $request)
     {     
          $item = Item::create($request->all());
-         $item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
-         //dd($item);
          return redirect('item');
     }
 
@@ -88,7 +86,6 @@ class ItemController extends Controller
       //return redirect('item');
         $item = Item::find($id);
         Item::find($id)->update($request->all());
-        $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $request->qty]);
        return redirect('item');
     }
 

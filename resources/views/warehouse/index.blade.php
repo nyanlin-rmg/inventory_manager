@@ -43,6 +43,7 @@
 		</table>
 		<hr>
 		<a href="{{ url('warehouse/create') }}" class="btn btn-info">Create Warehouse</a>
+		<a href="{{ url('/purchase') }}" class="btn btn-info">Purchase</a>
 	</div>
 </body>
 </html>

@@ -1,4 +1,6 @@
 <?php
+Route::get('/purchase', 'WarehouseController@purchase');
+Route::post('/save', 'WarehouseController@save');
 Route::get('warehouse/showItems/{itemid}/{wid}', 'WarehouseController@showItems');;
 Route::resource('/warehouse', 'WarehouseController');
 Route::post('warehouse/search', 'WarehouseController@search');
