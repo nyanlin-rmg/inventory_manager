@@ -52,7 +52,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-
+        
     }
 
     /**

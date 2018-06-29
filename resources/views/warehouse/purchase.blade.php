@@ -37,6 +37,6 @@
 		<a href="{{ route('warehouse.index') }}" class="btn btn-primary">Cancel</a>
 	</form>
 	</div>
->>>>>>> fcdd39db7d007aa6d2b88213433de6cd98856a18
+
 </body>
 </html>

@@ -15,7 +15,7 @@ Route::post('category/search','CategoryController@search');
 Route::resource('item','ItemController')->except(['show']);
 Route::post('item/search','ItemController@search');
 
+Auth::routes();
 
-
-
+Route::get('/home', 'HomeController@index')->name('home');
 
