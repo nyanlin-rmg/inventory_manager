@@ -12,8 +12,19 @@
 			    <li><a href="{{ url('warehouses/') }}">Warehouse</a></li>
 			    <li><a href="{{ url('categories/') }}">Category</a></li>
 			    <li><a href="{{ url('items/') }}">Item</a></li>
-				<li><a href="#">Login</a></li>
-				<li><a href="#">Register</a></li>
+				<li>
+					
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" >
+                                        Logout
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                
+                </li>
 			</ul>
 		</div>
 	</div>

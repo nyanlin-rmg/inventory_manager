@@ -48,7 +48,7 @@ class WarehouseController extends Controller
     public function update(Request $request, $id)
     {
         Warehouse::find($id)->update($request->all());
-        return redirect('warehouse')->with('success','Warehouse successfully updated');
+        return redirect('warehouses')->with('success','Warehouse successfully updated');
     }
     public function destroy($id)
     {
