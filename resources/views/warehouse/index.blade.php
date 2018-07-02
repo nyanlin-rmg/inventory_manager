@@ -1,11 +1,10 @@
-@extends('layouts.default')
-@include('header')
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Warehouse</title>
 </head>
 <body>
+	@include('layouts.app')
 	<div class="container">
 		<form action="{{ url('warehouses/search') }}" method="POST">
 			{{csrf_field()}}

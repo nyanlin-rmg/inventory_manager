@@ -3,9 +3,15 @@
 <html>
 <head>
 	<title></title>
+	<style type="text/css">
+		div {
+    		padding-top:20px;
+		}
+	</style>
 </head>
 <body>
 	<div class="container">
+		<a href="{{ url('items/create') }}" class="btn btn-primary">Create Item</a>
 		<table class="table table-striped">
 			<tr>
 				<td><b>Name</b></td>

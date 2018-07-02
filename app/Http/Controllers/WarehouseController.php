@@ -11,6 +11,7 @@ class WarehouseController extends Controller
     public function index()
     {
         $warehouses = Warehouse::all();
+        
         return view('warehouse.index', ['warehouses'=>$warehouses]);
     }
     public function create()
@@ -26,11 +27,12 @@ class WarehouseController extends Controller
     {
         $wid = $id;
         $warehouses = Warehouse::findOrFail($id);
+        $items = Item::all();
         $items = $warehouses->items()->get();
         $categories = $items->map ( function ($value, $key) {
             return $value->category()->get();
         } )->unique(); 
-        return view('warehouse.show',['wid'=>$wid], ['categories'=>$categories]);
+        return view('warehouse.show',['wid'=>$wid], ['categories'=>$categories],['items'=>$items]);
     }
 
     public function showItems( $category_id, $warehouse_id)
@@ -55,7 +57,7 @@ class WarehouseController extends Controller
         $warehouse = Warehouse::find($id);
         Warehouse::find($id)->delete();
         $warehouse->items()->detach();
-        return redirect('warehouses/')->with('success','Warehouse successfully deleted');
+        return redirect('warehouses')->with('success','Warehouse successfully deleted');
     }
     public function search(Request $request)
     {
@@ -63,12 +65,12 @@ class WarehouseController extends Controller
         if(!trim($search))
         {
             $search_warehouses = [];
-            return view('warehouse.search_result', ['search_warehouses'=>collect($search_warehouses)]);
+            return view('warehouse.search_result', ['search_warehouses'=>collect($search_warehouses) , 'search' => $search]);
         }
         $search_warehouses = Warehouse::where(
             'name', 'LIKE', '%'. $search. '%'
         )->get();
-        return view('warehouse.search_result', ['search_warehouses' => $search_warehouses]);
+        return view('warehouse.search_result', ['search_warehouses' => $search_warehouses, 'search' => $search]);
     }
     public function inventory_in(Request $request, $id)
     {
@@ -104,6 +106,5 @@ class WarehouseController extends Controller
         $quantity = $qty + $quantity;
         $item->warehouses()->sync([$request->warehouse_id => ['qty'=>$quantity]]);
        return redirect('warehouses');
-
     }
 }
