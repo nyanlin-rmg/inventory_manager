@@ -1,11 +1,12 @@
-@extends('layouts.default')
-@include('header')
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
 </head>
 <body>
+	@include('layouts.app')
+@extends('layouts.default')
 	<div class="container">
 		<div class="row">
 			<p>

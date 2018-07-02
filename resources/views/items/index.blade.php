@@ -1,5 +1,5 @@
-  @extends('layouts.default')
- @include('header')
+ @extends('layouts.default')
+ 
 <html>
 <head>
 </head>
@@ -35,6 +35,7 @@
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
               </td>
+
 		 </tr>
 		@endforeach
 		</tbody>
