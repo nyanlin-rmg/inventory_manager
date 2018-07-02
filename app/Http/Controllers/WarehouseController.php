@@ -11,7 +11,6 @@ class WarehouseController extends Controller
     public function index()
     {
         $warehouses = Warehouse::all();
-        
         return view('warehouse.index', ['warehouses'=>$warehouses]);
     }
     public function create()
@@ -27,12 +26,11 @@ class WarehouseController extends Controller
     {
         $wid = $id;
         $warehouses = Warehouse::findOrFail($id);
-        $items = Item::all();
         $items = $warehouses->items()->get();
         $categories = $items->map ( function ($value, $key) {
             return $value->category()->get();
         } )->unique(); 
-        return view('warehouse.show',['wid'=>$wid], ['categories'=>$categories],['items'=>$items]);
+        return view('warehouse.show',['wid'=>$wid], ['categories'=>$categories]);
     }
 
     public function showItems( $category_id, $warehouse_id)
@@ -99,12 +97,12 @@ class WarehouseController extends Controller
         $quantity = $request->quantity;
         $warehouse = $item->warehouses()->find($request->warehouse_id);
         if($warehouse == null) {
-            $qty = 0;
+        $item->warehouses()->attach($request->warehouse_id, ['qty'=>$quantity]);
         } else {
             $qty = $warehouse->pivot->qty;
+            $quantity = $qty + $quantity;
+            $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$quantity]);
         }
-        $quantity = $qty + $quantity;
-        $item->warehouses()->sync([$request->warehouse_id => ['qty'=>$quantity]]);
        return redirect('warehouses');
     }
 }

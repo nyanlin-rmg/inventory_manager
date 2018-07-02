@@ -6,6 +6,7 @@
 </head>
 <body>
 	<div class="container">
+		<h2>Update Item</h2>
 		<div class="row">
 			<form action="{{ route('items.update', $item->id) }}" method="post">
 				{{csrf_field()}}

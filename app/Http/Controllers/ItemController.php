@@ -77,14 +77,6 @@ class ItemController extends Controller
     {
         $item = Item::find($id)->update($request->all());
         return redirect('items')->with('success','Item updated successfully!!');
-        /*$item = Item::find($id);
-        Item::find($id)->update($request->all());
-        $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $request->qty]);
-<<<<<<< HEAD
-       return redirect('items');
-=======
-        return redirect('item');*/
-
     }
 
     /**
