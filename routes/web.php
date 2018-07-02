@@ -13,13 +13,6 @@ Route::post('categories/search','CategoryController@search')->middleware('auth')
 
 Route::resource('items','ItemController')->except(['show'])->middleware('auth');
 Route::post('items/search','ItemController@search')->middleware('auth');
-
-
-
-
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
->>>>>>> 81e32901294427f5d6ff9f03011b4c9232f07b08
