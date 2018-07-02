@@ -1,9 +1,9 @@
- @extends('layouts.default')
- @include('header')
+ <!DOCTYPE html>
 <html>
 <head>
 </head>
 <body>
+	@include('layouts.app')
 	<div class="container">
 		<form action="{{ url('categories/search') }}" method="POST">
 		{{ csrf_field() }}

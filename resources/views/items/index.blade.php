@@ -1,9 +1,12 @@
- @extends('layouts.default')
+
  
-<html>
+
+ <!DOCTYPE html>
+ <html>
 <head>
 </head>
 <body>
+ @include('layouts.app')
 	<div class="container"> 
 	<form action="{{ url('items/search') }}" method="POST">
 	{{ csrf_field() }}

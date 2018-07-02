@@ -6,7 +6,6 @@
 </head>
 <body>
 	@include('layouts.app')
-@extends('layouts.default')
 	<div class="container">
 		<div class="row">
 			<p>

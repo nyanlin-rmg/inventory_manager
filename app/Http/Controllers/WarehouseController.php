@@ -11,6 +11,7 @@ class WarehouseController extends Controller
     public function index()
     {
         $warehouses = Warehouse::all();
+        
         return view('warehouse.index', ['warehouses'=>$warehouses]);
     }
     public function create()
@@ -26,11 +27,12 @@ class WarehouseController extends Controller
     {
         $wid = $id;
         $warehouses = Warehouse::findOrFail($id);
+        $items = Item::all();
         $items = $warehouses->items()->get();
         $categories = $items->map ( function ($value, $key) {
             return $value->category()->get();
         } )->unique(); 
-        return view('warehouse.show',['wid'=>$wid], ['categories'=>$categories]);
+        return view('warehouse.show',['wid'=>$wid], ['categories'=>$categories],['items'=>$items]);
     }
 
     public function showItems( $category_id, $warehouse_id)
