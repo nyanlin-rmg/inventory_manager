@@ -15,4 +15,4 @@ Route::resource('items','ItemController')->except(['show'])->middleware('auth');
 Route::post('items/search','ItemController@search')->middleware('auth');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
