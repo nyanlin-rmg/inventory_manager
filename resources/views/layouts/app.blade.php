@@ -43,7 +43,10 @@
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-                        @else
+                        @else                                                   
+                        <li><a class="nav-link" href="{{ url('/') }}">Home</a></li>
+                        <li><a class="nav-link" href="{{ url('warehouses/') }}">Warehouse</a></li> 
+                        <li><a class="nav-link" href="">Category</a></li>                  <li><a class="nav-link" href="">Item</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

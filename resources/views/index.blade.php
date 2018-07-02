@@ -1,5 +1,6 @@
+
 @extends('layouts.default')
-@include('header')
+@include('layouts.app')
 <!DOCTYPE html>
 <html>
 <head>
