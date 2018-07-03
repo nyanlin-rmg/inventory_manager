@@ -1,4 +1,3 @@
-@extends('layouts.default')
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +24,5 @@
                 </li>
 			</ul>
 		</div>
-	</div>
 </body>
 </html>

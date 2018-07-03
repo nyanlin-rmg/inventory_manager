@@ -1,11 +1,12 @@
-@extends('layouts.default')
-<!DOCTYPE html>
-<html>
-<head>	
-	<title></title>
-</head>
-<body>	
-	<div class="container">
+@extends('layouts.app')
+@section('content')
+		@if ($errors->any())
+			<div class="alert alert-danger">
+				@foreach($errors->all() as $error)
+					{{ $error }}
+				@endforeach
+			</div>
+		@endif
 		<form action="{{route('items.store')}}" method="post">
 			{{csrf_field()}}
 				<div class="form-group">
@@ -35,6 +36,4 @@
 				<a href="{{ route('items.index') }}" class="btn btn-danger">Cancel</a>
 				</div>	
 		</form>
-	</div>
-</body>
-</html>
+@endsection

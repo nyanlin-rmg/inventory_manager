@@ -34,7 +34,6 @@
 				<td class="warning"> There is no category !!!! </td>
 				<td class="warning"></td>
 				<td class="warning"></td>
-				<td class="warning"></td>
 			</tr>
     	@endforelse
 	</table>

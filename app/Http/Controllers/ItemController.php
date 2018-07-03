@@ -5,6 +5,7 @@ use App\Warehouse;
 use App\Category;
 use App\Item;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ItemController extends Controller
 {
@@ -15,7 +16,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::get();
+        $items = Item::paginate(5);
         return view('items.index', ['items'=>$items]);
     }
 
@@ -27,7 +28,8 @@ class ItemController extends Controller
     public function create()
     {
        $categories = Category::all();
-       return view('items.create',['categories'=>$categories]);
+       $warehouses = Warehouse::all();
+       return view('items.create',['categories'=>$categories],['warehouses'=>$warehouses]);
    }
 
     /**
@@ -38,10 +40,13 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {     
+         $request->validate([
+            'name' => 'required|unique:items|max:255',
+            'price' => 'required',
+        ]);
          $item = Item::create($request->all());
-         //$item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
-         //dd($item);
-         return redirect('items')->with('success','Item created successfully!!');
+         Alert::success('Success', "Category created successfully");
+         return redirect('items');
     }
 
     /**
@@ -53,7 +58,6 @@ class ItemController extends Controller
     public function show($id)
     {
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -77,11 +81,6 @@ class ItemController extends Controller
     {
         $item = Item::find($id)->update($request->all());
         return redirect('items')->with('success','Item updated successfully!!');
-        /*$item = Item::find($id);
-        Item::find($id)->update($request->all());
-        $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $request->qty]);
-        return redirect('item');*/
-
     }
 
     /**
@@ -107,6 +106,5 @@ class ItemController extends Controller
             'name', 'LIKE', '%'. $search. '%'
         )->get();
         return view('items.search_result', ['search_items' => $search_items, 'search' => $search]);
-    }   
+    }
 }
-

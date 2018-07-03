@@ -5,6 +5,7 @@ use App\Warehouse;
 use App\Item;
 use App\Category;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class WarehouseController extends Controller
 {
@@ -19,8 +20,13 @@ class WarehouseController extends Controller
     }
     public function store(Request $request)
     {
-        $test = Warehouse::create($request->all());
-        return redirect('warehouses')->with('success','Warehouse successfully created');
+        $request->validate([
+            'name' => 'required|unique:warehouses|max:255',
+            'location' => 'required',
+        ]);
+        Warehouse::create($request->all());
+        Alert::success('Success', 'Success');
+        return redirect('warehouses');
     }
     public function show($id)
     {
@@ -97,11 +103,11 @@ class WarehouseController extends Controller
         $quantity = $request->quantity;
         $warehouse = $item->warehouses()->find($request->warehouse_id);
         if($warehouse == null) {
-            $item->warehouses()->attach($request->warehouse_id , ['qty'=>$quantity]);
+            $item->warehouses()->attach($request->warehouse_id, ['qty'=>$quantity]);
         } else {
             $qty = $warehouse->pivot->qty;
             $quantity = $qty + $quantity;
-            $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty'=>$quantity]);
+            $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$quantity]);
         }
        return redirect('warehouses');
     }

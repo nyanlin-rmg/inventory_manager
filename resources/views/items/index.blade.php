@@ -1,19 +1,9 @@
-  @extends('layouts.default')
- @include('header')
-<html>
-<head>
-</head>
-<body>
-	<div class="container"> 
+@extends('layouts.app')
+@section('content')
 	<form action="{{ url('items/search') }}" method="POST">
 	{{ csrf_field() }}
 	<input type="text" name="search" class="form-control search" placeholder="search" required> 
 	</form>
-	@if ($message = Session::get('success'))
-		<div class="alert alert-success">
-		<p>{{ $message }}</p>
-		</div>
-	@endif
 	<table class="table table-havor">
 		<thread>
 			<tr>
@@ -35,11 +25,11 @@
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
               </td>
+
 		 </tr>
 		@endforeach
 		</tbody>
 		</table>	
-		<a href="{{ route('items.create') }}" class="btn btn-primary">Create Item</a>
-	</div>
-</body>
-</html>
+		{{ $items->links() }}
+		<p><a href="{{ route('items.create') }}" class="btn btn-primary">Create Item</a></p>
+@endsection

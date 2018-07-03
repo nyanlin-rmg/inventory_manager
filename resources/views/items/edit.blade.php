@@ -1,11 +1,5 @@
-@extends('layouts.default')
-<!DOCTYPE html>
-<html>
-<head>	
-	<title></title>
-</head>
-<body>
-	<div class="container">
+@extends('layouts.app')
+@section('content')
 		<div class="row">
 			<form action="{{ route('items.update', $item->id) }}" method="post">
 				{{csrf_field()}}
@@ -29,6 +23,4 @@
 				</div>
 			</form>
 		</div>
-	</div>
-</body>
-</html>
+@endsection
