@@ -1,11 +1,9 @@
-@extends('layouts.default')
+@extends('layouts.app')
 @section('content')
 		<form action="{{ url('warehouses/search') }}" method="POST">
 			{{csrf_field()}}
 			<input type="text" name="search" class="form-control search" placeholder="Search">
 		</form>
-	</div>
-	<div class="container">
 		<table class="table">
 			<tr>
 				<th> Name </th>
