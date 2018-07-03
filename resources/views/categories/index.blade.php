@@ -4,7 +4,7 @@
 		{{ csrf_field() }}
 			<input type="text" name="search" class="form-control search" placeholder="search" required> 
 		</form>
-		<table class="table table-striped">
+		<table class="table table-havor">
 		<thread>
 
 			<tr>

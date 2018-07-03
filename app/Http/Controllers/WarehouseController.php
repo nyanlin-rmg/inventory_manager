@@ -110,6 +110,7 @@ class WarehouseController extends Controller
             $quantity = $qty + $quantity;
             $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$quantity]);
         }
+        Alert::success('Success', 'Success');
        return redirect('warehouses');
     }
     public function sale()
