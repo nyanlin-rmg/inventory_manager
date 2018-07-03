@@ -23,6 +23,4 @@
 					<a href="{{ route('warehouses.index') }}" class="btn btn-danger">Cancel</a>
 				</div>
 			</form>
-
-		</div>
 @endsection

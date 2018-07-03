@@ -4,10 +4,12 @@ Route::get('/', function () {
 })->middleware('auth');
 
 Route::get('warehouses/purchase','WarehouseController@purchase')->middleware('auth');
+Route::get('warehouses/sale','WarehouseController@sale')->middleware('auth');
 Route::resource('warehouses', 'WarehouseController')->middleware('auth');
 Route::post('warehouses/search', 'WarehouseController@search')->middleware('auth');
 Route::get('warehouses/showItems/{itemid}/{wid}', 'WarehouseController@showItems')->middleware('auth');
 Route::post('warehouses/save','WarehouseController@save')->middleware('auth');
+Route::post('warehouses/sell','WarehouseController@sell')->middleware('auth');
 Route::post('warehouses/showItems/{itemid}/{wid}', 'WarehouseController@showItems')->middleware('auth');
 
 Route::resource('/categories','CategoryController')->except(['show'])->middleware('auth');

@@ -54,7 +54,8 @@ class WarehouseController extends Controller
     public function update(Request $request, $id)
     {
         Warehouse::find($id)->update($request->all());
-        return redirect('warehouses')->with('success','Warehouse successfully updated');
+        Alert::success('Success', 'Successfully Updated!');
+        return redirect('warehouses');
     }
     public function destroy($id)
     {
@@ -103,12 +104,24 @@ class WarehouseController extends Controller
         $quantity = $request->quantity;
         $warehouse = $item->warehouses()->find($request->warehouse_id);
         if($warehouse == null) {
-        $item->warehouses()->attach($request->warehouse_id, ['qty'=>$quantity]);
+            $item->warehouses()->attach($request->warehouse_id, ['qty'=>$quantity]);
         } else {
             $qty = $warehouse->pivot->qty;
             $quantity = $qty + $quantity;
             $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$quantity]);
         }
        return redirect('warehouses');
+    }
+    public function sale()
+    {
+        $items = Item::all();
+        $warehouses = Warehouse::all();
+        return view('warehouse.sale', ['warehouses' => $warehouses, 'items' => $items]);
+    }
+    public function sell(Request $request)
+    {
+        $warehouse = Warehouse::find($request->warehouse_id);
+        $item = $warehouse->items()->get();
+        return view('warehouse.sale', ['warehouse' => $warehouse, 'item' => $items]);
     }
 }
