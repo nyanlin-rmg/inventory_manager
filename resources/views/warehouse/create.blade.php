@@ -1,12 +1,13 @@
 
 @extends('layouts.default')
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Warehouse</title>
-</head>
-<body>
-	<div class="container">
+@section('content')
+		@if ($errors->any())
+			<div class="alert alert-danger">
+				@foreach($errors->all() as $error)
+					{{ $error }}
+				@endforeach
+			</div>
+		@endif
 		<div class="row">
 			<form action="{{route('warehouses.store')}}" method="post">
 				{{csrf_field()}}
@@ -26,6 +27,4 @@
 			</form>
 
 		</div>
-	</div>
-</body>
-</html>
+@endsection

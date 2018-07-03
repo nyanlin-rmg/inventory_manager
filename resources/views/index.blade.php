@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	@include('layouts.app')
-	<div class="container">
+@extends('layouts.default')
+@section('content')
 		<div class="row">
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -22,6 +16,4 @@
 			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 		</div>
-	</div>
-</body>
-</html>
+@endsection

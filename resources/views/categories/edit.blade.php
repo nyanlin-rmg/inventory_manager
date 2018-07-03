@@ -1,9 +1,5 @@
 @extends('layouts.default')
-<html>
-<head></head>
-<body>
-	<div class="container">
-	<h1>Update</h1>
+@section('content')
 	<form action="{{ route('categories.update', $category->id) }}" method="post">
 	{{ csrf_field() }}
 	{{ method_field('PUT') }}
@@ -21,6 +17,4 @@
 		<a href="{{ route('categories.index') }}" class="btn btn-danger">Cancel</a>
 	</div>
 	</form>
-	</div>
-</body>
-</html>
+@endsection

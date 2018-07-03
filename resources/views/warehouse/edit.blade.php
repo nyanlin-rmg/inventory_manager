@@ -1,6 +1,6 @@
 @extends('layouts.default')
+@section('content')
 	<div class="container">
-		<h2>Update Warehouse</h2>
 		<div class="row">
 			<form action="{{ route('warehouses.update', $warehouse->id) }}" method="post">
 				{{csrf_field()}}
@@ -20,4 +20,4 @@
 				</div>
 			</form>
 		</div>
-	</div>
+@endsection

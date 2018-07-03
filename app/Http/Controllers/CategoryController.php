@@ -5,6 +5,7 @@ use App\Item;
 use App\Warehouse;
 use Illuminate\Http\Request;
 use App\Category;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(5);
         return view('categories.index',['categories'=>$categories]);
     }
 
@@ -37,9 +38,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|unique:categories|max:255',
+            'description' => 'required',
+        ]);
         Category::create($request->all());
-        //return redirect('/category')->with('success','Category created successfully');
-        return redirect('/categories')->with('success','Category created successfully!!');
+        Alert::success('Success', "Category created successfully");
+        return redirect('/categories');
     }
 
     /**
@@ -91,7 +96,9 @@ class CategoryController extends Controller
         $category = Category::find($id);
         Category::find($id)->delete();
         $category->items()->delete();
-        return redirect('/categories')->with('success','Category deleted successfully!!');
+        return response()->json([
+            'message' => 'Deleted'
+        ]);
     }
 
     public function search(Request $request)

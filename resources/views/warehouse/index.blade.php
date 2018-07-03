@@ -1,22 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Warehouse</title>
-</head>
-<body>
-	@include('layouts.app')
-	<div class="container">
+@extends('layouts.default')
+@section('content')
 		<form action="{{ url('warehouses/search') }}" method="POST">
 			{{csrf_field()}}
 			<input type="text" name="search" class="form-control search" placeholder="Search" required>
 		</form>
 	</div>
 	<div class="container">
-		@if ($message = Session::get('success'))
-		<div class="alert alert-success">
-		<p>{{ $message }}</p>
-		</div>
-	@endif
 		<table class="table">
 			<tr>
 				<th> Name </th>
@@ -38,9 +27,7 @@
 			</tr>
 			@endforeach
 		</table>
-		<hr>
+		{{ $warehouses->links() }} <br>
 		<a href="{{ route('warehouses.create') }}" class="btn btn-primary">Create Warehouse</a>
 		<a href="{{ url('warehouses/purchase') }}" class="btn btn-primary">Purchase</a>
-	</div>
-</body>
-</html>
+@endsection
