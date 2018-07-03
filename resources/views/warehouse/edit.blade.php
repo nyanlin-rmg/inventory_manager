@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 	<div class="container">
-		<div class="row">
 			<form action="{{ route('warehouses.update', $warehouse->id) }}" method="post">
 				{{csrf_field()}}
 				{{method_field('PUT')}}

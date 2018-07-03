@@ -7,7 +7,6 @@
 				@endforeach
 			</div>
 		@endif
-		<div class="row">
 			<form action="{{route('warehouses.store')}}" method="post">
 				{{csrf_field()}}
 
