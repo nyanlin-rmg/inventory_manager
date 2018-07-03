@@ -1,11 +1,5 @@
-@extends('layouts.default')
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<div class="container">
+@extends('layouts.app')
+@section('content')
 		<form action="{{ url('items/search') }}" method="POST">
 		{{csrf_field()}}
 			<input type="text" name="search" class="form-control search" placeholder="Search" value="{{ $search }}" required="">
@@ -40,6 +34,4 @@
 		@endforelse
 		</table>
 		<a href="{{url('items')}}" class="btn btn-primary">Back</a>
-	</div>
-</body>
-</html>
+@endsection

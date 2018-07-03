@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.app')
 <!DOCTYPE html>
 <html>
 <head>

@@ -1,10 +1,5 @@
-@extends('layouts.default')
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+@extends('layouts.app')
+@section('content')
 	<div class="container">
 		<form action="{{ url('warehouses/search') }}" method="POST">
 			{{csrf_field()}}
@@ -40,6 +35,4 @@
 		@endforelse
 		</table>
 		<a href="{{url('warehouses')}}" class="btn btn-primary">Back</a>
-	</div>
-</body>
-</html>
+@endsection

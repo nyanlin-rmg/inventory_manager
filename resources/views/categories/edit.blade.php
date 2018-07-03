@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.app')
 @section('content')
 	<form action="{{ route('categories.update', $category->id) }}" method="post">
 	{{ csrf_field() }}
