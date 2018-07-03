@@ -8,6 +8,7 @@ class Item extends Model
 {
    public $fillable=['name','price','category_id'];
    
+   
    public function category()
     {
         return $this->belongsTo('App\Category');

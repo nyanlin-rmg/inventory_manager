@@ -5,6 +5,7 @@ use App\Item;
 use App\Warehouse;
 use Illuminate\Http\Request;
 use App\Category;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(5);
         return view('categories.index',['categories'=>$categories]);
     }
 
@@ -42,8 +43,8 @@ class CategoryController extends Controller
             'description' => 'required',
         ]);
         Category::create($request->all());
-        //return redirect('/category')->with('success','Category created successfully');
-        return redirect('/category')->with('success','Category created successfully!!');
+        Alert::success('Success', "Category created successfully");
+        return redirect('/categories');
     }
 
     /**
@@ -81,7 +82,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     { 
         Category::find($id)->update($request->all());
-        return redirect('/category')->with('success','Category updated successfully!!');
+        return redirect('/categories')->with('success','Category updated successfully!!');
     }
 
     /**
@@ -95,19 +96,22 @@ class CategoryController extends Controller
         $category = Category::find($id);
         Category::find($id)->delete();
         $category->items()->delete();
-        return redirect('/category')->with('success','Category deleted successfully!!');
+        return response()->json([
+            'message' => 'Deleted'
+        ]);
     }
 
     public function search(Request $request)
     {
-        if ( ! trim( $request->search) ) 
+        $search = $request->search;
+        if ( ! trim( $search ) ) 
         {
             $categories = [];
-            return view('categories.search_result', ['categories'=> collect($categories)] );
+            return view('categories.search_result', ['categories'=> collect($categories) , 'search'=>$search] );
         }
 
-        $categories = Category::where('name','LIKE','%'.$request->search.'%')->get();
+        $categories = Category::where('name','LIKE','%'.$search.'%')->get();
     
-        return view('categories.search_result', ['categories'=>$categories]);
+        return view('categories.search_result', ['categories'=>$categories, 'search'=>$search]);
         }   
 }

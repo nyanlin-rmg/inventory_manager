@@ -1,52 +1,45 @@
- @extends('layouts.default')
+@extends('layouts.default')
+<!DOCTYPE html>
 <html>
 <head>
+	<title></title>
 </head>
 <body>
 	<div class="container">
 		<form action="{{ url('items/search') }}" method="POST">
-		{{ csrf_field() }}
-			<input type="text" name="search" class="form-control search" placeholder="search" value="{{ $search }}" required> 
+		{{csrf_field()}}
+			<input type="text" name="search" class="form-control search" placeholder="Search" value="{{ $search }}" required="">
 		</form>
-    	<h1>Show</h1>
-    	<div class="container">
-		<table class="table table-striped">
-		<thread>
+	</div>
+	<div class="container">
+		<table class="table">
 			<tr>
-				<td> Name </td>
-				<td> Quanity </td>
-				<td> Price </td>
-				<td> </td>
-	            <td> </td>
+				<td><b>Name</b></td>
+				<td><b>Price</b></td>
+				<td width="180px"><b>Action</b></td>
 			</tr>
-		 </thread>
-		 <tbody>
-		 	@forelse( $items as $item)
-		 	<tr>
-			<td>{{ $item->name }}</td>
-			<?php  
-            $warehouses = $item->warehouses;
-            ?>
-            @foreach ($warehouses as $warehouse) 
-            <td>{{ $warehouse->pivot->qty }}</td>
-            @endforeach
-            <td>{{ $item->price }}</td>
-			<td> <a class="btn btn-success" href="{{ route('items.edit',$item->id) }}">Edit</a></td>
-			<td>
-				<form action="{{ route('items.destroy', $item->id) }}" method="post">
-					{{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-			</td>
-		 </tr>
+			@forelse($search_items as $search_item)
+			<tr>
+				<td>{{ ucwords($search_item->name) }}</td>
+				<td>{{ ucwords($search_item->price) }}</td>
+				<td><a href="{{ route('items.edit', $search_item->id) }}" class="btn btn-primary">Edit</a>
+					<form action="{{ route('items.destroy', $search_item->id) }}" method="post" style="display: inline;">
+						{{ csrf_field() }}
+						{{ method_field('DELETE') }}
+						<button class="btn btn-danger">Delete</button>
+					</form>
+				</td>
+			</tr>
 		@empty
-		 <div class="container">
-		 <h1>  There is no item !!!! </h1>
-		 </div>
-    	@endforelse
-    </tbody>
-</table>
-    	<a href="{{ route('items.index') }}" class="btn btn-primary">Back</a>
+		<tr>
+			<td class="warning">There is no item you are searching for!</td>
+			<td class="warning"></td>
+			<td class="warning"></td>
+			<td class="warning"></td>
+		</tr>
+		@endforelse
+		</table>
+		<a href="{{url('items')}}" class="btn btn-primary">Back</a>
+	</div>
 </body>
 </html>

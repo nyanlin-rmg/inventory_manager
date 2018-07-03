@@ -1,10 +1,6 @@
 @extends('layouts.default')
-<html>
-<head></head>
-<body>
-	<div class="container">
-	<h1>Update</h1>
-	<form action="{{ route('category.update', $category->id) }}" method="post">
+@section('content')
+	<form action="{{ route('categories.update', $category->id) }}" method="post">
 	{{ csrf_field() }}
 	{{ method_field('PUT') }}
 	<input type='hidden' name='id' class='form-control' value='{{ $category->id }}'><br>
@@ -18,9 +14,7 @@
 	</div>
 	<div class="form-group">
 		<input type="submit" class="btn btn-primary" value="Update"></input>
-		<a href="{{ route('category.index') }}" class="btn btn-danger">Cancel</a>
+		<a href="{{ route('categories.index') }}" class="btn btn-danger">Cancel</a>
 	</div>
 	</form>
-	</div>
-</body>
-</html>
+@endsection

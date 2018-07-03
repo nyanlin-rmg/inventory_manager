@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div class="container">
-		<form action="{{url('warehouse/save')}}" method="post">
+		<form action="{{url('warehouses/save')}}" method="post">
 			{{ csrf_field() }}
 		<div class="form-group">
 			<label>Item Name:</label>
@@ -33,7 +33,7 @@
 			<input type="number" name="quantity" class="form-control">
 		</div>
 		<input type="submit" value="Purchase" class="btn btn-primary">
-		<a href="{{ route('warehouse.index') }}" class="btn btn-danger">Cancel</a>
+		<a href="{{ route('warehouses.index') }}" class="btn btn-danger">Cancel</a>
 	</form>
 	</div>
 </body>

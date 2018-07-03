@@ -5,12 +5,13 @@ use App\Warehouse;
 use App\Item;
 use App\Category;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class WarehouseController extends Controller
 {
     public function index()
     {
-        $warehouses = Warehouse::all();
+        $warehouses = Warehouse::paginate(5);
         return view('warehouse.index', ['warehouses'=>$warehouses]);
     }
     public function create()
@@ -20,11 +21,12 @@ class WarehouseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|alpha|max:255',
+            'name' => 'required|unique:warehouses|max:255',
             'location' => 'required',
         ]);
-        $test = Warehouse::create($request->all());
-        return redirect('warehouse')->with('success','Warehouse successfully created');
+        Warehouse::create($request->all());
+        Alert::success('Success', 'Success');
+        return redirect('warehouses');
     }
     public function show($id)
     {
@@ -52,14 +54,14 @@ class WarehouseController extends Controller
     public function update(Request $request, $id)
     {
         Warehouse::find($id)->update($request->all());
-        return redirect('warehouse')->with('success','Warehouse successfully updated');
+        return redirect('warehouses')->with('success','Warehouse successfully updated');
     }
     public function destroy($id)
     {
         $warehouse = Warehouse::find($id);
         Warehouse::find($id)->delete();
         $warehouse->items()->detach();
-        return redirect('warehouse/')->with('success','Warehouse successfully deleted');
+        return redirect('warehouses')->with('success','Warehouse successfully deleted');
     }
     public function search(Request $request)
     {
@@ -67,12 +69,12 @@ class WarehouseController extends Controller
         if(!trim($search))
         {
             $search_warehouses = [];
-            return view('warehouse.search_result', ['search_warehouses'=>collect($search_warehouses)]);
+            return view('warehouse.search_result', ['search_warehouses'=>collect($search_warehouses) , 'search' => $search]);
         }
         $search_warehouses = Warehouse::where(
             'name', 'LIKE', '%'. $search. '%'
         )->get();
-        return view('warehouse.search_result', ['search_warehouses' => $search_warehouses]);
+        return view('warehouse.search_result', ['search_warehouses' => $search_warehouses, 'search' => $search]);
     }
     public function inventory_in(Request $request, $id)
     {
@@ -87,6 +89,7 @@ class WarehouseController extends Controller
         return redirect()->back();
     }
 
+
     public function purchase() 
     {
         $items = Item::all();
@@ -100,12 +103,12 @@ class WarehouseController extends Controller
         $quantity = $request->quantity;
         $warehouse = $item->warehouses()->find($request->warehouse_id);
         if($warehouse == null) {
-            $qty = 0;
+            $item->warehouses()->attach($request->warehouse_id , ['qty'=>$quantity]);
         } else {
             $qty = $warehouse->pivot->qty;
+            $quantity = $qty + $quantity;
+            $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty'=>$quantity]);
         }
-        $quantity = $qty + $quantity;
-        $item->warehouses()->sync([$request->warehouse_id => ['qty'=>$quantity]]);
-       return redirect('warehouse');
+       return redirect('warehouses');
     }
 }

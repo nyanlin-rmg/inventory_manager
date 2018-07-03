@@ -1,5 +1,5 @@
- @extends('layouts.default')
- @include('header')
+@extends('layouts.default')
+@section('content')
 <html>
 <head>
 </head>
@@ -9,11 +9,6 @@
 	{{ csrf_field() }}
 	<input type="text" name="search" class="form-control search" placeholder="search" required> 
 	</form>
-	@if ($message = Session::get('success'))
-		<div class="alert alert-success">
-		<p>{{ $message }}</p>
-		</div>
-	@endif
 	<table class="table table-havor">
 		<thread>
 			<tr>
@@ -25,7 +20,6 @@
 		 <tbody>
 		 @foreach($items as $item)
 		 <tr>
-
 		 	<td>{{ $item->name }}</td>
 		 	<td>{{ $item->price }}</td>
 		 	<td> 
@@ -40,7 +34,6 @@
 		@endforeach
 		</tbody>
 		</table>	
-		<a href="{{ route('items.create') }}" class="btn btn-primary">Create</a>
-	</div>
-</body>
-</html>
+		{{ $items->links() }}
+		<p><a href="{{ route('items.create') }}" class="btn btn-primary">Create Item</a></p>
+@endsection

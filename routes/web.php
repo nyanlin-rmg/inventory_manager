@@ -1,29 +1,27 @@
 <?php
 Route::get('/', function () {
 	return view('index');
-});
-Route::get('warehouse', function () {
-	return view('warehouse');	
-});
-Route::get('category', function () {
-	return view('category');	
-});
-Route::get('item', function () {
-	return view('item');	
-});
-Route::get('warehouse/purchase','WarehouseController@purchase');
-Route::resource('warehouse', 'WarehouseController');
-Route::post('warehouse/search', 'WarehouseController@search');
-Route::get('warehouse/showItems/{itemid}/{wid}', 'WarehouseController@showItems');
-Route::post('warehouse/save','WarehouseController@save');
-Route::post('warehouse/showItems/{itemid}/{wid}', 'WarehouseController@showItems');
+})->middleware('auth');
+Route::get('warehouses/purchase','WarehouseController@purchase')->middleware('auth');
+Route::resource('warehouses', 'WarehouseController')->middleware('auth');
+Route::post('warehouses/search', 'WarehouseController@search')->middleware('auth');
+Route::get('warehouses/showItems/{itemid}/{wid}', 'WarehouseController@showItems')->middleware('auth');
+Route::post('warehouses/save','WarehouseController@save')->middleware('auth');
+Route::post('warehouses/showItems/{itemid}/{wid}', 'WarehouseController@showItems')->middleware('auth');
 
-Route::resource('/category','CategoryController')->except(['show']);
-Route::post('category/search','CategoryController@search');
 
-Route::resource('items','ItemController')->except(['show']);
-Route::post('items/search','ItemController@search');
+
+Route::resource('/categories','CategoryController')->except(['show'])->middleware('auth');
+Route::post('categories/search','CategoryController@search')->middleware('auth');
+
+Route::resource('items','ItemController')->except(['show'])->middleware('auth');
+Route::post('items/search','ItemController@search')->middleware('auth');
 
 
 
 
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');

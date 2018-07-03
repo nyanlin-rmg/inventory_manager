@@ -1,20 +1,14 @@
 @extends('layouts.default')
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Warehouse</title>
-</head>
-<body>
-	<div class="container">
+@section('content')
 		@if ($errors->any())
-		<div class="alert alert-danger">
+			<div class="alert alert-danger">
 				@foreach($errors->all() as $error)
-				{{ $error }}
+					{{ $error }}
 				@endforeach
-		</div>
+			</div>
 		@endif
 		<div class="row">
-			<form action="{{route('warehouse.store')}}" method="post">
+			<form action="{{route('warehouses.store')}}" method="post">
 				{{csrf_field()}}
 				<div class="form-group">
 					<label>Name:</label>
@@ -26,10 +20,8 @@
 				</div>
 				<div class="form-group">
 					<input type="submit" value="Create" class="btn btn-primary">
-					<a href="{{ route('warehouse.index') }}" class="btn btn-danger">Cancel</a>
+					<a href="{{ route('warehouses.index') }}" class="btn btn-danger">Cancel</a>
 				</div>
 			</form>
 		</div>
-	</div>
-</body>
-</html>
+@endsection

@@ -13,7 +13,7 @@
 				<td> </td>
 			</tr>
 			@foreach( $items as $item )
-			<form action="{{ url('warehouse/inventory_in_out', $item->id) }}" method="post">
+			<form action="{{ url('warehouses/inventory_in_out', $item->id) }}" method="post">
 				{{ csrf_field() }}
 				<tr>
 					<td>{{ ucwords($item->name) }}</td>
@@ -23,6 +23,7 @@
 			@endforeach	
 		</table>
 		<hr>
+		<a href="{{ url('warehouses') }}" class="btn btn-primary">Back</a>
 	</div>
 </body>
 </html>

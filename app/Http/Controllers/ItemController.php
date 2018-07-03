@@ -5,6 +5,7 @@ use App\Warehouse;
 use App\Category;
 use App\Item;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ItemController extends Controller
 {
@@ -15,7 +16,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::get();
+        $items = Item::paginate(5);
         return view('items.index', ['items'=>$items]);
     }
 
@@ -39,13 +40,12 @@ class ItemController extends Controller
     public function store(Request $request)
     {     
          $request->validate([
-            'name' => 'required|alpha|max:255',
-            'price' =>'required',
-         ]);
+            'name' => 'required|unique:items|max:255',
+            'price' => 'required',
+        ]);
          $item = Item::create($request->all());
-         //$item->warehouses()->attach($request->warehouse_id , ['qty' => $request->qty]);
-         //dd($item);
-         return redirect('items')->with('success','Item created successfully!!');
+         Alert::success('Success', "Category created successfully");
+         return redirect('items');
     }
 
     /**
@@ -80,7 +80,7 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
         $item = Item::find($id)->update($request->all());
-        return redirect('items')->with('success','Category updated successfully!!');
+        return redirect('items')->with('success','Item updated successfully!!');
         /*$item = Item::find($id);
         Item::find($id)->update($request->all());
         $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $request->qty]);
@@ -96,22 +96,21 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-       //$item = Item::find($id);
-       Item::find($id)->delete();
-       //$item->warehouses()->detach();               
-       return redirect('items')->with('success','Category updated successfully!!');
+       Item::find($id)->delete();      
+       return redirect('items')->with('success','Item deleted successfully!!');
     }
     public function search(Request $request)
     {
         $search = $request->search;
-        if ( ! trim( $search) ) 
+        if(!trim($search))
         {
-            $items = [];
-            return view('items.search_result', ['items'=> collect($items), 'search' => $search] );
+            $search_items = [];
+            return view('items.search_result', ['search_items'=>collect($search_items) , 'search' => $search]);
         }
-
-        $items = Item::with('warehouses')->where('name','LIKE','%'.$request->search.'%')->get();
-        return view('items.search_result', ['items'=>$items, 'search' => $search]);
-        }  
+        $search_items = Item::where(
+            'name', 'LIKE', '%'. $search. '%'
+        )->get();
+        return view('items.search_result', ['search_items' => $search_items, 'search' => $search]);
+    }
 }
 
