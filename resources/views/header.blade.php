@@ -1,4 +1,3 @@
-@extends('layouts.default')
 <!DOCTYPE html>
 <html>
 <head>

@@ -1,10 +1,5 @@
 @extends('layouts.default')
 @section('content')
-<html>
-<head>
-</head>
-<body>
-	<div class="container"> 
 	<form action="{{ url('items/search') }}" method="POST">
 	{{ csrf_field() }}
 	<input type="text" name="search" class="form-control search" placeholder="search" required> 
@@ -30,6 +25,7 @@
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
               </td>
+
 		 </tr>
 		@endforeach
 		</tbody>

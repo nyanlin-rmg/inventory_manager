@@ -1,4 +1,4 @@
- @extends('layouts.default')
+@extends('layouts.default')
 @section('content')
 		<form action="{{ url('categories/search') }}" method="POST">
 		{{ csrf_field() }}

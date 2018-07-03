@@ -28,7 +28,8 @@ class ItemController extends Controller
     public function create()
     {
        $categories = Category::all();
-       return view('items.create',['categories'=>$categories]);
+       $warehouses = Warehouse::all();
+       return view('items.create',['categories'=>$categories],['warehouses'=>$warehouses]);
    }
 
     /**
@@ -57,7 +58,6 @@ class ItemController extends Controller
     public function show($id)
     {
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -81,11 +81,6 @@ class ItemController extends Controller
     {
         $item = Item::find($id)->update($request->all());
         return redirect('items')->with('success','Item updated successfully!!');
-        /*$item = Item::find($id);
-        Item::find($id)->update($request->all());
-        $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $request->qty]);
-        return redirect('item');*/
-
     }
 
     /**
@@ -113,4 +108,3 @@ class ItemController extends Controller
         return view('items.search_result', ['search_items' => $search_items, 'search' => $search]);
     }
 }
-

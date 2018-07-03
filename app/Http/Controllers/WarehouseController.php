@@ -103,11 +103,11 @@ class WarehouseController extends Controller
         $quantity = $request->quantity;
         $warehouse = $item->warehouses()->find($request->warehouse_id);
         if($warehouse == null) {
-            $item->warehouses()->attach($request->warehouse_id , ['qty'=>$quantity]);
+        $item->warehouses()->attach($request->warehouse_id, ['qty'=>$quantity]);
         } else {
             $qty = $warehouse->pivot->qty;
             $quantity = $qty + $quantity;
-            $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty'=>$quantity]);
+            $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$quantity]);
         }
        return redirect('warehouses');
     }
