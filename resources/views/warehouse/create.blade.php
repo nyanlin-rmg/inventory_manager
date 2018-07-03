@@ -7,7 +7,6 @@
 				@endforeach
 			</div>
 		@endif
-		<div class="row">
 			<form action="{{route('warehouses.store')}}" method="post">
 				{{csrf_field()}}
 				<div class="form-group">
@@ -23,5 +22,4 @@
 					<a href="{{ route('warehouses.index') }}" class="btn btn-danger">Cancel</a>
 				</div>
 			</form>
-		</div>
 @endsection

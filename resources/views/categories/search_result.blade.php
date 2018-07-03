@@ -1,10 +1,5 @@
- @extends('layouts.default')
-<html>
-<head>
-	<title>Category Search</title>
-</head>
-<body>
-	<div class="container">
+ @extends('layouts.app')
+ @section('content')
 		<form action="{{ url('categories/search') }}" method="POST">
 		{{ csrf_field() }}
 			<input type="text" name="search" class="form-control search" placeholder="search" value="{{ $search }}" required> 
@@ -38,6 +33,4 @@
     	@endforelse
 	</table>
     	<a href="{{ route('categories.index') }}" class="btn btn-primary">Back</a>  
-    </div>
-</body>
-</html>
+@endsection

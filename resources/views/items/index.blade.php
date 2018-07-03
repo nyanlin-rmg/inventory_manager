@@ -19,11 +19,7 @@
 		 	<td>{{ $item->price }}</td>
 		 	<td> 
 		 		<a class="btn btn-success" href="{{ route('items.edit',$item->id) }}">Edit</a>
-				<form action="{{ route('items.destroy', $item->id) }}" method="post" style="display: inline;">
-					{{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
+				<button class="btn btn-danger" onclick="deleteItem({{$item->id}})">Delete</button>
               </td>
 
 		 </tr>
@@ -32,4 +28,49 @@
 		</table>	
 		{{ $items->links() }}
 		<p><a href="{{ route('items.create') }}" class="btn btn-primary">Create Item</a></p>
+@endsection
+@section('script')
+	<script type="text/javascript">
+		function deleteItem(id) {
+		swal({
+          title: "Are you sure?",
+          text: "You cannot recover!",
+          type: "warning",
+          showCancelButton: true,
+          cancelButtonColor: "#d66",
+          cancelButtonText: "Cancel",
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Delete"
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                url: '/items/'+ id,
+                type:"POST",
+                data: {'id':id,'_token': "{{ csrf_token() }}",'_method' : "DELETE"},
+                success: function(response){
+                swal({
+                    title: 'Success',
+                    text: 'deleted',
+                    type: 'success',
+                    confirmButtonColor: "teal",
+                }).then((result) => {
+                    if(result.value) {
+                        location.reload();
+                    }
+                })
+            },
+                error:function (response){
+                    swal({
+                      title: response.status + '!',
+                      text: response.statusText ,
+                      type: "error",
+                      confirmButtonColor: "teal"
+                    });
+                    console.log(response);
+                  }
+                })
+            }    
+        })
+    }
+	</script>
 @endsection

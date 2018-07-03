@@ -80,7 +80,8 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
         $item = Item::find($id)->update($request->all());
-        return redirect('items')->with('success','Item updated successfully!!');
+        Alert::success('Success', 'Successfully Updated!');
+        return redirect('items');
     }
 
     /**

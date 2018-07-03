@@ -4,7 +4,6 @@
 		{{ csrf_field() }}
 			<input type="text" name="search" class="form-control search" placeholder="search" required> 
 		</form>
-	<div class="container">
 		<table class="table table-striped">
 		<thread>
 			<tr>
@@ -21,6 +20,9 @@
 			<td> 
 				<a class="btn btn-success" href="{{ route('categories.edit',$category->id) }}">Edit</a>
 				<button class="btn btn-danger" onclick="deleteCategory({{$category->id}})">Delete</button>
+        <!-- {{ route('categories.destroy', $category->id) }} -->
+        <!-- {{ csrf_field() }} -->
+        <!-- {{ method_field('DELETE') }} -->
 				<!-- <form action="{{ route('categories.destroy', $category->id) }}" method="post" style="display: inline;">
 					{{ csrf_field() }}
                     {{ method_field('DELETE') }}
@@ -33,7 +35,6 @@
 		</table>
 		{{ $categories->links() }}
 		<p><a class="btn btn-primary" href="{{ route('categories.create')}}">Create Category</a></p>
-	</div>
 @endsection
 @section('script')
 	<script type="text/javascript">
@@ -43,7 +44,7 @@
           text: "You cannot recover!",
           type: "warning",
           showCancelButton: true,
-          cancelButtonColor: "black",
+          cancelButtonColor: "#d66",
           cancelButtonText: "Cancel",
           confirmButtonColor: "#3085d6",
           confirmButtonText: "Delete"
@@ -52,8 +53,8 @@
                 $.ajax({
                 url: '/categories/'+ id,
                 type:"POST",
-              data: {'id':id,'_token': "{{ csrf_token() }}",'_method' : "DELETE"},
-              success: function(response){
+                data: {'id':id,'_token': "{{ csrf_token() }}",'_method' : "DELETE"},
+                success: function(response){
                 swal({
                     title: 'Success',
                     text: 'deleted',
