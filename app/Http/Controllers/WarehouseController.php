@@ -10,7 +10,7 @@ class WarehouseController extends Controller
 {
     public function index()
     {
-        $warehouses = Warehouse::all();
+        $warehouses = Warehouse::paginate(5);
         return view('warehouse.index', ['warehouses'=>$warehouses]);
     }
     public function create()
@@ -97,12 +97,24 @@ class WarehouseController extends Controller
         $quantity = $request->quantity;
         $warehouse = $item->warehouses()->find($request->warehouse_id);
         if($warehouse == null) {
-            $qty = 0;
+            $item->warehouses()->attach($request->warehouse_id , ['qty'=>$quantity]);
         } else {
             $qty = $warehouse->pivot->qty;
+            $quantity = $qty + $quantity;
+            $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty'=>$quantity]);
         }
-        $quantity = $qty + $quantity;
-        $item->warehouses()->sync([$request->warehouse_id => ['qty'=>$quantity]]);
        return redirect('warehouses');
+    }
+    public function sale()
+    {
+        $items = Item::all();
+        $warehouses = Warehouse::all();
+        return view('warehouse.sale', ['warehouses' => $warehouses, 'items' => $items]);
+    }
+    public function sell(Request $request)
+    {
+        $warehouse = Warehouse::find($request->warehouse_id);
+        $item = $warehouse->items()->get();
+        return view('warehouse.sale', ['warehouse' => $warehouse, 'item' => $items]);
     }
 }
