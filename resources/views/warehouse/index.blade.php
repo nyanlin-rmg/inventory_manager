@@ -8,7 +8,7 @@
 	<div class="container">
 		<form action="{{ url('warehouses/search') }}" method="POST">
 			{{csrf_field()}}
-			<input type="text" name="search" class="form-control search" placeholder="Search">
+			<input type="text" name="search" class="form-control search" placeholder="Search" required>
 		</form>
 	</div>
 	<div class="container">

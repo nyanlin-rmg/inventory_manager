@@ -80,18 +80,8 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
         $item = Item::find($id)->update($request->all());
-
-        return redirect('items')->with('success','Item updated successfully!!');
-        /*$item = Item::find($id);
-        Item::find($id)->update($request->all());
-        $item->warehouses()->updateExistingPivot($request->warehouse_id , ['qty' => $request->qty]);
-<<<<<<< HEAD
-       return redirect('items');
-=======
-        return redirect('item');*/
-
-
-    }
+        return redirect('items')->with('success','Item updated successfully!!');    
+     }
 
     /**
      * Remove the specified resource from storage.
@@ -101,17 +91,10 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-<<<<<<< HEAD
-       //$item = Item::find($id);
-       Item::find($id)->delete();
-
-       //$item->warehouses()->detach();               
-       return redirect('items')->with('success','Category updated successfully!!');
-=======
        Item::find($id)->delete();      
        return redirect('items')->with('success','Item deleted successfully!!');
->>>>>>> 60e3eb4de59994560cf98c5cec02f948378f6b9d
     }
+
     public function search(Request $request)
     {
         $search = $request->search;
@@ -119,24 +102,11 @@ class ItemController extends Controller
         {
             $search_items = [];
             return view('items.search_result', ['search_items'=>collect($search_items) , 'search' => $search]);
-        }
-<<<<<<< HEAD
-        $items = Item::with('warehouses')->where('name','LIKE','%'.$request->search.'%')->get();       
-    
-        return view('items.search_result', ['items'=>$items]);
-
-        }  
-
-}
-
-    
-
-
-=======
+        }    
         $search_items = Item::where(
             'name', 'LIKE', '%'. $search. '%'
         )->get();
         return view('items.search_result', ['search_items' => $search_items, 'search' => $search]);
     }   
 }
->>>>>>> 60e3eb4de59994560cf98c5cec02f948378f6b9d
+

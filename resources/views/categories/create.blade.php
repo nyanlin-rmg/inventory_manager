@@ -9,11 +9,11 @@
 	
 	<div class="form-group">
 		<label for="usr">Name:</label>
-		<input type="text" name="name" class="form-control" placeholder="Name" null>
+		<input type="text" name="name" class="form-control" placeholder="Name" required="" null >
 	</div>
 	<div class="form-group">
 		<label for="usr">Description:</label>
-		<textarea name="description" class="form-control" placeholder="Description"></textarea>
+		<textarea name="description" class="form-control" placeholder="Description" required=""></textarea>
 	</div>
 	<div class="form-group">
 		<input type="submit" class="btn btn-primary" value="Submit"></button>
