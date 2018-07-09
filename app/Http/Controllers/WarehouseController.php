@@ -114,14 +114,30 @@ class WarehouseController extends Controller
     }
     public function sale()
     {
-        $items = Item::all();
         $warehouses = Warehouse::all();
-        return view('warehouse.sale', ['warehouses' => $warehouses, 'items' => $items]);
+        return view('warehouse.sale', ['warehouses' => $warehouses]);
     }
-    public function sell(Request $request)
+    public function sale_items($warehouse_id)
     {
-        $warehouse = Warehouse::find($request->warehouse_id);
-        $item = $warehouse->items()->get();
-        return view('warehouse.sale', ['warehouse' => $warehouse, 'item' => $items]);
+        $warehouse = Warehouse::find($warehouse_id);
+        $items = $warehouse->items;
+        return view('warehouse.sale_items', ['items' => $items, 'warehouse' => $warehouse]);
+    }
+    public function sell_item(Request $request)
+    {
+        $item = Item::find($request->item_id);
+        $warehouses = $item->warehouses()->get();
+        $warehouse = $item->warehouses()->find($request->warehouse_id);
+        $quantity = $request->quantity;
+        $qty = $warehouse->pivot->qty;
+        if($qty < $quantity) {
+            Alert::warning('Warning', 'No sufficient quantity in this warehouse');
+            return back();
+        }
+        else{
+            $quantity = $qty - $quantity;
+            $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$quantity]);
+            return redirect('warehouses');
+        }
     }
 }
