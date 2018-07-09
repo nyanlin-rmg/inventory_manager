@@ -17,3 +17,4 @@
 	</table>
 	<a href="{{ url('warehouses') }}" class="btn btn-primary">Back</a>
 @endsection
+

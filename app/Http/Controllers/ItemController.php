@@ -57,6 +57,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
+        
     }
     /**
      * Show the form for editing the specified resource.
@@ -64,10 +65,13 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
+
         $item = Item::find($id);
         return view('items.edit', ['item' => $item]);
+
     }
 
     /**
@@ -95,6 +99,7 @@ class ItemController extends Controller
        Item::find($id)->delete();      
        return redirect('items')->with('success','Item deleted successfully!!');
     }
+
     public function search(Request $request)
     {
         $search = $request->search;
@@ -102,10 +107,11 @@ class ItemController extends Controller
         {
             $search_items = [];
             return view('items.search_result', ['search_items'=>collect($search_items) , 'search' => $search]);
-        }
+        }    
         $search_items = Item::where(
             'name', 'LIKE', '%'. $search. '%'
         )->get();
         return view('items.search_result', ['search_items' => $search_items, 'search' => $search]);
     }
 }
+
