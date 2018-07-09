@@ -111,4 +111,10 @@ class WarehouseController extends Controller
         }
        return redirect('warehouses');
     }
+
+    public function sale()
+    {
+        $warehouses = Warehouse::all();
+        return view('warehouse.sale', ['warehouses'=>$warehouses]);
+    }
 }

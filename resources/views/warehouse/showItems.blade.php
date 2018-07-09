@@ -1,16 +1,5 @@
 @extends('layouts.app')
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<style type="text/css">
-		div {
-    		padding-top:20px;
-		}
-	</style>
-</head>
-<body>
-	<div class="container">
+@section('content')
 		<a href="{{ url('items/create') }}" class="btn btn-primary">Create Item</a>
 		<table class="table table-striped">
 			<tr>
@@ -30,6 +19,4 @@
 		</table>
 		<hr>
 		<a href="{{ url('warehouses') }}" class="btn btn-primary">Back</a>
-	</div>
-</body>
-</html>
+@endsection

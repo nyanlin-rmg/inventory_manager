@@ -28,4 +28,5 @@
 		{{ $warehouses->links() }} <br>
 		<a href="{{ route('warehouses.create') }}" class="btn btn-primary">Create Warehouse</a>
 		<a href="{{ url('warehouses/purchase') }}" class="btn btn-primary">Purchase</a>
+		<a href="{{ url('warehouses/sale') }}" class="btn btn-primary">Sale</a>
 @endsection
