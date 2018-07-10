@@ -46,6 +46,7 @@
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+
                         @else
                          <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -61,6 +62,7 @@
                     <a class="nav-link" href="{{ url('categories/') }}">Categories <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

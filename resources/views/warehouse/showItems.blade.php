@@ -1,19 +1,18 @@
 @extends('layouts.app')
 @section('content')
-		<a href="{{ url('items/create') }}" class="btn btn-primary">Create Item</a>
-		<table class="table table-striped">
+	<table class="table table-striped">
+		<tr>
+			<td><b>Name</b></td>
+			<td><b>Quantity</b></td>
+			<td> </td>
+		</tr>
+		@foreach( $items as $item )
+		<form action="{{ url('warehouses/inventory_in_out', $item->id) }}" method="post">
+			{{ csrf_field() }}
 			<tr>
-				<td><b>Name</b></td>
-				<td><b>Quantity</b></td>
-				<td> </td>
+				<td>{{ ucwords($item->name) }}</td>
+				<td>{{ $item->pivot->qty }}</td>					
 			</tr>
-			@foreach( $items as $item )
-			<form action="{{ url('warehouses/inventory_in_out', $item->id) }}" method="post">
-				{{ csrf_field() }}
-				<tr>
-					<td>{{ ucwords($item->name) }}</td>
-					<td>{{ $item->pivot->qty }}</td>					
-				</tr>
 			</form>
 			@endforeach	
 		</table>

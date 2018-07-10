@@ -1,20 +1,25 @@
 @extends('layouts.app')
 @section('content')
-		<table class="table table-striped">
-			<tr>
-				<td><b>Category Name</b></td>
-			</tr>
-			@foreach( $categories as $category )
-				@foreach( $category as $name )
-			<tr>
-				<td><a href="{{ url('warehouses/showItems'.'/'. $name->id . '/' . $wid) }}">
+	<div class="row">
+	@foreach( $categories as $category )
+		@foreach( $category as $name )
+			<div class="col-sm-3">
+			<div class="card" style="width: 18em;">
+			  <div class="card-body">
+			    <h5 class="card-title">
+			    	<a href="{{ url('warehouses/showItems'.'/'. $name->id . '/' . $wid) }}">
 					<input type="hidden" name="categoryid" value="{{ $name->id }}" >
 					{{ $name->name }}
-				</a></td>
-			</tr>
-				@endforeach
-			@endforeach	
-		</table>
-		<hr>
-		<a href="{{ url('warehouses') }}" class="btn btn-primary">Back</a>
+					</a>
+				</h5>
+			    <p class="card-text">{{ $name->description }}</p>
+			  </div>
+			</div>
+		</div>
+		@endforeach
+	@endforeach
+	</div>
+	<div class="form-group">
+	<a href="{{ url('warehouses') }}" class="btn btn-primary">Back</a>
+	</div>	
 @endsection

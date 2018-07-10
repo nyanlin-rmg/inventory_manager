@@ -12,6 +12,7 @@
 				<td>Description</td>
 				<td width="180px"><b>Action</b></td>
 			</tr>
+
 		 	@forelse( $categories as $category)
 		 	<tr>
 				<td>{{ $category->name }}</td>

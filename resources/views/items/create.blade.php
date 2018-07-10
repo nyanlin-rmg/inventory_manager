@@ -30,7 +30,6 @@
 							</select>
 						</div>
 				</div>
-
 				<div class="form-group"> 
 				<input type="submit" value="Create" class="btn btn-primary">
 				<a href="{{ route('items.index') }}" class="btn btn-danger">Cancel</a>
