@@ -38,11 +38,30 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->photo);
         $request->validate([
             'name' => 'required|unique:categories|max:255',
             'description' => 'required',
-        ]);
-        Category::create($request->all());
+            'image' => 'required',
+        ]); 
+        /*$fileName = "fileName".time().'.'.request()->image->getClientOriginalExtension();
+        $request->image->storeAs('images',$fileName);*/
+
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            //dd($name);
+            $destinationpath = public_path('/images');
+            $imagePath = $destinationpath . "/" . $name;
+            $image->move($destinationpath, $name);
+
+            $save = Category::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'image' => $name
+            ]);
+        }
+        $save->save();
         Alert::success('Success', "Category created successfully");
         return redirect('/categories');
     }

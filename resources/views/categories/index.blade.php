@@ -10,6 +10,7 @@
 			<tr>
 				<th> Name </th>
 				<th> Description </th>
+        <th> Image </th>
 				<th width="180px">Action</th>
 			</tr>
 		 </thread>
@@ -19,6 +20,8 @@
 		 <tr>
 			<td>{{ $category->name }}</td>
 			<td>{{ $category->description }}</td>
+      <td>
+        <img src="../images/{{ $category->image }}" width="80px" height="80px">
 			<td> 
 				<a class="btn btn-success" href="{{ route('categories.edit',$category->id) }}">Edit</a>
 				<button class="btn btn-danger" onclick="deleteCategory({{$category->id}})">Delete</button>

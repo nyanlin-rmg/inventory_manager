@@ -1,34 +1,7 @@
-.warning {
-	margin-top: 20px;
-	margin-bottom: 20px;
-	font-size: 20px;
-	color: red;
-	font-style: italic;
-}
-.links {
-	margin-bottom: 30px;
-}
-.links{
-	background: #908f8f;
-	padding: 20px;
-	border-radius: 3px;
-	}
-.links ul li a{
-	color: white;
-	text-decoration: none;
-	padding: 10px;
-}
-.links ul li a:hover {
-	background: #555;
-	border-radius: 3px;
-}
-.links ul{
-	margin: 0px;
-}
-.search {
+.back {
 	margin-top: 10px;
-	margin-bottom: 20px;
 }
-.container {
-	padding-top: 20px;
+.warehouses {
+	margin-top: 15px;
+	padding-right: 0px;
 }

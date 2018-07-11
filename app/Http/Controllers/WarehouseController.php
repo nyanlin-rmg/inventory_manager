@@ -20,11 +20,28 @@ class WarehouseController extends Controller
     }
     public function store(Request $request)
     {
+        //dd($request);
         $request->validate([
             'name' => 'required|unique:warehouses|max:255',
             'location' => 'required',
+            'image' => 'required',
         ]);
-        Warehouse::create($request->all());
+        //image is a name from form
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            //dd($name);
+            $destinationpath = public_path('/images');
+            $imagePath = $destinationpath . "/" . $name;
+            $image->move($destinationpath, $name);
+
+            $save = Warehouse::create([
+                'name' => $request->name,
+                'location' => $request->location,
+                'image' => $name
+            ]);
+        }
+        $save->save();
         Alert::success('Success', 'Success');
         return redirect('warehouses');
     }
