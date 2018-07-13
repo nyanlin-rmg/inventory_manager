@@ -5,3 +5,10 @@
 	margin-top: 15px;
 	padding-right: 0px;
 }
+.navbar {
+	background: none;
+}
+.navbar-toggler .navbar-nav .nav-item .nav-link .dropdown .navbarDropdown {
+	background-color: none;
+	color: green;
+}

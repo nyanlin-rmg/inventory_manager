@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<div class="container">
 	<form action="{{url('warehouses/save')}}" method="post">
 		{{ csrf_field() }}
 	<div class="form-group">
@@ -29,4 +30,5 @@
 	<input type="submit" value="Purchase" class="btn btn-primary">
 	<a href="{{ route('warehouses.index') }}" class="btn btn-danger">Cancel</a>
 	</form>
+</div>
 @endsection

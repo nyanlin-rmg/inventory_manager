@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<div class="container">
 		<form action="{{ url('categories/search') }}" method="POST">
 		{{ csrf_field() }}
 			<input type="text" name="search" class="form-control search" placeholder="search" required> 
@@ -85,4 +86,5 @@
         })
     }
 	</script>
+</div>
 @endsection

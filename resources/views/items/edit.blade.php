@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<div class="container">
 			<form action="{{ route('items.update', $item->id) }}" method="post">
 				{{csrf_field()}}
 				{{ method_field('PUT') }}
@@ -21,4 +22,5 @@
 					<a href="{{ route('items.index') }}" class="btn btn-danger">Cancel</a>
 				</div>
 			</form>
+</div>
 @endsection
