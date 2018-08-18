@@ -11,7 +11,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <!-- <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script> -->
     <script src="{{ asset('js/sweetalert2.all.js') }}"></script>
 
     <!-- Fonts -->
@@ -22,81 +21,104 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
     <!-- CSS Files -->
-    <link rel="stylesheet" type="text/css" href="../public/css/style.css">
-    <link href="../css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="../css/material-dashboard.min">
-      <!-- CSS Just for demo purpose, don't include it in your project -->
-      <link href="../css/demo.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{asset("../public/css/style.css")}}">
+    <link href="{{asset('../css/material-dashboard.css?v=2.1.0')}}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{asset('../css/material-dashboard.min')}}">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 </head>
 <body>  
-    <div id="app">
-            <div class="container">
-                <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-                        @endguest
-                    </ul>
-                     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
-      <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-        Tip 2: you can also add an image using data-image tag
-    -->
-      <div class="logo simple-text logo-normal">
-        <a href="#" class="simple-text logo-normal">
-          Inventory Manager
-        </a>
-      </div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="nav-item   ">
-            <a class="nav-link" href="{{ url('/') }}">
-              <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('warehouses') }}">
-              <i class="fas fa-warehouse"></i>
-              <p>Warehouse</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('categories') }}">
-              <i class="material-icons">content_paste</i>
-              <p>Category</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('items') }}">
-              <i class="material-icons">library_books</i>
-              <p>Item</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./icons.html">
-              <i class="material-icons">bubble_chart</i>
-              <p>Icons</p>
-            </a>
-          </li>
-        </ul>
-      </div>
+  <div id="app">
+    <div class="container">
+      <!-- Right Side Of Navbar -->
+      <ul class="navbar-nav ml-auto">
+        <!-- Authentication Links -->
+        @guest
+          <li><a class="nav-link links text-right" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+          <li><a class="nav-link links text-right" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+        @else
+      </ul>
+      <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+        <div class="logo simple-text logo-normal">
+          <a href="#" class="simple-text logo-normal">
+            Inventory Manager
+          </a>
+        </div>
+        <div class="sidebar-wrapper">
+          <ul class="nav">
+            <li class="nav-item   ">
+              <a class="nav-link" href="{{ url('/') }}">
+                <i class="material-icons">dashboard</i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url('warehouses') }}">
+                <i class="fas fa-warehouse"></i>
+                <p>Warehouse</p>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url('categories') }}">
+                <i class="material-icons">content_paste</i>
+                <p>Category</p>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url('items') }}">
+                <i class="material-icons">library_books</i>
+                <p>Item</p>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url('warehouses/purchase') }}">
+                <i class="fas fa-cart-plus"></i>
+                <p>Purchase</p>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url('warehouses/sale') }}">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <p>Sale</p>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url('warehouses/transfer') }}">
+                <i class="fas fa-exchange-alt"></i>
+                <p>Transfer</p>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url('warehouses/history') }}">
+                <i class="fas fa-history"></i>
+                <p>History</p>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url('about') }}">
+                <i class="fas fa-info-circle"></i>
+                <p>About Us</p>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Logout</p>
+              </a>
+              <form id = "logout-form" action="{{ route('logout') }}" method="POST" style="display: none">@csrf</form>
+            </li>
+          </ul>
+        </div>
+        </div>
+    @endguest
     </div>
-    
-                </div>
-            </div>
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>  
-    @include('sweetalert::alert')
-    @yield('script')
+  </div>
+  <main class="py-4">
+    @yield('content')
+  </main>  
+  @include('sweetalert::alert')
+  @yield('script')
 </body>
 </html>

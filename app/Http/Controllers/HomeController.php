@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Warehouse;
+use App\Item;
+use App\Category;
+use App\History;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {
@@ -23,6 +28,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $warehouses = count(Warehouse::all());
+        $categories = count(Category::all());
+        $items = count(Item::all());
+        return view('index',['warehouses'=>$warehouses, 'categories'=>$categories, 'items'=>$items]);
+    }
+    public function about()
+    {
+        return view('about');
     }
 }

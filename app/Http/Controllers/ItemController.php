@@ -16,7 +16,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::paginate(5);
+        $items = Item::with('category')->paginate(5);
+        // $links = Item::
         return view('items.index', ['items'=>$items]);
     }
 
@@ -45,7 +46,7 @@ class ItemController extends Controller
             'price' => 'required',
         ]);
          $item = Item::create($request->all());
-         Alert::success('Success', "Category created successfully");
+         Alert::success('Success', "Item created successfully");
          return redirect('items');
     }
 
@@ -68,9 +69,11 @@ class ItemController extends Controller
 
     public function edit($id)
     {
-
         $item = Item::find($id);
-        return view('items.edit', ['item' => $item]);
+        $category_id = $item->category_id;
+        $selected_category = Category::find($category_id);
+        $categories = Category::all();
+        return view('items.edit', ['item' => $item, 'selected_category' => $selected_category, 'categories' => $categories]);
 
     }
 

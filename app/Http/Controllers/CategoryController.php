@@ -42,26 +42,14 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|unique:categories|max:255',
             'description' => 'required',
-            'image' => 'required',
-        ]); 
-        /*$fileName = "fileName".time().'.'.request()->image->getClientOriginalExtension();
-        $request->image->storeAs('images',$fileName);*/
-
-        if($request->hasFile('image')) {
-            $image = $request->file('image');
-            $name = time().'.'.$image->getClientOriginalExtension();
-            //dd($name);
-            $destinationpath = public_path('/images');
-            $imagePath = $destinationpath . "/" . $name;
-            $image->move($destinationpath, $name);
-
-            $save = Category::create([
-                'name' => $request->name,
-                'description' => $request->description,
-                'image' => $name
-            ]);
-        }
-        $save->save();
+            'image' => 'required|mimes:jpeg,jpg,png|max:1000',
+        ]);
+        $category['name'] = $request->name;
+        $category['description'] = $request->description; 
+        $file = $request->file('image');
+        $category['image'] = uniqid().'.'.$file->getClientOriginalName();
+        $request->image->move(public_path('images'),$category['image']);
+        Category::create($category);
         Alert::success('Success', "Category created successfully");
         return redirect('/categories');
     }
@@ -100,7 +88,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     { 
-        Category::find($id)->update($request->all());
+        $file = $request->file('image');
+        if($file != null) {
+            $category['name'] = $request->name;
+            $category['description'] = $request->description; 
+            $category['image'] = uniqid().'.'.$file->getClientOriginalName();
+            $request->image->move(public_path('images'),$category['image']);
+            Category::find($id)->update($category);
+        } else {
+            $category['name'] = $request->name;
+            $category['description'] = $request->description;
+            Category::find($id)->update($category);
+        }
         Alert::success('Success', 'Successfully Updated!');
         return redirect('/categories');
     }

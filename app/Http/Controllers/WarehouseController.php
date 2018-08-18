@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Warehouse;
 use App\Item;
 use App\Category;
+use App\History;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -20,29 +21,24 @@ class WarehouseController extends Controller
     }
     public function store(Request $request)
     {
-        //dd($request);
         $request->validate([
             'name' => 'required|unique:warehouses|max:255',
-            'location' => 'required',
-            'image' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'image' => 'required|mimes:jpeg,jpg,png|max:1000',
         ]);
-        //image is a name from form
-        if($request->hasFile('image')) {
-            $image = $request->file('image');
-            $name = time().'.'.$image->getClientOriginalExtension();
-            //dd($name);
-            $destinationpath = public_path('/images');
-            $imagePath = $destinationpath . "/" . $name;
-            $image->move($destinationpath, $name);
-
-            $save = Warehouse::create([
-                'name' => $request->name,
-                'location' => $request->location,
-                'image' => $name
-            ]);
+        if($request->phone < 0) {
+            Alert::warning('Warning', 'Phone number should be unsigned number!');
+            return back();
         }
-        $save->save();
-        Alert::success('Success', 'Success');
+        $warehouse['name'] = $request->name;
+        $warehouse['address'] = $request->address;
+        $warehouse['phone'] = $request->phone;
+        $file = $request->file('image');
+        $warehouse['image'] = uniqid().'.'.$file->getClientOriginalName();
+        $request->image->move(public_path('images'),$warehouse['image']);
+        Warehouse::create($warehouse);
+        Alert::success('Success', 'Warehouse created successfully');
         return redirect('warehouses');
     }
     public function show($id)
@@ -60,7 +56,7 @@ class WarehouseController extends Controller
     {
         $warehouses = Warehouse::findOrFail($warehouse_id);
         $items = $warehouses->items()->where('category_id',$category_id)->get();
-        return view('warehouse.showItems', ['items'=>$items]);
+        return view('warehouse.showItems', ['items'=>$items], ['warehouse_id'=>$warehouse_id]);
     }
 
     public function edit($id)
@@ -70,7 +66,24 @@ class WarehouseController extends Controller
     }
     public function update(Request $request, $id)
     {
-        Warehouse::find($id)->update($request->all());
+        $file = $request->file('image');
+        if($request->phone < 0) {
+            Alert::warning('Warning', 'Phone number should be unsigned number!');
+            return back();
+        }
+        if($file != null) {
+            $warehouse['name'] = $request->name;
+            $warehouse['address'] = $request->address;
+            $warehouse['phone'] = $request->phone;
+            $warehouse['image'] = uniqid().'.'.$file->getClientOriginalName();
+            $request->image->move(public_path('images'),$warehouse['image']);
+            Warehouse::find($id)->update($warehouse);
+        } else {
+            $warehouse['name'] = $request->name;
+            $warehouse['address'] = $request->address;
+            $warehouse['phone'] = $request->phone;
+            Warehouse::find($id)->update($warehouse);
+        }
         Alert::success('Success', 'Successfully Updated!');
         return redirect('warehouses');
     }
@@ -94,41 +107,45 @@ class WarehouseController extends Controller
         )->get();
         return view('warehouse.search_result', ['search_warehouses' => $search_warehouses, 'search' => $search]);
     }
-    public function inventory_in(Request $request, $id)
-    {
-        $item = Item::find($id);
-        $warehouses = $item->warehouses;
-        foreach ($warehouses as $warehouse) {
-            $qty = $warehouse->pivot->qty;
-            $warehouse_id = $warehouse->pivot->warehouse_id;
-        }
-        $qty += $request->quantiy;
-        $item->warehouses()->updateExistingPivot($warehouse_id, ['qty' => $qty]);
-        return redirect()->back();
-    }
-
 
     public function purchase() 
     {
-        $items = Item::all();
         $warehouses = Warehouse::all();
-        return view('warehouse.purchase', ['warehouses' => $warehouses, 'items' => $items]);
+        return view('warehouse.purchase', ['warehouses' => $warehouses]);
     }
+
+    public function purchase_item($warehouse_id)
+    {
+        $warehouse = Warehouse::find($warehouse_id);
+        $items = Item::all();
+        return view('warehouse.purchase_item', ['items' => $items, 'warehouse' => $warehouse]);
+    }
+
     public function save(Request $request)
     {
-        $item = Item::find($request->item_id);
-        $warehouses = $item->warehouses()->get();
-        $quantity = $request->quantity;
-        $warehouse = $item->warehouses()->find($request->warehouse_id);
-        if($warehouse == null) {
-            $item->warehouses()->attach($request->warehouse_id, ['qty'=>$quantity]);
-        } else {
-            $qty = $warehouse->pivot->qty;
-            $quantity = $qty + $quantity;
-            $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$quantity]);
-        }
-        Alert::success('Success', 'Success');
-       return redirect('warehouses');
+         $item = Item::find($request->item_id);
+         $warehouses = $item->warehouses()->get();
+         $quantity = $request->quantity;
+         $warehouse = $item->warehouses()->find($request->warehouse_id);
+
+         if ($quantity <= 0) {
+             Alert::warning('Warning', 'Something wrong with your input');
+             return back();
+         }
+         if($warehouse == null) {
+             $item->warehouses()->attach($request->warehouse_id, ['qty'=>$quantity]);
+         } else {
+             $qty = $warehouse->pivot->qty;
+             $quantity = $qty + $quantity;
+             $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$quantity]);
+         }
+         $history['warehouse'] = Warehouse::find($request->warehouse_id)->name;
+         $history['item'] = $item->name;
+         $history['qty'] = $quantity;
+         $history['action'] = "Purchase";
+         History::create($history);
+         Alert::success('Success', 'Success');
+        return redirect('warehouses');
     }
     public function sale()
     {
@@ -148,15 +165,88 @@ class WarehouseController extends Controller
         $warehouse = $item->warehouses()->find($request->warehouse_id);
         $quantity = $request->quantity;
         $qty = $warehouse->pivot->qty;
+        $item_id = $warehouse->pivot->item_id;
+        $item_id = $warehouse->pivot->warehouse_id;
+        
         if($qty < $quantity) {
             Alert::warning('Warning', 'No sufficient quantity in this warehouse');
             return back();
         }
-        else{
-            $quantity = $qty - $quantity;
-            $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$quantity]);
-            Alert::success('Success', 'Items have sold');
-            return redirect('warehouses');
+        else if ($quantity < 0) {
+            Alert::warning('Warning', 'Something wrong with your input');
+            return back();
         }
+
+        $history['warehouse'] = Warehouse::find($request->warehouse_id)->name;
+        $history['item'] = $item->name;
+        $history['qty'] = $quantity;
+        $history['action'] = "Sale";
+        History::create($history);
+
+        $quantity = $qty - $quantity;
+        
+        if($quantity == 0) {
+            $item->warehouses()->detach($request->warehouse_id, $request->item_id);
+        }else {
+            $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$quantity]);
+        }
+
+
+        Alert::success('Success', 'Items have been sold');
+        return redirect('warehouses');
+    }
+    public function transfer()
+    {
+        $warehouses = Warehouse::all();
+        return view('warehouse.transfer', ['warehouses' => $warehouses]);
+    }
+    public function transfer_items($warehouse_id)
+    {
+        $warehouses = Warehouse::where('id','!=', $warehouse_id)->get();
+        $warehouse = Warehouse::find($warehouse_id);
+        $items = $warehouse->items;
+        return view('warehouse.transfer_items', ['items' => $items, 'warehouses' => $warehouses, 'warehouse_id'=>$warehouse_id]);
+    }
+    public function transfer_save(Request $request)
+    {
+        $warehouse = Warehouse::find($request->warehouse);
+        $item = Item::find($request->item);
+        $warehouses = $item->warehouses()->find($request->warehouse);
+        $origin_warehouse = $item->warehouses()->find($request->warehouse_id);
+        $origin_qty = $origin_warehouse->pivot->qty;
+        $quantity = $request->quantity;
+
+        if($origin_qty < $quantity) {
+            Alert::warning('Warning', 'No sufficient quantity in this warehouse');
+            return back();
+        }
+        else if ($quantity < 0) {
+            Alert::warning('Warning', 'Something wrong with your input');
+            return back();
+        }
+
+        $origin_qty = $origin_qty - $quantity;
+
+        if($origin_qty == 0) {
+            $item->warehouses()->detach($request->warehouse_id, $request->item_id);
+        } else {
+            $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$origin_qty]);
+        }
+
+        // $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$origin_qty]);
+         if($warehouses == null) {
+             $item->warehouses()->attach($request->warehouse, ['qty'=>$quantity]);
+         } else {
+             $qty = $warehouses->pivot->qty;
+             $quantity = $qty + $quantity;
+             $item->warehouses()->updateExistingPivot($request->warehouse, ['qty'=>$quantity]);
+         }
+         Alert::success('Success', 'Success');
+        return redirect('warehouses');
+    }
+    public function history()
+    {
+        $histories = History::orderBy('created_at', 'desc')->get();
+        return view('warehouse.history', ['histories'=>$histories]);
     }
 }
