@@ -1,6 +1,7 @@
 <?php
 Route::get('/', 'HomeController@index')->middleware('auth');
 Route::get('about', 'HomeController@about')->middleware('auth');
+Route::get('testvue', 'HomeController@testvue')->middleware('auth');
 
 Route::get('warehouses/history','WarehouseController@history')->middleware('auth');
 Route::get('warehouses/purchase','WarehouseController@purchase')->middleware('auth');

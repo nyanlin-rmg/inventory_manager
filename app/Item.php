@@ -13,9 +13,7 @@ class Item extends Model
     {
         return $this->belongsTo('App\Category');
     }
-
-
-     public function warehouses()
+    public function warehouses()
     {
     	return $this->belongsToMany('App\Warehouse','item_warehouses')->withPivot('qty')->withTimestamps();
     }

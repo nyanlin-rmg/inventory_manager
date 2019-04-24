@@ -123,23 +123,23 @@ class WarehouseController extends Controller
 
     public function save(Request $request)
     {
-         $item = Item::find($request->item_id);
-         $warehouses = $item->warehouses()->get();
-         $quantity = $request->quantity;
-         $warehouse = $item->warehouses()->find($request->warehouse_id);
+        $item = Item::find($request->item_id);
+        $warehouses = $item->warehouses()->get();
+        $quantity = $request->quantity;
+        $warehouse = $item->warehouses()->find($request->warehouse_id);
 
-         if ($quantity <= 0) {
-             Alert::warning('Warning', 'Something wrong with your input');
-             return back();
-         }
-         if($warehouse == null) {
-             $item->warehouses()->attach($request->warehouse_id, ['qty'=>$quantity]);
-         } else {
-             $qty = $warehouse->pivot->qty;
-             $quantity = $qty + $quantity;
-             $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$quantity]);
-         }
-         $history['warehouse'] = Warehouse::find($request->warehouse_id)->name;
+        if ($quantity <= 0) {
+            Alert::warning('Warning', 'Something wrong with your input');
+            return back();
+        }
+        if($warehouse == null) {
+            $item->warehouses()->attach($request->warehouse_id, ['qty'=>$quantity]);
+        } else {
+            $qty = $warehouse->pivot->qty;
+            $quantity = $qty + $quantity;
+            $item->warehouses()->updateExistingPivot($request->warehouse_id, ['qty'=>$quantity]);
+        }
+        $history['warehouse'] = Warehouse::find($request->warehouse_id)->name;
          $history['item'] = $item->name;
          $history['qty'] = $quantity;
          $history['action'] = "Purchase";
